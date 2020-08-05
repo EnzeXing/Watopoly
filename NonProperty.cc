@@ -10,13 +10,13 @@ Tuition::accept(Player & p) {
 TimHortons::~TimHortons() {}
 
 TimHortons::accept(Player & p) {
-  //to be added
+  throw WatopolyException("Waiting in the line!");
 }
 
 GoToTims::~GoToTims() {}
 
 GoToTims::accept(Player & p) {
-  throw WatopolyException("Move");
+  p->move(20);
 }
 
 SLC::~SLC(){}
