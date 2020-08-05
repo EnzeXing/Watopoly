@@ -1,3 +1,5 @@
+#ifndef _BUILDING_H_
+#define _BUILDING_H_
 #include <string>
 #include <memory>
 #include <algorithm>
@@ -15,3 +17,4 @@ class Building {
     virtual void accept(Player & p) = 0;
 };
 
+#endif
