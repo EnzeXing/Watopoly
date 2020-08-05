@@ -28,7 +28,7 @@ class AcademicBuilding : public Property {
     unsigned int getPurchaseCost();
     unsigned int getImprovementCost();
     unsigned int getTuition();
-    virtual void accept(Player & player) override;
+    virtual void accept(Player & p) override;
     void improve();
 };
 
@@ -37,7 +37,7 @@ class Gym: public Property {
   
   public:
   unsigned int getFee();
-  void accept(Player p);
+  virtual void accept(Player & p) override;
 };
   
 class Residence: public Property {
@@ -46,7 +46,7 @@ class Residence: public Property {
   public:
   unsigned int getPurchaseCost();
   unsigned int getTuition();
-  void accept(Player p);
+  virtual void accept(Player & p) override;
 };
   
 
