@@ -37,6 +37,14 @@ class Gym: public Property {
   void accept(Player p);
 };
   
+class Residence: public Property {
+  unsigned int pruchaseCost;
+  
+  public:
+  unsigned int getPurchaseCost();
+  unsigned int getTuition();
+  void accept(Player p);
+};
   
   
   
