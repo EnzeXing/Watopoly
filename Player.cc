@@ -63,7 +63,7 @@ bool Player::hasFullMonopoly(std::string type) {
 }
 
 void Player::move(int p) {
-    position = p;
+    position = (position + p) % 40;
 }
 
 void Player::addCup() {
