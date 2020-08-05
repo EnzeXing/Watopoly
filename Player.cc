@@ -62,6 +62,10 @@ bool Player::hasFullMonopoly(std::string type) {
     }
 }
 
+void Player::move(int p) {
+    position = p;
+}
+
 void Player::addCup() {
     rimCup++;
 }
@@ -83,4 +87,8 @@ void Player::stayInLine() {
 
 void Player::leaveLine() {
     TimRound = 0;
+}
+
+int Player::roll() {
+    return dice->roll();
 }
