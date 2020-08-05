@@ -14,6 +14,7 @@ class Player {
     std::map<std::string, int> properties;
     int position;
     int rimCup;
+    int TimRound;
   public:
     std::string getName();
     char getSymbol();
@@ -27,6 +28,9 @@ class Player {
     void visit(Building & b); // call b.accept(*this)
     void addCup();
     void removeCup(); // Note exception
+    int getTimRound;
+    void stayInLine();
+    void leaveLine();
 };
 
 #endif
