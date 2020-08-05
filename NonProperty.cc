@@ -1,4 +1,5 @@
 #include "NonProperty.h"
+#include <cstdlib>
 
 Tuition::~Tuition() {}
 
@@ -21,7 +22,24 @@ GoToTims::accept(Player & p) {
 SLC::~SLC(){}
 
 SLC::accept(Player & p) {
-  throw WatopolyException("SLC");
+  int num = rand() % 24;
+  if (num >= 0 && num <= 2) {
+    p->move(-3);
+  } else if (num >= 3 && num <= 6) {
+    p->move(-2);
+  } else if (num >= 7 && num <= 10) {
+    p->move(-1);
+  } else if (num >= 11 && num <= 13) {
+    p->move(1);
+  } else if (num >= 14 && num <= 17) {
+    p->move(2);
+  } else if (num >= 18 && num <= 21) {
+    p->move(3);
+  } else if (num == 22) {
+    p->move(8);
+  } else {
+    p->move(-2);
+  }
 }
 
 OSAP::~OSAP(){}
