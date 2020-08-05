@@ -72,3 +72,15 @@ void Player::removeCup() {
     }
     rimCup--;
 }
+
+int Player::getTimRound() {
+    return TimRound;
+}
+
+void Player::stayInLine() {
+    TimRound++;
+}
+
+void Player::leaveLine() {
+    TimRound = 0;
+}
