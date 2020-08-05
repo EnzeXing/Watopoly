@@ -5,5 +5,5 @@
 class Dice {
   
   public:
-  int roll();
+  unsigned int roll();
 };
