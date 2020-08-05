@@ -5,6 +5,10 @@ std::string Property::getOwner() {
     return Owner;
 }
 
+void Property::setOwner(std::string p) {
+    Owner = p;
+}
+
 unsigned int Gym::getFee() {
 }
 
