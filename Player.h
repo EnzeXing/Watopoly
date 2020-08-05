@@ -5,6 +5,7 @@
 #include <vector>
 #include <map>
 #include <memory>
+#include "Dice.h"
 
 class Player {
   private:
@@ -15,6 +16,7 @@ class Player {
     int position;
     int rimCup;
     int TimRound;
+    std::shared_ptr<Dice> dice;
   public:
     std::string getName();
     char getSymbol();
@@ -32,6 +34,7 @@ class Player {
     int getTimRound();
     void stayInLine();
     void leaveLine();
+    int roll();
 };
 
 #endif
