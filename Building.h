@@ -3,8 +3,6 @@
 #include <algorithm>
 #include <iostream>
 
-int a;
-
 class Player;
 
 class Building {
@@ -17,7 +15,3 @@ class Building {
     virtual void accept(Player & p) = 0;
 };
 
-class Academic : public Building {
-  
-
-};
