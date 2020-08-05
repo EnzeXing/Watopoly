@@ -36,7 +36,6 @@ class OSAP : public NonProperty {
   public:
     virtual ~OSAP() override;
     virtual accept(Player & p) override;
-    unsigned int giveMoney();
 };
 
 class CoopFee : public NonProperty {
