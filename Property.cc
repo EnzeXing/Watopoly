@@ -24,7 +24,9 @@ unsigned int Residence::getPurchaseCost() {
 }
 
 unsigned int Resisdence::getRent() {
-    //under construction
+    unsigned int residence = owner->getProperties("Residence");
+    unsigned int rent = residence * 50;
+    return rent;
 }
 
 void Residence::accept(Player & p) {
