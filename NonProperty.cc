@@ -63,5 +63,20 @@ Goose::accept(Player & p) {
 NeedlesHall::~NeedlesHall(){}
 
 NeedlesHall::accept(Player & p) {
-  //to be added, check the probability and change the amount of money
+  int num = rand() % 18;
+  if (num == 0) {
+    p->addMoney(-200);
+  } else if (num >= 1 && num <= 2) {
+    p->addMoney(-100);
+  } else if (num >= 3 && num <= 5) {
+    p->addMoney(-50);
+  } else if (num >= 6 && num <= 11) {
+    p->addMoney(25);
+  } else if (num >= 12 && num <= 14) {
+    p->addMoney(50);
+  } else if (num >= 15 && num <= 16) {
+    p->addMoney(100);
+  } else {
+    p->addMoney(200);
+  }
 }
