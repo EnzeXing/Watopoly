@@ -36,3 +36,49 @@ void Residence::accept(Player & p) {
     }
 }
 
+
+std::string Academic::getMonopoly() {
+    return monopoly;
+}
+
+unsigned int Academic::getImprovement() {
+    return improvement;
+}
+
+unsigned int Academic::getPurchaseCost() {
+    return purchaseCost;
+}
+
+unsigned int Academic::getImprovementCost() {
+    return ImprovementCost;
+}
+
+unsigned int Academic::getTuition() {
+    int fee = tuition[improvement];
+    if ((improvement == 0) && (owner->hasFullMonopoly(monopoly))) {
+        return 2 * fee;
+    } else {
+        return fee;
+    }
+}
+
+void Academic::improve(std::string s) {
+    if (s == "buy") && (improvement < 5){
+        improvement++;
+        owner->giveMoney(nullptr, improvementCost);
+    } else if (s == "sell") && (improvement > 0) {
+        improvement--;
+        owner->addMoney(improvementCost / 2);
+    } else {
+        throw WatopolyException("invalid improvement command!");
+    }
+}
+
+void Academic::accept(Player p) {
+    if (owner != &p) {
+        unsigned int tuition = getTuition();
+        p.giveMoney(*owner, tuition);
+    }
+}
+
+
