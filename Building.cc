@@ -1,4 +1,5 @@
 #include "Building.h"
+#include "Player.h"
 
 std::string Building::getName() {
     return name;
