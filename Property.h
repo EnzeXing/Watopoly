@@ -4,15 +4,16 @@
 #include <string>
 #include <iostream>
 #include <vector>
+#include <memory>
 #include "Buildings.h"
 #include "Player.h"
 
 class Property: public Building {
-  std::string owner;
+  std::shared_ptr<Player> owner;
   
   public:
   virtual ~Property() = 0;
-  std::string getOwner();
+  std::shared_ptr<Player> getOwner();
 };
 
 class AcademicBuilding : public Property {
