@@ -1,10 +1,9 @@
 #include <string>
 #include <iostream>
+#include <vector>
 #include "Buildings.h"
-#include "Player.h"
 
 class Property: public Building {
-  
   std::string owner;
   
   public:
@@ -12,24 +11,19 @@ class Property: public Building {
   std::string getOwner();
 };
 
-class Gym: public Property {
-  
-  Unsigned Int purchaseCost;
-  
+class AcademicBuilding : public Property {
+  private:
+    std::string monopoly;
+    unsigned int improvement;
+    unsigned int purchaseCost;
+    unsigned int improvementCost;
+    std::vector<6, unsigned int> tuition;
   public:
-  Unsigned Int getFee();
-  void accept(Player p);
+    std::string getMonopoly();
+    unsigned int getImprovement();
+    unsigned int getPurchaseCost();
+    unsigned int getImprovementCost();
+    unsigned int getTuition();
+    virtual void accept(Player & player) override;
+    void improve();
 };
-
-class Resisdence public Property {
-  
-  Unsigned Int purchaseCost;
-  
-  public:
-  Unsigned Int getFee();
-  public:
-  Unsigned Int getTuition();
-  void accept(Player p);
-};
-  
-  
