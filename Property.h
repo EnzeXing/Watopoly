@@ -2,6 +2,7 @@
 #include <iostream>
 #include <vector>
 #include "Buildings.h"
+#include "Player.h"
 
 class Property: public Building {
   std::string owner;
@@ -27,3 +28,18 @@ class AcademicBuilding : public Property {
     virtual void accept(Player & player) override;
     void improve();
 };
+
+class Gym: public Property {
+  unsigned int pruchaseCost;
+  
+  public:
+  unsigned int getFee();
+  void accept(Player p);
+};
+  
+  
+  
+  
+  
+  
+  
