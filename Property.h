@@ -1,3 +1,6 @@
+#ifndef _PROPERTY_H_
+#define _PROPERTY_H_
+
 #include <string>
 #include <iostream>
 #include <vector>
@@ -46,8 +49,6 @@ class Residence: public Property {
   void accept(Player p);
 };
   
-  
-  
-  
-  
-  
+
+
+#endif
