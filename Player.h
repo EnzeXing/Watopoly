@@ -28,7 +28,7 @@ class Player {
     void visit(Building & b); // call b.accept(*this)
     void addCup();
     void removeCup(); // Note exception
-    int getTimRound;
+    int getTimRound();
     void stayInLine();
     void leaveLine();
 };
