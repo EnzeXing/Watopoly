@@ -20,6 +20,10 @@ class Player {
     int getMoney();
     void giveMoney(std::shared_ptr<Player> other, int amount); // if other is nullptr, give money to bank, note exception
     void addMoney(int amount);
+    unsigned int getProperties(std::string type);
+    void addBuilding(std::string type);
+    void loseBuilding(std::string type);
+    bool hasFullMonopoly(std::string type);
     void visit(Building & b); // call b.accept(*this)
     void addCup();
     void removeCup(); // Note exception
