@@ -6,4 +6,4 @@ int Dice::roll() {
   strand (time(NULL));
   a = rand() % 6 + 1;
   return a;
-  }
+}
