@@ -15,9 +15,7 @@ class Tuition : public NonProperty {
 };
 
 class TimHortons : public NonProperty {
-    std::vector<std::shared_ptr<Player>> line;
   public:
-    TimHortons();
     virtual ~TimHortons() override;
     virtual accept(Player & p) override;
 };
