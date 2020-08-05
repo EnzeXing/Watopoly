@@ -3,6 +3,8 @@
 #include <algorithm>
 #include <iostream>
 
+int a;
+
 class Player;
 
 class Building {
