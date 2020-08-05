@@ -13,7 +13,6 @@ class Property: public Building {
   public:
   virtual ~Property() = 0;
   std::string getOwner();
-  void setOwner(std::string p);
 };
 
 class AcademicBuilding : public Property {
@@ -46,7 +45,7 @@ class Residence: public Property {
   
   public:
   unsigned int getPurchaseCost();
-  unsigned int getTuition();
+  unsigned int getRent();
   virtual void accept(Player & p) override;
 };
   
