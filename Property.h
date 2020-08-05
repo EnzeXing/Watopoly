@@ -13,6 +13,7 @@ class Property: public Building {
   public:
   virtual ~Property() = 0;
   std::string getOwner();
+  void setOwner(std::string p);
 };
 
 class AcademicBuilding : public Property {
