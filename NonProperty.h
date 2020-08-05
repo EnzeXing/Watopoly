@@ -29,7 +29,7 @@ class GoToTims : public NonProperty {
 class SLC : public NonProperty {
   public:
     virtual ~SLC() override;
-    virtual accpet(Player & p) override;
+    virtual accept(Player & p) override;
 };
 
 class OSAP : public NonProperty {
