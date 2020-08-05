@@ -34,7 +34,7 @@ class AcademicBuilding : public Property {
 };
 
 class Gym: public Property {
-  unsigned int pruchaseCost;
+  unsigned int purchaseCost;
   
   public:
   unsigned int getFee();
@@ -42,7 +42,7 @@ class Gym: public Property {
 };
   
 class Residence: public Property {
-  unsigned int pruchaseCost;
+  unsigned int purchaseCost;
   
   public:
   unsigned int getPurchaseCost();
