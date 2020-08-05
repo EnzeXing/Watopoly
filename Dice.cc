@@ -1,7 +1,7 @@
 #include "Dice.h"
 
 
-int Dice::roll() {
+unsigned int Dice::roll() {
         std::random_device r;
         std::default_random_engine e1(r());
         std::uniform_int_distribution<int> uniform_dist(1, 6);
