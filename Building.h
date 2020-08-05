@@ -14,3 +14,8 @@ class Building {
     int getPosition();
     virtual void accept(Player & p) = 0;
 };
+
+class Academic : public Building {
+  
+
+};
