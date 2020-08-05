@@ -1,6 +1,7 @@
 #ifndef NONPROPERTY_H
 #define NONPROPERTY_H
 #include "Building.h"
+#include "Player.h"
 #include <vector>
 
 class NonProperty : public Building {
