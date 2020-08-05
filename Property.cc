@@ -1,20 +1,22 @@
 #include "Property.h"
-#include <string>
 
-std::string Property::getOwner() {
+shared_ptr<Player> Property::getOwner() {
     return Owner;
 }
 
-void Property::setOwner(std::string p) {
+void Property::setOwner(shared_ptr<Player> p) {
     Owner = p;
 }
 
 unsigned int Gym::getFee() {
+    //under construction
 }
 
 void Gym::accept(Player & p) {
-    unsigned int fee = getFee();
-    p.addMoney(fee);
+    if (owner != &p) {
+        unsigned int fee = getFee();
+        p.giveMoney(*owner, fee);
+    }
 }
 
 unsigned int Residence::getPurchaseCost() {
@@ -22,10 +24,13 @@ unsigned int Residence::getPurchaseCost() {
 }
 
 unsigned int Resisdence::getRent() {
+    //under construction
 }
 
-void Residence::accept(Player p) {
-    unsigned int rent = getRent();
-    p.addMoney(rent);
+void Residence::accept(Player & p) {
+    if (owner != &p) {
+        unsigned int rent = getRent();
+        p.giveMoney(*owner, rent);
+    }
 }
 
