@@ -1,6 +1,7 @@
 #include <string>
 #include <memory>
 #include <vector>
+#include <iostream>
 
 class Board {
   std::vector<40, std::vector<7, std::string>> board;
