@@ -8,4 +8,10 @@ class Board {
 };
 
 Board::Board(std::vector<std::shared_ptr<40, Buildings>> b) {
-  vector<40, std::vector<7, std::string>>
+  for (int i = 0; i < 40; i++) {
+    board[i][0] = "------";
+    board[i][1] = 
+    
+    for (int a = 0; a < 7; a++) {
+      board[i][a]
+  
