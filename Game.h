@@ -18,7 +18,7 @@ class Game {
     std::shared_ptr<Observer> board;
     std::shared_ptr<Dice> dice;
   public:
-    Game(std::map<std::string, char> players);
+    Game(std::map<std::string, char> player_names);
     Game(std::ifstream file);
     void nextPlayer();
     void movePlayer(int steps);
