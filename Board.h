@@ -7,7 +7,7 @@ class Board {
   
   public:
   Board(std::vector<std::shared_ptr<40, Buildings>> b);
-  void updateImprovement(int number);
-  void updatePlayer(int number, int player);
+  void updateImprovement(int position, int improvementNumber);
+  void updatePlayer(int position, std::string playerName);
+  void drawBoard();
 };
-
