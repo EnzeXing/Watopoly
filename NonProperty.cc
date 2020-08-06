@@ -1,11 +1,14 @@
 #include "NonProperty.h"
 #include <cstdlib>
 
+Tuition::Tuition(std::string name, int position) : Building{name, positon} {}
 Tuition::~Tuition() {}
 
 Tuition::accept(Player & p) {
   throw WatopolyException("Tuition");
 }
+
+TimHortons::TimHortons(std::string name, int position) : Building{name, positon} {}
 
 TimHortons::~TimHortons() {}
 
@@ -13,11 +16,15 @@ TimHortons::accept(Player & p) {
   throw WatopolyException("Waiting in the line!");
 }
 
+GoToTims::GoToTims(std::string name, int position) : Building{name, positon} {}
+
 GoToTims::~GoToTims() {}
 
 GoToTims::accept(Player & p) {
   p->move(20);
 }
+
+SLC::SLC(std::string name, int position) : Building{name, positon} {}
 
 SLC::~SLC(){}
 
@@ -42,11 +49,15 @@ SLC::accept(Player & p) {
   }
 }
 
+OSAP::OSAP(std::string name, int position) : Building{name, positon} {}
+
 OSAP::~OSAP(){}
 
 OSAP::accept(Player & p) {
   p->addMoney(200);
 }
+
+CoopFee::CoopFee(std::string name, int position) : Building{name, positon} {}
 
 CoopFee::~CoopFee(){}
 
@@ -54,11 +65,15 @@ CoopFee::accept(Player & p) {
   p->giveMoney(nullptr, 150);
 }
 
+Goose::Goose(std::string name, int position) : Building{name, positon} {}
+
 Goose::~Goose(){}
 
 Goose::accept(Player & p) {
   throw WatopolyException("Attacked by geese!");
 }
+
+NeedlesHall::NeedlesHall(std::string name, int position) : Building{name, positon} {}
 
 NeedlesHall::~NeedlesHall(){}
 
