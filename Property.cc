@@ -1,5 +1,7 @@
 #include "Property.h"
 
+Property::Property(std::string name, int position, std::shared_ptr<Player> owner) : Building(name, position), owner{owner} {}
+
 shared_ptr<Player> Property::getOwner() {
     return Owner;
 }
@@ -7,6 +9,8 @@ shared_ptr<Player> Property::getOwner() {
 void Property::setOwner(shared_ptr<Player> p) {
     Owner = p;
 }
+
+Gym::Gym(std::string name, int position, std::shared_ptr<Player> owner, unsigned int purchaseCost) : Property(name, position, owner), purchaseCost{purchaseCost} {}
 
 unsigned int Gym::getFee() {
     //under construction
@@ -18,6 +22,8 @@ void Gym::accept(Player & p) {
         p.giveMoney(*owner, fee);
     }
 }
+
+Residence::Residence(std::string name, int position, std::shared_ptr<Player> owner, unsigned int purchaseCost) : Property(name, position, owner), purchaseCost{purchaseCost} {}
 
 unsigned int Residence::getPurchaseCost() {
     return purchaseCost;
@@ -36,6 +42,9 @@ void Residence::accept(Player & p) {
     }
 }
 
+Academic::Academic(std::string name, int position, std::shared_ptr<Player> owner, 
+         std::string monopoly, int purchaseCost, int improvementCost, 
+         std::vector<6, unsigned int > tuition) : Property(name, position, owner), monopoly{monopoly}, improvement{0}, purchaseCost{purchaseCost}, improvementCost{improvementCost}, tuition{tuition} {}
 
 std::string Academic::getMonopoly() {
     return monopoly;
