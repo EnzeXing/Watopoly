@@ -18,7 +18,7 @@ class Player {
     int TimRound;
     std::shared_ptr<Dice> dice;
   public:
-    Player(std::string name, char symbol, int position);
+    Player(std::string name, char symbol, int position, std::shared_ptr<Dice> dice);
     std::string getName();
     char getSymbol();
     int getMoney();
