@@ -10,7 +10,7 @@ void Property::setOwner(shared_ptr<Player> p) {
     Owner = p;
 }
 
-Gym::Gym(std::string name, int position, std::shared_ptr<Player> owner, unsigned int purchaseCost) : Property(name, position, owner), purchaseCost{purchaseCost} {}
+Gym::Gym(std::string name, int position, std::shared_ptr<Player> owner) : Property(name, position, owner), purchaseCost{150} {}
 
 unsigned int Gym::getFee() {
     //under construction
@@ -23,7 +23,7 @@ void Gym::accept(Player & p) {
     }
 }
 
-Residence::Residence(std::string name, int position, std::shared_ptr<Player> owner, unsigned int purchaseCost) : Property(name, position, owner), purchaseCost{purchaseCost} {}
+Residence::Residence(std::string name, int position, std::shared_ptr<Player> owner) : Property(name, position, owner), purchaseCost{200} {}
 
 unsigned int Residence::getPurchaseCost() {
     return purchaseCost;
