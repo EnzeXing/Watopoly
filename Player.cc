@@ -1,6 +1,21 @@
 #include "Player.h"
 #include <stdexcept>
 
+Player::Player(std::string name, char symbol, int position, std::shared_ptr<Dice> dice) : name{name}, symbol{symbol}, position{position}, money{1500} dice{dice} {
+    properties["Arts1"] = 0;
+    properties["Arts2"] = 0;
+    properties["Eng"] = 0;
+    properties["Health"] = 0;
+    properties["Env"] = 0;
+    properties["Sci1"] = 0;
+    properties["Sci2"] = 0;
+    properties["Math"] = 0;
+    properties["Residence"] = 0;
+    properties["Gym"] = 0;
+    rimCup = 0;
+    TimRound = 0;
+}
+
 std::string Player::getName() {
     return name;
 }
