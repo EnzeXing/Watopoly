@@ -12,6 +12,7 @@ class Building {
     std::string name;
     int position;
   public:
+    Building(std::string name, int position);
     std::string getName();
     int getPosition();
     virtual void accept(Player & p) = 0;
