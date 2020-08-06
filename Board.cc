@@ -119,19 +119,4 @@ void Board::drawBoard() {
   
   cout << out;
 }
-  
-  
-
-
-
-
-  
-        
-        
-        
-        
-        
-        
-        
-        
         
