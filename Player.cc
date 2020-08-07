@@ -1,7 +1,7 @@
 #include "Player.h"
 #include <stdexcept>
 
-Player::Player(std::string name, char symbol, int position, std::shared_ptr<Dice> dice, 
+Player::Player(std::string name, std::string symbol, int position, std::shared_ptr<Dice> dice, 
                int TimCup, int money, int TimRound) : name{name}, symbol{symbol}, position{position}, money{money}, rimCup{TimCup}, TimRound{TimRound}, dice{dice} {
     properties["Arts1"] = 0;
     properties["Arts2"] = 0;
@@ -19,7 +19,7 @@ std::string Player::getName() {
     return name;
 }
 
-char Player::getSymbol() {
+std::string Player::getSymbol() {
     return symbol;
 }
 
