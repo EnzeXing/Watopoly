@@ -2,6 +2,16 @@
 #include <cstdlib>
 #include <time.h>
 
+void RimCup::giveCup(Player & p) {
+  ActiveCup++;
+  p.addCup();
+}
+
+void RimCup::receiveCup(Player & p) {
+  ActiveCup--;
+  p.removeCup();
+}
+
 Tuition::Tuition(std::string name, int position) : Building{name, positon} {}
 Tuition::~Tuition() {}
 
