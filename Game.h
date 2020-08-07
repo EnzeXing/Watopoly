@@ -12,9 +12,9 @@
 
 class Game {
   private:
-    std::vector<40, std::shared_ptr<Building>> buildings;
-    std::vector<8, std::shared_ptr<Player>> players;
-    std::vector<8, std::shared_ptr<Player>>::it currentPlayer;
+    std::vector<std::shared_ptr<Building>> buildings;
+    std::vector<std::shared_ptr<Player>> players;
+    std::vector<std::shared_ptr<Player>>::it currentPlayer;
     std::shared_ptr<Observer> board;
     std::shared_ptr<Dice> dice;
   public:
