@@ -30,6 +30,7 @@ class Player {
     bool hasFullMonopoly(std::string type);
     void move(int position);
     void visit(Building & b); // call b.accept(*this)
+    int getCup();
     void addCup();
     void removeCup(); // Note exception
     int getTimRound();
