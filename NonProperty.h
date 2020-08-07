@@ -3,6 +3,7 @@
 #include "Building.h"
 #include "Player.h"
 #include <vector>
+#include <memory>
 
 class NonProperty : public Building {
   public:
@@ -31,6 +32,7 @@ class GoToTims : public NonProperty {
 };
 
 class SLC : public NonProperty {
+  shared_ptr<RimCup> rimCup;
   public:
     SLC(std::string name, int position);
     virtual ~SLC() override;
@@ -59,6 +61,7 @@ class Goose : public NonProperty {
 };
 
 class NeedlesHall : public NonProperty {
+  shared_ptr<RimCup> rimCup;
   public:
     NeedlesHall(std::string name, int position);
     virtual ~NeedlesHall() override;
