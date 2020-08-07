@@ -10,7 +10,7 @@
 class Player {
   private:
     std::string name;
-    char symbol;
+    std::string symbol;
     int money;
     std::map<std::string, int> properties;
     int position;
@@ -18,9 +18,9 @@ class Player {
     int TimRound;
     std::shared_ptr<Dice> dice;
   public:
-    Player(std::string name, char symbol, int position, std::shared_ptr<Dice> dice, int TimCup, int money, int TimRound);
+    Player(std::string name, std::string symbol, int position, std::shared_ptr<Dice> dice, int TimCup, int money, int TimRound);
     std::string getName();
-    char getSymbol();
+    std::string getSymbol();
     int getMoney();
     void giveMoney(std::shared_ptr<Player> other, int amount); // if other is nullptr, give money to bank, note exception
     void addMoney(int amount);
