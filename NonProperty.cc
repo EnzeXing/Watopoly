@@ -1,5 +1,6 @@
 #include "NonProperty.h"
 #include <cstdlib>
+#include <time.h>
 
 Tuition::Tuition(std::string name, int position) : Building{name, positon} {}
 Tuition::~Tuition() {}
@@ -78,6 +79,7 @@ NeedlesHall::NeedlesHall(std::string name, int position) : Building{name, posito
 NeedlesHall::~NeedlesHall(){}
 
 NeedlesHall::accept(Player & p) {
+  srand (time(NULL));
   int num = rand() % 18;
   if (num == 0) {
     p->addMoney(-200);
