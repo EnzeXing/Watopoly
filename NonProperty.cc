@@ -85,7 +85,7 @@ Goose::accept(Player & p) {
   throw WatopolyException("Attacked by geese!");
 }
 
-NeedlesHall::NeedlesHall(std::string name, int position) : Building{name, positon} {}
+NeedlesHall::NeedlesHall(std::string name, int position, shared_ptr<RimCup> r) : Building{name, positon}, rimCup{r} {}
 
 NeedlesHall::~NeedlesHall(){}
 
