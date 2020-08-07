@@ -1,3 +1,7 @@
+#ifndef _DICE_H_
+#define _DICE_H_
+
+
 #include <stdlib.h>
 #include <stdio.h>
 #include <iostream>
@@ -9,3 +13,5 @@ class Dice {
   public:
   unsigned int roll();
 };
+
+#endif
