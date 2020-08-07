@@ -65,4 +65,15 @@ class NeedlesHall : public NonProperty {
     virtual accept(Player & p) override;
 };
 
+class RimCup {
+  int ActiveCup;
+  public:
+  void giveCup(Player p);
+  void receiveCup(Player p);
+};
+  
+  
+  
+  
+
 #endif
