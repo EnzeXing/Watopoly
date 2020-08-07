@@ -41,7 +41,7 @@ class Gym: public Property {
   
   public:
   Gym(std::string name, int position, std::shared_ptr<Player> owner);
-  unsigned int getFee();
+  unsigned int getFee(Player & p);
   virtual void accept(Player & p) override;
 };
   
