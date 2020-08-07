@@ -34,6 +34,7 @@ class Academic : public Property {
     unsigned int getTuition();
     virtual void accept(Player & p) override;
     void improve();
+    void setImprovement(int improvement);
 };
 
 class Gym: public Property {
