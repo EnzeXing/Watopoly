@@ -15,6 +15,7 @@ class Property: public Building {
     Property(std::string name, int position, std::shared_ptr<Player> owner);
     virtual ~Property() = 0;
     std::shared_ptr<Player> getOwner();
+    void setOwner(std::shared_ptr<Player> owner);
 };
 
 class Academic : public Property {
