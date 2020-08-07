@@ -91,6 +91,10 @@ void Academic::improve(std::string s) {
     }
 }
 
+void Academic::setImprovement(int improve) {
+    improvement = improve;
+}
+
 void Academic::accept(Player p) {
     if (owner != &p) {
         unsigned int tuition = getTuition();
