@@ -154,3 +154,46 @@ Game::Game(std::ifstream file) {
     }
 }
 
+void Game::nextPlayer() {
+    currentPlayer++;
+    if (currentPlayer == players.end()) currentPlayer = players.begin();
+}
+
+void Game::movePlayer(int steps) {
+    currentPlayer->move(steps);
+}
+
+std::shared_ptr<Player> Game::findPlayer(std::string s) {
+    for (auto n : players) {
+        if (n->getName() == s || n->getSymbol() == s) return n;
+    }
+    
+    return nullptr;
+}
+
+void Game::saveGame(std::ofstream file) {
+    file << players.size() << std::endl;
+    for (auto n : players) {
+        file << n->getName() << " " << n->getSymbol() << " " << n->getCup() << " " << n->getMoney() << " " << n->getPosition();
+        if (n->getPosition() == 10) {
+            if (n->getTimRound() == 0) file << " 0";
+            else {
+                file << " 1 " << n->getTimRound();
+            }
+        }
+        file << std::endl;
+    }
+    
+    for (auto n : buildings) {
+        file << n->getName() << " ";
+        auto n2 = dynamic_cast<std::shared_ptr<Academic>>(n);
+        if (n2 != nullptr && n2->getOwner() != nullptr) {
+            file << n2->getOwner()->getName() << " " << n2->getImprovement() << std::endl;
+        } else if (n2 != nullptr) {
+            file << "Bank " << n2->getImprovement() << std::endl;
+        } else {
+            file << "Bank 0" << std::endl;
+        }
+    }
+}
+
