@@ -53,3 +53,5 @@ Game::Game(std::map<std::string, char> players) {
     buildings.emplace_back(std::make_shared<CoopFee>("Co-op Fee", 38));
     buildings.emplace_back(std::make_shared<Academic>("DC", 39, nullptr, "MATH", 400, 200, std::vector<unsigned int>{50, 200, 600, 1400, 1700, 2000}));
 }
+
+
