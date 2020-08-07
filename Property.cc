@@ -14,9 +14,13 @@ Gym::Gym(std::string name, int position, std::shared_ptr<Player> owner) : Proper
 
 unsigned int Gym::getFee(Player & p) {
     unsigned int diceSum = p.roll() + p.roll();
-    owner
-    
+    if (owner->getProperties("Gym") == 1) {
+        return diceSum * 4;
+    } else {
+        return diceSum * 10;
+    }
 }
+
 
 void Gym::accept(Player & p) {
     if (owner != &p) {
@@ -25,11 +29,13 @@ void Gym::accept(Player & p) {
     }
 }
 
+
 Residence::Residence(std::string name, int position, std::shared_ptr<Player> owner) : Property(name, position, owner), purchaseCost{200} {}
 
 unsigned int Residence::getPurchaseCost() {
     return purchaseCost;
 }
+
 
 unsigned int Resisdence::getRent() {
     unsigned int residence = owner->getProperties("Residence");
