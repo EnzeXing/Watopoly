@@ -68,8 +68,8 @@ class NeedlesHall : public NonProperty {
 class RimCup {
   int ActiveCup;
   public:
-  void giveCup(Player p);
-  void receiveCup(Player p);
+  void giveCup(Player & p);
+  void receiveCup(Player & p);
 };
   
   
