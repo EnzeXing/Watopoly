@@ -23,7 +23,7 @@ class Academic : public Property {
     unsigned int improvement;
     unsigned int purchaseCost;
     unsigned int improvementCost;
-    std::vector<6, unsigned int> tuition;
+    std::vector<unsigned int> tuition;
   public:
     Academic(std::string name, int position, std::shared_ptr<Player> owner, std::string monopoly, 
                      int purchaseCost, int improvementCost, std::vector<6, unsigned int > tuition)
