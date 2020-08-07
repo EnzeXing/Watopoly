@@ -1,3 +1,7 @@
+#ifndef _BOARD_H_
+#define _BOARD_H_
+
+
 #include <string>
 #include <memory>
 #include <vector>
@@ -14,3 +18,5 @@ class Board {
   void updatePlayer(int position, std::string playerName);
   void drawBoard(std::ostream & out);
 };
+
+#endif
