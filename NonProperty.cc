@@ -1,6 +1,7 @@
 #include "NonProperty.h"
 #include <cstdlib>
 #include <time.h>
+#include <random>
 
 void RimCup::giveCup(Player & p) {
   ActiveCup++;
@@ -40,24 +41,33 @@ SLC::SLC(std::string name, int position, shared_ptr<RimCup> r) : Building{name, 
 SLC::~SLC(){}
 
 SLC::accept(Player & p) {
-  srand (time(NULL));
-  int num = rand() % 24;
-  if (num >= 0 && num <= 2) {
-    p->move(-3);
-  } else if (num >= 3 && num <= 6) {
-    p->move(-2);
-  } else if (num >= 7 && num <= 10) {
-    p->move(-1);
-  } else if (num >= 11 && num <= 13) {
-    p->move(1);
-  } else if (num >= 14 && num <= 17) {
-    p->move(2);
-  } else if (num >= 18 && num <= 21) {
-    p->move(3);
-  } else if (num == 22) {
-    p->move(8);
+  std::random_device r;
+  std::default_random_engine e1(r());
+  std::uniform_int_distribution<int> uniform_dist(1, 100);
+  int a = uniform_dist(e1);
+  
+  if (a == 44) {
+    rimCup->giveCup(p);
   } else {
-    p->move(-2);
+    srand (time(NULL));
+    int num = rand() % 24;
+    if (num >= 0 && num <= 2) {
+      p->move(-3);
+    } else if (num >= 3 && num <= 6) {
+      p->move(-2);
+    } else if (num >= 7 && num <= 10) {
+      p->move(-1);
+    } else if (num >= 11 && num <= 13) {
+      p->move(1);
+    } else if (num >= 14 && num <= 17) {
+      p->move(2);
+    } else if (num >= 18 && num <= 21) {
+      p->move(3);
+    } else if (num == 22) {
+      p->move(8);
+    } else {
+      p->move(-2);
+    }
   }
 }
 
@@ -90,21 +100,30 @@ NeedlesHall::NeedlesHall(std::string name, int position, shared_ptr<RimCup> r) :
 NeedlesHall::~NeedlesHall(){}
 
 NeedlesHall::accept(Player & p) {
-  srand (time(NULL));
-  int num = rand() % 18;
-  if (num == 0) {
-    p->addMoney(-200);
-  } else if (num >= 1 && num <= 2) {
-    p->addMoney(-100);
-  } else if (num >= 3 && num <= 5) {
-    p->addMoney(-50);
-  } else if (num >= 6 && num <= 11) {
-    p->addMoney(25);
-  } else if (num >= 12 && num <= 14) {
-    p->addMoney(50);
-  } else if (num >= 15 && num <= 16) {
-    p->addMoney(100);
+  std::random_device r;
+  std::default_random_engine e1(r());
+  std::uniform_int_distribution<int> uniform_dist(1, 100);
+  int a = uniform_dist(e1);
+  
+  if (a == 44) {
+    rimCup->giveCup(p);
   } else {
-    p->addMoney(200);
+    srand (time(NULL));
+    int num = rand() % 18;
+    if (num == 0) {
+      p->addMoney(-200);
+    } else if (num >= 1 && num <= 2) {
+      p->addMoney(-100);
+    } else if (num >= 3 && num <= 5) {
+      p->addMoney(-50);
+    } else if (num >= 6 && num <= 11) {
+      p->addMoney(25);
+    } else if (num >= 12 && num <= 14) {
+      p->addMoney(50);
+    } else if (num >= 15 && num <= 16) {
+      p->addMoney(100);
+    } else {
+      p->addMoney(200);
+    }
   }
 }
