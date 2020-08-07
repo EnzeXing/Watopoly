@@ -35,7 +35,7 @@ GoToTims::accept(Player & p) {
   p->move(20);
 }
 
-SLC::SLC(std::string name, int position) : Building{name, positon} {}
+SLC::SLC(std::string name, int position, shared_ptr<RimCup> r) : Building{name, positon}, rimCup{r} {}
 
 SLC::~SLC(){}
 
