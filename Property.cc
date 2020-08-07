@@ -2,11 +2,11 @@
 
 Property::Property(std::string name, int position, std::shared_ptr<Player> owner) : Building(name, position), owner{owner} {}
 
-shared_ptr<Player> Property::getOwner() {
+std::shared_ptr<Player> Property::getOwner() {
     return Owner;
 }
 
-void Property::setOwner(shared_ptr<Player> p) {
+void Property::setOwner(std::shared_ptr<Player> p) {
     Owner = p;
 }
 
