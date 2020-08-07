@@ -30,6 +30,7 @@ SLC::SLC(std::string name, int position) : Building{name, positon} {}
 SLC::~SLC(){}
 
 SLC::accept(Player & p) {
+  srand (time(NULL));
   int num = rand() % 24;
   if (num >= 0 && num <= 2) {
     p->move(-3);
