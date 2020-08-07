@@ -12,13 +12,15 @@ void Property::setOwner(shared_ptr<Player> p) {
 
 Gym::Gym(std::string name, int position, std::shared_ptr<Player> owner) : Property(name, position, owner), purchaseCost{150} {}
 
-unsigned int Gym::getFee() {
-    //under construction
+unsigned int Gym::getFee(Player & p) {
+    unsigned int diceSum = p.roll() + p.roll();
+    owner
+    
 }
 
 void Gym::accept(Player & p) {
     if (owner != &p) {
-        unsigned int fee = getFee();
+        unsigned int fee = getFee(Player & p);
         p.giveMoney(*owner, fee);
     }
 }
