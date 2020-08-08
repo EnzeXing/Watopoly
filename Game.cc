@@ -177,7 +177,7 @@ std::shared_ptr<Player> Game::findPlayer(std::string s) {
     return nullptr;
 }
 
-void Game::saveGame(std::ofstream file) {
+void Game::saveGame(std::ofstream & file) {
     file << players.size() << std::endl;
     for (auto n : players) {
         file << n->getName() << " " << n->getSymbol() << " " << n->getCup() << " " << n->getMoney() << " " << n->getPosition();
