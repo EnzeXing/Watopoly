@@ -85,9 +85,9 @@ void Academic::improve(std::string s) {
         this->getOwner()->giveMoney(nullptr, improvementCost);
     } else if ((s == "sell") && (improvement > 0)) {
         improvement--;
-        owner->addMoney(improvementCost / 2);
+        this->getOwner()->addMoney(improvementCost / 2);
     } else {
-        throw WatopolyException("invalid improvement command!");
+        //throw WatopolyException("invalid improvement command!");
     }
 }
 
