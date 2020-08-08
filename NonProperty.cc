@@ -5,7 +5,7 @@
 
 NonProperty::NonProperty (std::string name, int position) : Building(name, position) {}
 
-NonProperty::~NonProperty {}
+NonProperty::~NonProperty() {}
 
 void RimCup::giveCup(Player & p) {
   ActiveCup++;
