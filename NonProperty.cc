@@ -3,6 +3,8 @@
 #include <time.h>
 #include <random>
 
+NonProperty::NonProperty (std::string name, int position) : Building(name, position) {}
+
 void RimCup::giveCup(Player & p) {
   ActiveCup++;
   p.addCup();
@@ -13,34 +15,34 @@ void RimCup::receiveCup(Player & p) {
   p.removeCup();
 }
 
-Tuition::Tuition(std::string name, int position) : Building{name, positon} {}
+Tuition::Tuition(std::string name, int position) : NonProperty{name, position} {}
 Tuition::~Tuition() {}
 
-Tuition::accept(Player & p) {
+void Tuition::accept(Player & p) {
   throw WatopolyException("Tuition");
 }
 
-TimHortons::TimHortons(std::string name, int position) : Building{name, positon} {}
+TimHortons::TimHortons(std::string name, int position) : NonProperty{name, position} {}
 
 TimHortons::~TimHortons() {}
 
-TimHortons::accept(Player & p) {
-  throw WatopolyException("Waiting in the line!");
+void TimHortons::accept(Player & p) {
+  //throw WatopolyException("Waiting in the line!");
 }
 
-GoToTims::GoToTims(std::string name, int position) : Building{name, positon} {}
+GoToTims::GoToTims(std::string name, int position) : NonProperty{name, position} {}
 
 GoToTims::~GoToTims() {}
 
-GoToTims::accept(Player & p) {
-  p->move(20);
+void GoToTims::accept(Player & p) {
+  p.move(20);
 }
 
-SLC::SLC(std::string name, int position, shared_ptr<RimCup> r) : Building{name, positon}, rimCup{r} {}
+SLC::SLC(std::string name, int position, std::shared_ptr<RimCup> r) : NonProperty{name, position}, rimCup{r} {}
 
 SLC::~SLC(){}
 
-SLC::accept(Player & p) {
+ void SLC::accept(Player & p) {
   std::random_device r;
   std::default_random_engine e1(r());
   std::uniform_int_distribution<int> uniform_dist(1, 100);
@@ -52,54 +54,54 @@ SLC::accept(Player & p) {
     srand (time(NULL));
     int num = rand() % 24;
     if (num >= 0 && num <= 2) {
-      p->move(-3);
+      p.move(-3);
     } else if (num >= 3 && num <= 6) {
-      p->move(-2);
+      p.move(-2);
     } else if (num >= 7 && num <= 10) {
-      p->move(-1);
+      p.move(-1);
     } else if (num >= 11 && num <= 13) {
-      p->move(1);
+      p.move(1);
     } else if (num >= 14 && num <= 17) {
-      p->move(2);
+      p.move(2);
     } else if (num >= 18 && num <= 21) {
-      p->move(3);
+      p.move(3);
     } else if (num == 22) {
-      p->move(8);
+      p.move(8);
     } else {
-      p->move(-2);
+      p.move(-2);
     }
   }
 }
 
-OSAP::OSAP(std::string name, int position) : Building{name, positon} {}
+OSAP::OSAP(std::string name, int position) : NonProperty{name, position} {}
 
 OSAP::~OSAP(){}
 
-OSAP::accept(Player & p) {
+void OSAP::accept(Player & p) {
   p->addMoney(200);
 }
 
-CoopFee::CoopFee(std::string name, int position) : Building{name, positon} {}
+CoopFee::CoopFee(std::string name, int position) : NonProperty{name, position} {}
 
 CoopFee::~CoopFee(){}
 
-CoopFee::accept(Player & p) {
+void CoopFee::accept(Player & p) {
   p->giveMoney(nullptr, 150);
 }
 
-Goose::Goose(std::string name, int position) : Building{name, positon} {}
+Goose::Goose(std::string name, int position) : NonProperty{name, position} {}
 
 Goose::~Goose(){}
 
-Goose::accept(Player & p) {
+void Goose::accept(Player & p) {
   throw WatopolyException("Attacked by geese!");
 }
 
-NeedlesHall::NeedlesHall(std::string name, int position, shared_ptr<RimCup> r) : Building{name, positon}, rimCup{r} {}
+NeedlesHall::NeedlesHall(std::string name, int position, shared_ptr<RimCup> r) : NonProperty{name, position}, rimCup{r} {}
 
 NeedlesHall::~NeedlesHall(){}
 
-NeedlesHall::accept(Player & p) {
+void NeedlesHall::accept(Player & p) {
   std::random_device r;
   std::default_random_engine e1(r());
   std::uniform_int_distribution<int> uniform_dist(1, 100);
