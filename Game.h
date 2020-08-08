@@ -23,7 +23,7 @@ class Game {
     std::shared_ptr<RimCup> rimcup;
   public:
     Game(std::map<std::string, std::string> player_names);
-    Game(std::ifstream file);
+    Game(std::ifstream & file);
     void nextPlayer();
     void movePlayer(int steps);
     std::shared_ptr<Player> findPlayer(std::string s);
