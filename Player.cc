@@ -1,4 +1,7 @@
 #include "Player.h"
+#include "Building.h"
+#include "Property.h"
+#include "NonProperty.h"
 #include <stdexcept>
 
 Player::Player(std::string name, std::string symbol, int position, std::shared_ptr<Dice> dice, 
