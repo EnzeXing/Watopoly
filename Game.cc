@@ -1,6 +1,4 @@
 #include "Game.h"
-#include "Property.h"
-#include "NonProperty.h"
 #include <algorithm>
 #include <sstream>
 
