@@ -1,7 +1,6 @@
 #ifndef _BOARD_H_
 #define _BOARD_H_
 
-
 #include <string>
 #include <memory>
 #include <vector>
@@ -14,8 +13,8 @@ class Board {
 
   public:
   Board();
-  void updateImprovement(int position, int improvementNumber);
-  void updatePlayer(int position, std::string playerName);
+  void updateImprovement(std::shared_ptr<Building> building);
+  void updatePlayer(int oldPosition, int newPosition, std::string playerName);
   void drawBoard(std::ostream & out);
 };
 
