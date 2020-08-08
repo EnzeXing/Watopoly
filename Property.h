@@ -5,7 +5,7 @@
 #include <iostream>
 #include <vector>
 #include <memory>
-#include "Buildings.h"
+#include "Building.h"
 #include "Player.h"
 
 class Property: public Building {
