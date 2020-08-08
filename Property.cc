@@ -82,8 +82,8 @@ unsigned int Academic::getTuition() {
 void Academic::improve(std::string s) {
     if ((s == "buy") && (improvement < 5)) {
         improvement++;
-        owner->giveMoney(nullptr, improvementCost);
-    } else if (s == "sell") && (improvement > 0) {
+        this->getOwner()->giveMoney(nullptr, improvementCost);
+    } else if ((s == "sell") && (improvement > 0)) {
         improvement--;
         owner->addMoney(improvementCost / 2);
     } else {
