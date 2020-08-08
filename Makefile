@@ -4,7 +4,7 @@ OBJECTS=Board.o Building.o Dice.o Game.o NonProperty.o Player.o Property.o test.
 DEPENDS=${OBJECTS:.o=.d}
 EXEC=watopoly
 
-${EXEC}: ${OBJECTS}
+${EXEC}: ${OBJECTS} 
   ${CXX} ${OBJECTS} -o ${EXEC}
 
 -include ${DEPENDS}
