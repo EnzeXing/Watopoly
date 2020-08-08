@@ -25,7 +25,7 @@ unsigned int Gym::getFee(Player & p) {
 void Gym::accept(Player & p) {
     if (this->getOwner()->getName() != p.getName()) {
         unsigned int fee = getFee(p);
-        p.giveMoney(*(this->getOwner()), fee);
+        p.giveMoney(this->getOwner(), fee);
     }
 }
 
@@ -46,7 +46,7 @@ unsigned int Residence::getRent() {
 void Residence::accept(Player & p) {
     if (this->getOwner()->getName() != p.getName()) {
         unsigned int rent = getRent();
-        p.giveMoney(*(this->getOwner()), rent);
+        p.giveMoney(this->getOwner(), rent);
     }
 }
 
@@ -95,10 +95,10 @@ void Academic::setImprovement(int improve) {
     improvement = improve;
 }
 
-void Academic::accept(Player p) {
-    if (owner != &p) {
+void Academic::accept(Player & p) {
+    if (this->getOwner()->getName() != p.getName()) {
         unsigned int tuition = getTuition();
-        p.giveMoney(*owner, tuition);
+        p.giveMoney(this->getOwner(), tuition);
     }
 }
 
