@@ -87,6 +87,10 @@ void Player::move(int p) {
     position = (position + p + 40) % 40;
 }
 
+void Player::visit(Building & b) {
+    b.accept(*this);
+}
+
 int Player::getCup() {
     return rimCup;
 }
