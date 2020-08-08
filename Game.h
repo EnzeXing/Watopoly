@@ -20,6 +20,7 @@ class Game {
     std::vector<std::shared_ptr<Player>>::iterator currentPlayer;
     std::shared_ptr<Board> board;
     std::shared_ptr<Dice> dice;
+    std::shared_ptr<RimCup> rimcup;
   public:
     Game(std::map<std::string, std::string> player_names);
     Game(std::ifstream file);
