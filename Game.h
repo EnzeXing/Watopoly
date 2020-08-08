@@ -15,7 +15,7 @@ class Game {
     std::vector<std::shared_ptr<Building>> buildings;
     std::vector<std::shared_ptr<Player>> players;
     std::vector<std::shared_ptr<Player>>::it currentPlayer;
-    std::shared_ptr<Observer> board;
+    std::shared_ptr<Board> board;
     std::shared_ptr<Dice> dice;
   public:
     Game(std::map<std::string, char> player_names);
