@@ -3,6 +3,8 @@
 
 #include "Player.h"
 #include "Building.h"
+#include "Property.h"
+#include "NonProperty.h"
 #include "Board.h"
 #include <fstream>
 #include <string>
