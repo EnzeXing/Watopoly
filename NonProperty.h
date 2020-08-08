@@ -14,6 +14,7 @@ class RimCup {
 
 class NonProperty : public Building {
   public:
+    NonProperty(std::string name, int position);
     virtual ~NonProperty() = 0;
 };
 
