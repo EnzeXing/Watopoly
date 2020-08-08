@@ -15,6 +15,7 @@ class Board {
   Board();
   void updateImprovement(std::shared_ptr<Building> building);
   void updatePlayer(int oldPosition, int newPosition, std::string playerName);
+  void printMessage(std::string, std::ostream & out);
   void drawBoard(std::ostream & out);
 };
 
