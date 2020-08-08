@@ -54,7 +54,7 @@ Game::Game(std::map<std::string, std::string> p) {
     buildings.emplace_back(std::make_shared<Academic>("DC", 39, nullptr, "MATH", 400, 200, std::vector<unsigned int>{50, 200, 600, 1400, 1700, 2000}));
 }
 
-Game::Game(std::ifstream file) {
+Game::Game(std::ifstream & file) {
     dice = std::make_shared<Dice>();
     board = nullptr;
     rimcup = std::make_shared<RimCup>();
