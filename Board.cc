@@ -109,7 +109,7 @@ void Board::updatePlayer(int oldPosition, int newPosition, std::string playerNam
 }
 
 void Board::printMessage(std::string message, std::ostream & out) {
-	std::out << message << std::endl;
+	out << message << std::endl;
 }
 
 
