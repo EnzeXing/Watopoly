@@ -118,8 +118,6 @@ void Board::drawBoard(std::ostream & out) {
 		out << "\n";
 	}
   }
-
-
   
   for (int h = 0; h < 7; h++) {
     for (int w = 10; w >= 0; w--) {
