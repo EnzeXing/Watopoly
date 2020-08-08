@@ -196,9 +196,9 @@ void Game::saveGame(std::ofstream & file) {
         if (n2 != nullptr && n2->getOwner() != nullptr) {
             file << n2->getOwner()->getName() << " " << n2->getImprovement() << std::endl;
         } else if (n2 != nullptr) {
-            file << "Bank " << n2->getImprovement() << std::endl;
+            file << "BANK " << n2->getImprovement() << std::endl;
         } else {
-            file << "Bank 0" << std::endl;
+            file << "BANK 0" << std::endl;
         }
     }
     
