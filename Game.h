@@ -6,6 +6,7 @@
 #include "Property.h"
 #include "NonProperty.h"
 #include "Board.h"
+#include "Dice.h"
 #include <fstream>
 #include <string>
 #include <vector>
