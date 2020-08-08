@@ -28,7 +28,7 @@ class Game {
     void movePlayer(int steps);
     std::shared_ptr<Player> findPlayer(std::string s);
     void bankrupt(std::shared_ptr<Player>);
-    void saveGame(std::ofstream file);
+    void saveGame(std::ofstream & file);
 };
 
 #endif
