@@ -3,7 +3,7 @@
 #include <sstream>
 
 Game::Game(std::map<std::string, char> players) {
-    dice = std::make_shared<Dice>;
+    dice = std::make_shared<Dice>();
     board = nullptr;
     
     for (auto n : players) {
@@ -21,7 +21,7 @@ Game::Game(std::map<std::string, char> players) {
     buildings.emplace_back(std::make_shared<NeedlesHall>("Needles Hall", 7));
     buildings.emplace_back(std::make_shared<Academic>("PAS", 8, nullptr, "Arts2", 100, 50, std::vector<unsigned int>{6, 30, 90, 270, 400, 550}));
     buildings.emplace_back(std::make_shared<Academic>("HH", 9, nullptr, "Arts2", 120, 50, std::vector<unsigned int>{8, 40, 100, 300, 450, 600}));
-    buildings.emplace_back(std::make_shared<TimHortens>("DC Tims Line", 10));
+    buildings.emplace_back(std::make_shared<TimHortons>("DC Tims Line", 10));
     buildings.emplace_back(std::make_shared<Academic>("RCH", 11, nullptr, "Eng", 140, 100, std::vector<unsigned int>{10, 50, 150, 450, 625, 750}));
     buildings.emplace_back(std::make_shared<Gym>("PAC", 12, nullptr));
     buildings.emplace_back(std::make_shared<Academic>("DWE", 13, nullptr, "Eng", 140, 100, std::vector<unsigned int>{10, 50, 150, 450, 625, 750}));
@@ -41,7 +41,7 @@ Game::Game(std::map<std::string, char> players) {
     buildings.emplace_back(std::make_shared<Academic>("B1", 27, nullptr, "Sci1", 260, 150, std::vector<unsigned int>{22, 110, 330, 800, 975, 1150}));
     buildings.emplace_back(std::make_shared<Gym>("CIF", 28, nullptr));
     buildings.emplace_back(std::make_shared<Academic>("B2", 29, nullptr, "Sci1", 280, 150, std::vector<unsigned int>{24, 120, 360, 850, 1025, 1200}));
-    buildings.emplace_back(std::make_shared<GoToTim>("Go to Tims"), 30);
+    buildings.emplace_back(std::make_shared<GoToTims>("Go to Tims"), 30);
     buildings.emplace_back(std::make_shared<Academic>("EIT", 31, nullptr, "Sci2", 300, 200, std::vector<unsigned int>{26, 130, 390, 900, 1100, 1275}));
     buildings.emplace_back(std::make_shared<Academic>("ESC", 32, nullptr, "Sci2", 300, 200, std::vector<unsigned int>{26, 130, 390, 900, 1100, 1275}));
     buildings.emplace_back(std::make_shared<SLC>("SLC", 33));
@@ -100,7 +100,7 @@ Game::Game(std::ifstream file) {
     buildings.emplace_back(std::make_shared<NeedlesHall>("Needles Hall", 7));
     buildings.emplace_back(std::make_shared<Academic>("PAS", 8, nullptr, "Arts2", 100, 50, std::vector<unsigned int>{6, 30, 90, 270, 400, 550}));
     buildings.emplace_back(std::make_shared<Academic>("HH", 9, nullptr, "Arts2", 120, 50, std::vector<unsigned int>{8, 40, 100, 300, 450, 600}));
-    buildings.emplace_back(std::make_shared<TimHortens>("DC Tims Line", 10));
+    buildings.emplace_back(std::make_shared<TimHortons>("DC Tims Line", 10));
     buildings.emplace_back(std::make_shared<Academic>("RCH", 11, nullptr, "Eng", 140, 100, std::vector<unsigned int>{10, 50, 150, 450, 625, 750}));
     buildings.emplace_back(std::make_shared<Gym>("PAC", 12, nullptr));
     buildings.emplace_back(std::make_shared<Academic>("DWE", 13, nullptr, "Eng", 140, 100, std::vector<unsigned int>{10, 50, 150, 450, 625, 750}));
@@ -120,7 +120,7 @@ Game::Game(std::ifstream file) {
     buildings.emplace_back(std::make_shared<Academic>("B1", 27, nullptr, "Sci1", 260, 150, std::vector<unsigned int>{22, 110, 330, 800, 975, 1150}));
     buildings.emplace_back(std::make_shared<Gym>("CIF", 28, nullptr));
     buildings.emplace_back(std::make_shared<Academic>("B2", 29, nullptr, "Sci1", 280, 150, std::vector<unsigned int>{24, 120, 360, 850, 1025, 1200}));
-    buildings.emplace_back(std::make_shared<GoToTim>("Go to Tims"), 30);
+    buildings.emplace_back(std::make_shared<GoToTims>("Go to Tims"), 30);
     buildings.emplace_back(std::make_shared<Academic>("EIT", 31, nullptr, "Sci2", 300, 200, std::vector<unsigned int>{26, 130, 390, 900, 1100, 1275}));
     buildings.emplace_back(std::make_shared<Academic>("ESC", 32, nullptr, "Sci2", 300, 200, std::vector<unsigned int>{26, 130, 390, 900, 1100, 1275}));
     buildings.emplace_back(std::make_shared<SLC>("SLC", 33));
