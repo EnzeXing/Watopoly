@@ -21,7 +21,7 @@ class Game {
     std::shared_ptr<Board> board;
     std::shared_ptr<Dice> dice;
   public:
-    Game(std::map<std::string, char> player_names);
+    Game(std::map<std::string, std::string> player_names);
     Game(std::ifstream file);
     void nextPlayer();
     void movePlayer(int steps);
