@@ -84,7 +84,13 @@ Board::Board() {
 	}
 }
 
-void Board::updateImprovement(int position, int improvementNumber) {
+
+
+
+
+void Board::updateImprovement(std::shared_ptr<Academic> academic) {
+  int improvementNumber = academic->getImprovement();
+  int position = academic->getPosition();
   std::string temp = "       ";
   for (int i = 0; i < improvementNumber; i++) {
     temp[i] = 'I';
@@ -92,13 +98,18 @@ void Board::updateImprovement(int position, int improvementNumber) {
   board[position][1] = temp;
 }
 
-void Board::updatePlayer(int position, std::string playerName) {
+void Board::updatePlayer(int oldPosition, int newPosition, std::string playerName) {
+  board[oldPosition][4] = "       ";
   std::string temp = playerName;
   int length = 7 - playerName.length();
   for (int i = 0; i < length; i++) {
     temp += " ";
   }
-  board[position][4] = temp;
+  board[newPosition][4] = temp;
+}
+
+void Board::printMessage(std::string message, std::ostream & out) {
+	out << message << endl;
 }
 
 
