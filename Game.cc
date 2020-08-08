@@ -157,10 +157,15 @@ Game::Game(std::ifstream file) {
 void Game::nextPlayer() {
     currentPlayer++;
     if (currentPlayer == players.end()) currentPlayer = players.begin();
+    std::string message = "Next player is " + currentPlayer->getName();
+    board->printMessage(message);
 }
 
 void Game::movePlayer(int steps) {
     currentPlayer->move(steps);
+    std::string message = currentPlayer->getName() + " arrives at " + buildings[currentPlayer->getPosition()]->getName();
+    board->printMessage(message);
+    currentPlayer->visit(buildings[currentPlayer->getPosition()]);
 }
 
 std::shared_ptr<Player> Game::findPlayer(std::string s) {
@@ -195,6 +200,8 @@ void Game::saveGame(std::ofstream file) {
             file << "Bank 0" << std::endl;
         }
     }
+    
+    board->printMessage("This game has been saved.");
 }
 
 
