@@ -34,7 +34,7 @@ class Academic : public Property {
     unsigned int getImprovementCost();
     unsigned int getTuition();
     virtual void accept(Player & p) override;
-    void improve();
+    void improve(std::string s);
     void setImprovement(int improvement);
 };
 
