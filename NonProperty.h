@@ -42,7 +42,7 @@ class GoToTims : public NonProperty {
 class SLC : public NonProperty {
   std::shared_ptr<RimCup> rimCup;
   public:
-    SLC(std::string name, int position);
+    SLC(std::string name, int position, std::shared_ptr<RimCup> r);
     virtual ~SLC() override;
     virtual void accept(Player & p) override;
 };
@@ -71,7 +71,7 @@ class Goose : public NonProperty {
 class NeedlesHall : public NonProperty {
   std::shared_ptr<RimCup> rimCup;
   public:
-    NeedlesHall(std::string name, int position);
+    NeedlesHall(std::string name, int position, std::shared_ptr<RimCup> r);
     virtual ~NeedlesHall() override;
     virtual void accept(Player & p) override;
 };
