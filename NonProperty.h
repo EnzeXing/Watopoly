@@ -5,6 +5,13 @@
 #include <vector>
 #include <memory>
 
+class RimCup {
+  int ActiveCup;
+  public:
+  void giveCup(Player & p);
+  void receiveCup(Player & p);
+};
+
 class NonProperty : public Building {
   public:
     virtual ~NonProperty() = 0;
@@ -67,14 +74,6 @@ class NeedlesHall : public NonProperty {
     virtual ~NeedlesHall() override;
     virtual void accept(Player & p) override;
 };
-
-class RimCup {
-  int ActiveCup;
-  public:
-  void giveCup(Player & p);
-  void receiveCup(Player & p);
-};
-  
   
   
   
