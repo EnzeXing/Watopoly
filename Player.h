@@ -7,6 +7,8 @@
 #include <memory>
 #include "Dice.h"
 
+class Building;
+
 class Player {
   private:
     std::string name;
