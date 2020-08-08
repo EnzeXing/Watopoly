@@ -2,7 +2,7 @@
 #include <algorithm>
 #include <sstream>
 
-Game::Game(std::map<std::string, char> p) {
+Game::Game(std::map<std::string, std::string> p) {
     dice = std::make_shared<Dice>();
     board = nullptr;
     
@@ -41,7 +41,7 @@ Game::Game(std::map<std::string, char> p) {
     buildings.emplace_back(std::make_shared<Academic>("B1", 27, nullptr, "Sci1", 260, 150, std::vector<unsigned int>{22, 110, 330, 800, 975, 1150}));
     buildings.emplace_back(std::make_shared<Gym>("CIF", 28, nullptr));
     buildings.emplace_back(std::make_shared<Academic>("B2", 29, nullptr, "Sci1", 280, 150, std::vector<unsigned int>{24, 120, 360, 850, 1025, 1200}));
-    buildings.emplace_back(std::make_shared<GoToTims>("Go to Tims"), 30);
+    buildings.emplace_back(std::make_shared<GoToTims>("Go to Tims", 30);
     buildings.emplace_back(std::make_shared<Academic>("EIT", 31, nullptr, "Sci2", 300, 200, std::vector<unsigned int>{26, 130, 390, 900, 1100, 1275}));
     buildings.emplace_back(std::make_shared<Academic>("ESC", 32, nullptr, "Sci2", 300, 200, std::vector<unsigned int>{26, 130, 390, 900, 1100, 1275}));
     buildings.emplace_back(std::make_shared<SLC>("SLC", 33));
@@ -120,7 +120,7 @@ Game::Game(std::ifstream file) {
     buildings.emplace_back(std::make_shared<Academic>("B1", 27, nullptr, "Sci1", 260, 150, std::vector<unsigned int>{22, 110, 330, 800, 975, 1150}));
     buildings.emplace_back(std::make_shared<Gym>("CIF", 28, nullptr));
     buildings.emplace_back(std::make_shared<Academic>("B2", 29, nullptr, "Sci1", 280, 150, std::vector<unsigned int>{24, 120, 360, 850, 1025, 1200}));
-    buildings.emplace_back(std::make_shared<GoToTims>("Go to Tims"), 30);
+    buildings.emplace_back(std::make_shared<GoToTims>("Go to Tims", 30);
     buildings.emplace_back(std::make_shared<Academic>("EIT", 31, nullptr, "Sci2", 300, 200, std::vector<unsigned int>{26, 130, 390, 900, 1100, 1275}));
     buildings.emplace_back(std::make_shared<Academic>("ESC", 32, nullptr, "Sci2", 300, 200, std::vector<unsigned int>{26, 130, 390, 900, 1100, 1275}));
     buildings.emplace_back(std::make_shared<SLC>("SLC", 33));
@@ -145,7 +145,7 @@ Game::Game(std::ifstream file) {
         
         if (owner != "BANK") {
             ss1 >> improvement;
-            auto academic = dynamic_cast<Academic *>(buildings[i]);
+            auto academic = dynamic_pointer_cast<Academic>(buildings[i]);
             academic->setOwner(findPlayer(name));
             findPlayer(name)->addBuilding(academic->getMonopoly());
             academic->setImprovement(improvement);
@@ -190,7 +190,7 @@ void Game::saveGame(std::ofstream file) {
     
     for (auto n : buildings) {
         file << n->getName() << " ";
-        auto n2 = dynamic_cast<Academic *>(n);
+        auto n2 = dynamic_pointer_cast<Academic>(n);
         if (n2 != nullptr && n2->getOwner() != nullptr) {
             file << n2->getOwner()->getName() << " " << n2->getImprovement() << std::endl;
         } else if (n2 != nullptr) {
