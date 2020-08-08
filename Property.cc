@@ -2,7 +2,7 @@
 
 Property::Property(std::string name, int position, std::shared_ptr<Player> owner) : Building(name, position), owner{owner} {}
 
-Property::~Property {}
+Property::~Property() {}
 
 std::shared_ptr<Player> Property::getOwner() {
     return owner;
