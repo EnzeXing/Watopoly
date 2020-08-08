@@ -3,18 +3,18 @@
 Property::Property(std::string name, int position, std::shared_ptr<Player> owner) : Building(name, position), owner{owner} {}
 
 std::shared_ptr<Player> Property::getOwner() {
-    return Owner;
+    return owner;
 }
 
 void Property::setOwner(std::shared_ptr<Player> p) {
-    Owner = p;
+    owner = p;
 }
 
 Gym::Gym(std::string name, int position, std::shared_ptr<Player> owner) : Property(name, position, owner), purchaseCost{150} {}
 
 unsigned int Gym::getFee(Player & p) {
     unsigned int diceSum = p.roll() + p.roll();
-    if (owner->getProperties("Gym") == 1) {
+    if (this->getOwner()->getProperties("Gym") == 1) {
         return diceSum * 4;
     } else {
         return diceSum * 10;
@@ -23,9 +23,9 @@ unsigned int Gym::getFee(Player & p) {
 
 
 void Gym::accept(Player & p) {
-    if (owner != &p) {
-        unsigned int fee = getFee(Player & p);
-        p.giveMoney(*owner, fee);
+    if (this->getOwner()->getName() != p.getName()) {
+        unsigned int fee = getFee(p);
+        p.giveMoney(*(this->getOwner()), fee);
     }
 }
 
@@ -37,22 +37,22 @@ unsigned int Residence::getPurchaseCost() {
 }
 
 
-unsigned int Resisdence::getRent() {
-    unsigned int residence = owner->getProperties("Residence");
+unsigned int Residence::getRent() {
+    unsigned int residence = this->getOwner()->getProperties("Residence");
     unsigned int rent = residence * 50;
     return rent;
 }
 
 void Residence::accept(Player & p) {
-    if (owner != &p) {
+    if (this->getOwner()->getName() != p.getName()) {
         unsigned int rent = getRent();
-        p.giveMoney(*owner, rent);
+        p.giveMoney(*(this->getOwner()), rent);
     }
 }
 
 Academic::Academic(std::string name, int position, std::shared_ptr<Player> owner, 
-         std::string monopoly, int purchaseCost, int improvementCost, 
-         std::vector<6, unsigned int > tuition) : Property(name, position, owner), monopoly{monopoly}, improvement{0}, purchaseCost{purchaseCost}, improvementCost{improvementCost}, tuition{tuition} {}
+         std::string monopoly, unsigned int purchaseCost, unsigned int improvementCost, 
+         std::vector<unsigned int> tuition) : Property(name, position, owner), monopoly{monopoly}, improvement{0}, purchaseCost{purchaseCost}, improvementCost{improvementCost}, tuition{tuition} {}
 
 std::string Academic::getMonopoly() {
     return monopoly;
@@ -67,12 +67,12 @@ unsigned int Academic::getPurchaseCost() {
 }
 
 unsigned int Academic::getImprovementCost() {
-    return ImprovementCost;
+    return improvementCost;
 }
 
 unsigned int Academic::getTuition() {
     int fee = tuition[improvement];
-    if ((improvement == 0) && (owner->hasFullMonopoly(monopoly))) {
+    if ((improvement == 0) && (this->getOwner()->hasFullMonopoly(monopoly))) {
         return 2 * fee;
     } else {
         return fee;
