@@ -7,9 +7,9 @@ Game::Game(std::map<std::string, char> players) {
     board = nullptr;
     
     for (auto n : players) {
-        players.emplace_back(std::make_shared<Player>(n.first, n.second, 0, dice, 0, 1500, 0));
+        players->emplace_back(std::make_shared<Player>(n.first, n.second, 0, dice, 0, 1500, 0));
     }
-    currentPlayer = players.begin();
+    currentPlayer = players->begin();
     
     buildings.emplace_back(std::make_shared<OSAP>("OSAP", 0));
     buildings.emplace_back(std::make_shared<Academic>("AL", 1, nullptr, "Arts1", 40, 50, std::vector<unsigned int>{2, 10, 30, 90, 160, 250}));
@@ -54,7 +54,7 @@ Game::Game(std::map<std::string, char> players) {
 }
 
 Game::Game(std::ifstream file) {
-    dice = std::make_shared<Dice>;
+    dice = std::make_shared<Dice>();
     board = nullptr;
     
     int numPlayer;
@@ -80,7 +80,7 @@ Game::Game(std::ifstream file) {
         
         if (position == 10) {
             ss1 >> stuckAtTim;
-            if (stuchAtTim == 1) {
+            if (stuckAtTim == 1) {
                 ss1 >> TimRound;
             }
         }
@@ -145,9 +145,10 @@ Game::Game(std::ifstream file) {
         
         if (owner != "BANK") {
             ss1 >> improvement;
-            buildings[i]->setOwner(findPlayer(name));
-            findPlayer(name)->addBuilding(buildings[i]->getMonopoly());
-            buildings[i]->setImprovement(improvement);
+            auto academic = dynamic_cast<std::shared_ptr<Academic>>(buildings[i]);
+            academic->setOwner(findPlayer(name));
+            findPlayer(name)->addBuilding(academic->getMonopoly());
+            academic->setImprovement(improvement);
         }
     }
 }
@@ -155,15 +156,15 @@ Game::Game(std::ifstream file) {
 void Game::nextPlayer() {
     currentPlayer++;
     if (currentPlayer == players.end()) currentPlayer = players.begin();
-    std::string message = "Next player is " + currentPlayer->getName();
-    board->printMessage(message);
+    std::string message = "Next player is " + (*currentPlayer)->getName();
+    board->printMessage(message, std::cout);
 }
 
 void Game::movePlayer(int steps) {
-    currentPlayer->move(steps);
-    std::string message = currentPlayer->getName() + " arrives at " + buildings[currentPlayer->getPosition()]->getName();
-    board->printMessage(message);
-    currentPlayer->visit(buildings[currentPlayer->getPosition()]);
+    (*currentPlayer)->move(steps);
+    std::string message = (*currentPlayer)->getName() + " arrives at " + buildings[(*currentPlayer)->getPosition()]->getName();
+    board->printMessage(message, std::cout);
+    (*currentPlayer)->visit(buildings[(*currentPlayer)->getPosition()]);
 }
 
 std::shared_ptr<Player> Game::findPlayer(std::string s) {
