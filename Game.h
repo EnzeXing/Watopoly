@@ -17,7 +17,7 @@ class Game {
   private:
     std::vector<std::shared_ptr<Building>> buildings;
     std::vector<std::shared_ptr<Player>> players;
-    std::vector<std::shared_ptr<Player>>::it currentPlayer;
+    std::vector<std::shared_ptr<Player>>::iterator currentPlayer;
     std::shared_ptr<Board> board;
     std::shared_ptr<Dice> dice;
   public:
