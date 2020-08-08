@@ -7,7 +7,7 @@
 #include <map>
 #include <iostream>
 #include <iomanip>
-#include <Property.h>
+#include "Property.h"
 
 class Board {
   std::vector<std::vector<std::string>> board;
