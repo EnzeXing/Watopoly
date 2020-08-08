@@ -19,7 +19,7 @@ Tuition::Tuition(std::string name, int position) : NonProperty{name, position} {
 Tuition::~Tuition() {}
 
 void Tuition::accept(Player & p) {
-  throw WatopolyException("Tuition");
+  //throw WatopolyException("Tuition");
 }
 
 TimHortons::TimHortons(std::string name, int position) : NonProperty{name, position} {}
@@ -78,7 +78,7 @@ OSAP::OSAP(std::string name, int position) : NonProperty{name, position} {}
 OSAP::~OSAP(){}
 
 void OSAP::accept(Player & p) {
-  p->addMoney(200);
+  p.addMoney(200);
 }
 
 CoopFee::CoopFee(std::string name, int position) : NonProperty{name, position} {}
@@ -86,7 +86,7 @@ CoopFee::CoopFee(std::string name, int position) : NonProperty{name, position} {
 CoopFee::~CoopFee(){}
 
 void CoopFee::accept(Player & p) {
-  p->giveMoney(nullptr, 150);
+  p.giveMoney(nullptr, 150);
 }
 
 Goose::Goose(std::string name, int position) : NonProperty{name, position} {}
@@ -94,10 +94,10 @@ Goose::Goose(std::string name, int position) : NonProperty{name, position} {}
 Goose::~Goose(){}
 
 void Goose::accept(Player & p) {
-  throw WatopolyException("Attacked by geese!");
+  //throw WatopolyException("Attacked by geese!");
 }
 
-NeedlesHall::NeedlesHall(std::string name, int position, shared_ptr<RimCup> r) : NonProperty{name, position}, rimCup{r} {}
+NeedlesHall::NeedlesHall(std::string name, int position, std::shared_ptr<RimCup> r) : NonProperty{name, position}, rimCup{r} {}
 
 NeedlesHall::~NeedlesHall(){}
 
@@ -113,19 +113,19 @@ void NeedlesHall::accept(Player & p) {
     srand (time(NULL));
     int num = rand() % 18;
     if (num == 0) {
-      p->addMoney(-200);
+      p.addMoney(-200);
     } else if (num >= 1 && num <= 2) {
-      p->addMoney(-100);
+      p.addMoney(-100);
     } else if (num >= 3 && num <= 5) {
-      p->addMoney(-50);
+      p.addMoney(-50);
     } else if (num >= 6 && num <= 11) {
-      p->addMoney(25);
+      p.addMoney(25);
     } else if (num >= 12 && num <= 14) {
-      p->addMoney(50);
+      p.addMoney(50);
     } else if (num >= 15 && num <= 16) {
-      p->addMoney(100);
+      p.addMoney(100);
     } else {
-      p->addMoney(200);
+      p.addMoney(200);
     }
   }
 }
