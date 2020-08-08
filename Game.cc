@@ -2,14 +2,14 @@
 #include <algorithm>
 #include <sstream>
 
-Game::Game(std::map<std::string, char> players) {
+Game::Game(std::map<std::string, char> p) {
     dice = std::make_shared<Dice>();
     board = nullptr;
     
-    for (auto n : players) {
-        players->emplace_back(std::make_shared<Player>(n.first, n.second, 0, dice, 0, 1500, 0));
+    for (auto n : p) {
+        players.emplace_back(std::make_shared<Player>(n.first, n.second, 0, dice, 0, 1500, 0));
     }
-    currentPlayer = players->begin();
+    currentPlayer = players.begin();
     
     buildings.emplace_back(std::make_shared<OSAP>("OSAP", 0));
     buildings.emplace_back(std::make_shared<Academic>("AL", 1, nullptr, "Arts1", 40, 50, std::vector<unsigned int>{2, 10, 30, 90, 160, 250}));
@@ -145,7 +145,7 @@ Game::Game(std::ifstream file) {
         
         if (owner != "BANK") {
             ss1 >> improvement;
-            auto academic = dynamic_cast<std::shared_ptr<Academic>>(buildings[i]);
+            auto academic = dynamic_cast<Academic *>(buildings[i]);
             academic->setOwner(findPlayer(name));
             findPlayer(name)->addBuilding(academic->getMonopoly());
             academic->setImprovement(improvement);
@@ -164,7 +164,7 @@ void Game::movePlayer(int steps) {
     (*currentPlayer)->move(steps);
     std::string message = (*currentPlayer)->getName() + " arrives at " + buildings[(*currentPlayer)->getPosition()]->getName();
     board->printMessage(message, std::cout);
-    (*currentPlayer)->visit(buildings[(*currentPlayer)->getPosition()]);
+    (*currentPlayer)->visit(*(buildings[(*currentPlayer)->getPosition()]));
 }
 
 std::shared_ptr<Player> Game::findPlayer(std::string s) {
@@ -190,7 +190,7 @@ void Game::saveGame(std::ofstream file) {
     
     for (auto n : buildings) {
         file << n->getName() << " ";
-        auto n2 = dynamic_cast<std::shared_ptr<Academic>>(n);
+        auto n2 = dynamic_cast<Academic *>(n);
         if (n2 != nullptr && n2->getOwner() != nullptr) {
             file << n2->getOwner()->getName() << " " << n2->getImprovement() << std::endl;
         } else if (n2 != nullptr) {
@@ -200,7 +200,7 @@ void Game::saveGame(std::ofstream file) {
         }
     }
     
-    board->printMessage("This game has been saved.");
+    board->printMessage("This game has been saved.", std::cout);
 }
 
 
