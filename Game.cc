@@ -245,17 +245,18 @@ void Game::saveGame(std::ofstream & file) {
     for (auto n : buildings) {
         file << n->getName() << " ";
         auto n2 = std::dynamic_pointer_cast<Property>(n);
-        if (n2 != nullptr && n2->getOwner() != nullptr) {
-            file << n2->getOwner()->getName() << " ";
+        if (n2 != nullptr) {
+            if (n2->owner != nullptr) {
+                file << n2->getOwner()->getName() << " ";
+            } else {
+                file << "BANK ";
+            }
             auto n3 = std::dynamic_pointer_cast<Academic>(n2);
             if (n3 != nullptr) {
-                file << n2->getImprovement() << std::endl;
+                file << n3->getImprovement() << std::endl;
             } else {
                 file << "0\n"
             }
-            
-        } else if (n2 != nullptr) {
-            file << "BANK " << n2->getImprovement() << std::endl;
         } else {
             file << "BANK 0" << std::endl;
         }
