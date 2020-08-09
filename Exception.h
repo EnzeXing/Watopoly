@@ -1,3 +1,6 @@
+#ifndef _Exception_H_
+#define _Exception_H_
+
 #include <string>
 
 class WatopolyException {
@@ -53,3 +56,6 @@ class NeedlesHallException : public WatopolyException {
   int amount;
   NeedlesHallException(std::string m);
 };
+
+
+#endif
