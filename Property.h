@@ -7,6 +7,7 @@
 #include <memory>
 #include "Building.h"
 #include "Player.h"
+#include "Exception.h"
 
 class Property: public Building {
   std::shared_ptr<Player> owner;
