@@ -9,7 +9,7 @@ class WatopolyException {
   WatopolyException(std::string m);
 };
 
-class NoOwner : public Watopoly {
+class NoOwner : public WatopolyException {
   public:
   NoOwner(std::string m);
 };
