@@ -56,6 +56,12 @@ Board::Board() {
 	std::vector<std::string> piece(7, "");
 	board = std::vector<std::vector<std::string>>(40, piece);
 	for (int i = 0; i < 40; i++) {
+		if (i == 0) {
+			board[i][0] = " ------- ";
+			board[i][1] = "|COLLECT|";
+			board[i][2] = "|OSAP   |";
+			
+			
 		if (academic.count(i) == 1) {
 			board[i][0] = " ------- ";
       			board[i][1] = "|       |";
