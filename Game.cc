@@ -169,27 +169,29 @@ void Game::movePlayer(int steps) {
     try {
         (*currentPlayer)->visit(*(buildings[(*currentPlayer)->getPosition()]));
     } catch (NoOwner & e) {
-        board->printMessage(e.message);
-        buildings[(*currentPlayer)->getPosition()]->setOwner(*currentPlayer);
-        (*currentPlayer)->giveMoney(nullptr, buildings[(*currentPlayer)->getPosition()]->getPurchaseCost());
+        board->printMessage(e.message, std::cout);
+        auto property = dynamic_pointer_cast<Property>(buildings[(*currentPlayer)->getPosition()]);
+        property->setOwner(*currentPlayer);
+        (*currentPlayer)->giveMoney(nullptr, property->getPurchaseCost());
+        std::string = (*currentPlayer)->getName() + " has bought " + property->getName();
         // need to call input.purchaseOrNot()
-    } catch (NotEnoughMoney & e) {
+    } catch (NoEnoughMoney & e) {
         std::string message = "You don't have enough cash! You need " + str(e.amount) + " dollars.";
-        board->printMessage(message);
+        board->printMessage(message, std::cout);
         // need to call input.NotEnoughMoney()
-    } catch (NotEnoughCup & e) {
-        board->printMessage(e.message);
+    } catch (NoEnoughCup & e) {
+        board->printMessage(e.message, std::cout);
     } catch (TuitionException & e) {
-        board->printMessage(e.message);
+        board->printMessage(e.message, std::cout);
         // need to call input.PayTuition()
     } catch (TimHortonsException & e) {
-        board->printMessage(e.message);
+        board->printMessage(e.message, std::cout);
         // need to call input.TimHortons()
     } catch (getRimCup & e) {
-        board->printMessage(e.message);
+        board->printMessage(e.message, std::cout);
         rimCup->giveCup(**currentPlayer);
     } catch (SLCException & e) {
-        board->printMessage(e.message);
+        board->printMessage(e.message, std::cout);
         std::string message = "You need to go ";
         if (e.steps > 0) {
             message += "ahead " + str(e.steps) + " steps.";
@@ -197,24 +199,24 @@ void Game::movePlayer(int steps) {
             int step = 0 - e.steps;
             message += "back " + str(step) + " steps.";
         }
-        board->printMessage(message);
+        board->printMessage(message, std::count);
         movePlayer(e.steps);
     } catch (GooseException & e) {
-        board->printMessage(message);
+        board->printMessage(message, std::count);
     } catch (NeedlesHallException & e) {
-        board.printMessage(e.message);
+        board.printMessage(e.message, std::cout);
         if (e.amount > 0) {
             std::string message = "You receive " + str(e.amount) + " dollars.";
-            board->printMessage(message);
+            board->printMessage(message, std::cout);
             (*currentPlayer)->addMoney(e.amount);
         } else {
             int a = 0 - amount;
             std::string message = "You lose " + str(a) + " dollars.";
-            board->printMessage(message);
+            board->printMessage(message, std::cout);
             (*currentPlayer)->giveMoney(nullptr, e.amount);
         }
     } catch (ImprovementException & e) {
-        board.printMessage(e.message);
+        board.printMessage(e.message, std::cout);
     }
 }
 
