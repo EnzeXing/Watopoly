@@ -41,14 +41,14 @@ class Academic : public Property {
 
 class Gym: public Property {
   public:
-  Gym(std::string name, int position, std::shared_ptr<Player> owner, unsigned int p);
+  Gym(std::string name, int position, std::shared_ptr<Player> owner);
   unsigned int getFee(Player & p);
   virtual void accept(Player & p) override;
 };
   
 class Residence: public Property {
   public:
-  Residence(std::string name, int position, std::shared_ptr<Player> owner, unsigned int p);
+  Residence(std::string name, int position, std::shared_ptr<Player> owner);
   unsigned int getRent();
   virtual void accept(Player & p) override;
 };
