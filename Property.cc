@@ -95,7 +95,7 @@ void Academic::improve(std::string s) {
         improvement--;
         this->getOwner()->addMoney(improvementCost / 2);
     } else {
-        //throw WatopolyException("invalid improvement command!");
+        throw ImprovementException("invalid improvement command!");
     }
 }
 
