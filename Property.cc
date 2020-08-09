@@ -44,9 +44,17 @@ Residence::Residence(std::string name, int position, std::shared_ptr<Player> own
 
 unsigned int Residence::getRent() {
     unsigned int residence = this->getOwner()->getProperties("Residence");
-    unsigned int rent = residence * 50;
-    return rent;
+    if (residence == 1) {
+        return 25;
+    } else if (residence == 2) {
+        return 50;
+    } else if (residence == 3) {
+        return 100;
+    } else if (residence == 4) {
+        return 200;
+    }
 }
+     
 
 void Residence::accept(Player & p) {
     if (this->getOwner() == nullptr) {
