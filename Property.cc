@@ -85,7 +85,7 @@ unsigned int Academic::getImprovementCost() {
 
 unsigned int Academic::getTuition() {
     int fee = tuition[improvement];
-    if ((improvement == 0) && (this->getOwner()->hasFullMonopoly(monopoly))) {
+    if ((improvement == 0) && (this->getOwner()->hasFullMonopoly(this->getMonopoly()))) {
         return 2 * fee;
     } else {
         return fee;
