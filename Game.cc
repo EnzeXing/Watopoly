@@ -57,7 +57,7 @@ Game::Game(std::map<std::string, std::string> p) {
 
 Game::Game(std::ifstream & file) {
     dice = std::make_shared<Dice>();
-    board = nullptr;
+    board = std::make_shared<Board>();
     rimcup = std::make_shared<RimCup>();
     
     int numPlayer;
@@ -80,6 +80,7 @@ Game::Game(std::ifstream & file) {
         ss1 >> TimCup;
         ss1 >> money;
         ss1 >> position;
+        board->updatePlayer(position, position, symbol);
         
         if (position == 10) {
             ss1 >> stuckAtTim;
@@ -168,6 +169,8 @@ void Game::nextPlayer() {
 }
 
 void Game::movePlayer(int steps) {
+    int position = ((*currentPlayer)->getPosition() + steps + 40) % 40;
+    updatePlayer((*currentPlayer)->getPosition(), position, (*currentPlayer)->getSymbol());
     (*currentPlayer)->move(steps);
     std::string message = (*currentPlayer)->getName() + " arrives at " + buildings[(*currentPlayer)->getPosition()]->getName();
     board->printMessage(message, std::cout);
