@@ -174,7 +174,7 @@ void Game::movePlayer(int steps) {
         property->setOwner(*currentPlayer);
         (*currentPlayer)->giveMoney(nullptr, property->getPurchaseCost());
         std::string message = (*currentPlayer)->getName() + " has bought " + property->getName();
-        board->printMessage(message, std::cout)
+        board->printMessage(message, std::cout);
         // need to call input.purchaseOrNot()
     } catch (NoEnoughMoney & e) {
         std::string message = "You don't have enough cash! You need " + std::to_string(e.needAmount) + " dollars.";
@@ -205,14 +205,14 @@ void Game::movePlayer(int steps) {
     } catch (GooseException & e) {
         board->printMessage(message, std::cout);
     } catch (NeedlesHallException & e) {
-        board.printMessage(e.message, std::cout);
+        board->printMessage(e.message, std::cout);
         if (e.amount > 0) {
-            std::string message = "You receive " + str(e.amount) + " dollars.";
+            std::string message = "You receive " + std::to_string(e.amount) + " dollars.";
             board->printMessage(message, std::cout);
             (*currentPlayer)->addMoney(e.amount);
         } else {
             int a = 0 - e.amount;
-            std::string message = "You lose " + str(a) + " dollars.";
+            std::string message = "You lose " + std::to_string(a) + " dollars.";
             board->printMessage(message, std::cout);
             (*currentPlayer)->giveMoney(nullptr, e.amount);
         }
