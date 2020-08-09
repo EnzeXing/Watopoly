@@ -166,7 +166,56 @@ void Game::movePlayer(int steps) {
     (*currentPlayer)->move(steps);
     std::string message = (*currentPlayer)->getName() + " arrives at " + buildings[(*currentPlayer)->getPosition()]->getName();
     board->printMessage(message, std::cout);
-    (*currentPlayer)->visit(*(buildings[(*currentPlayer)->getPosition()]));
+    try {
+        (*currentPlayer)->visit(*(buildings[(*currentPlayer)->getPosition()]));
+    } catch (NoOwner & e) {
+        board->printMessage(e.message);
+        buildings[(*currentPlayer)->getPosition()]->setOwner(*currentPlayer);
+        (*currentPlayer)->giveMoney(nullptr, buildings[(*currentPlayer)->getPosition()]->getPurchaseCost());
+        // need to call input.purchaseOrNot()
+    } catch (NotEnoughMoney & e) {
+        std::string message = "You don't have enough cash! You need " + str(e.amount) + " dollars.";
+        board->printMessage(message);
+        // need to call input.NotEnoughMoney()
+    } catch (NotEnoughCup & e) {
+        board->printMessage(e.message);
+    } catch (TuitionException & e) {
+        board->printMessage(e.message);
+        // need to call input.PayTuition()
+    } catch (TimHortonsException & e) {
+        board->printMessage(e.message);
+        // need to call input.TimHortons()
+    } catch (getRimCup & e) {
+        board->printMessage(e.message);
+        rimCup->giveCup(**currentPlayer);
+    } catch (SLCException & e) {
+        board->printMessage(e.message);
+        std::string message = "You need to go ";
+        if (e.steps > 0) {
+            message += "ahead " + str(e.steps) + " steps.";
+        } else {
+            int step = 0 - e.steps;
+            message += "back " + str(step) + " steps.";
+        }
+        board->printMessage(message);
+        movePlayer(e.steps);
+    } catch (GooseException & e) {
+        board->printMessage(message);
+    } catch (NeedlesHallException & e) {
+        board.printMessage(e.message);
+        if (e.amount > 0) {
+            std::string message = "You receive " + str(e.amount) + " dollars.";
+            board->printMessage(message);
+            (*currentPlayer)->addMoney(e.amount);
+        } else {
+            int a = 0 - amount;
+            std::string message = "You lose " + str(a) + " dollars.";
+            board->printMessage(message);
+            (*currentPlayer)->giveMoney(nullptr, e.amount);
+        }
+    } catch (ImprovementException & e) {
+        board.printMessage(e.message);
+    }
 }
 
 std::shared_ptr<Player> Game::findPlayer(std::string s) {
