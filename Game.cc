@@ -274,5 +274,9 @@ void Game::saveGame(std::ofstream & file) {
     board->printMessage("This game has been saved.", std::cout);
 }
 
+void Game::drawBoard() {
+    board->drawBoard();
+}
+
 
 
