@@ -99,21 +99,34 @@ void Board::updateImprovement(std::shared_ptr<Academic> academic) {
 }
 
 void Board::updatePlayer(int oldPosition, int newPosition, std::string playerName) {
+	char symbol = playerName[0];
+	
+	if (oldPosition == 0) && (new)
 	for (int i = 0; i < 7; i += 2) {
-		if (board[oldPosition][4][i] == playerName) {
-			board[oldPosition][4][i] = " ";
+		if (board[oldPosition][4][i] == symbol) {
+			board[oldPosition][4][i] = ' ';
+		}
+	}
+	for (int i = 0; i < 7; i += 2) {
+		if (board[oldPosition][5][i] == symbol) {
+			board[oldPosition][5][i] = ' ';
 		}
 	}
 	
-	
-  board[oldPosition][4] = "       ";
-  std::string temp = playerName;
-  int length = 7 - playerName.length();
-  for (int i = 0; i < length; i++) {
-    temp += " ";
-  }
-  board[newPosition][4] = temp;
+	for (int i = 0; i < 7; i += 2) {
+		if (board[newPosition][4][i] == ' ') {
+			board[newPosition][4][i] = symbol;
+			return;
+		}
+	}
+	for (int i = 0; i < 7; i += 2) {
+		if (board[newPosition][5][i] == ' ') {
+			board[newPosition][5][i] = symbol;
+			return;
+		}
+	}
 }
+
 
 void Board::printMessage(std::string message, std::ostream & out) {
 	out << message << std::endl;
