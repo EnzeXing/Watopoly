@@ -7,6 +7,7 @@
 #include "NonProperty.h"
 #include "Board.h"
 #include "Dice.h"
+#include "Exception.h"
 #include <fstream>
 #include <string>
 #include <vector>
