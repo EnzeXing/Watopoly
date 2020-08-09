@@ -101,7 +101,7 @@ void Player::addCup() {
 
 void Player::removeCup() {
     if (rimCup == 0) {
-        throw WatopolyException("Not enough Rim Cup!");
+        throw NotEnoughCup("Not enough Rim Cup!");
     }
     rimCup--;
 }
