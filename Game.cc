@@ -170,7 +170,7 @@ void Game::nextPlayer() {
 
 void Game::movePlayer(int steps) {
     int position = ((*currentPlayer)->getPosition() + steps + 40) % 40;
-    updatePlayer((*currentPlayer)->getPosition(), position, (*currentPlayer)->getSymbol());
+    board->updatePlayer((*currentPlayer)->getPosition(), position, (*currentPlayer)->getSymbol());
     (*currentPlayer)->move(steps);
     std::string message = (*currentPlayer)->getName() + " arrives at " + buildings[(*currentPlayer)->getPosition()]->getName();
     board->printMessage(message, std::cout);
@@ -275,7 +275,7 @@ void Game::saveGame(std::ofstream & file) {
 }
 
 void Game::drawBoard() {
-    board->drawBoard();
+    board->drawBoard(std::cout);
 }
 
 
