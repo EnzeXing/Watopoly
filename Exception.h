@@ -57,5 +57,9 @@ class NeedlesHallException : public WatopolyException {
   NeedlesHallException(std::string m);
 };
 
+class ImprovementException : public WatopolyException {
+  public:
+  ImprovementException(std::string m);
+}
 
 #endif
