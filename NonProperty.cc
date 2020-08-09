@@ -21,23 +21,22 @@ Tuition::Tuition(std::string name, int position) : NonProperty{name, position} {
 Tuition::~Tuition() {}
 
 void Tuition::accept(Player & p) {
-  //throw WatopolyException("Tuition");
+  throw TuitionException("Tuition");
 }
 
 TimHortons::TimHortons(std::string name, int position) : NonProperty{name, position} {}
 
 TimHortons::~TimHortons() {}
 
-void TimHortons::accept(Player & p) {
-  //throw WatopolyException("Waiting in the line!");
-}
+void TimHortons::accept(Player & p) {}
+
 
 GoToTims::GoToTims(std::string name, int position) : NonProperty{name, position} {}
 
 GoToTims::~GoToTims() {}
 
 void GoToTims::accept(Player & p) {
-  p.move(20);
+  throw TimeHortonsException("Go to Tims");
 }
 
 SLC::SLC(std::string name, int position, std::shared_ptr<RimCup> r) : NonProperty{name, position}, rimCup{r} {}
@@ -52,25 +51,26 @@ SLC::~SLC(){}
   
   if (a == 44) {
     rimCup->giveCup(p);
+    throw getRimCup("Got a rim cup");
   } else {
     srand (time(NULL));
     int num = rand() % 24;
     if (num >= 0 && num <= 2) {
-      p.move(-3);
+      throw SLCException("You reached SLC", -3);
     } else if (num >= 3 && num <= 6) {
-      p.move(-2);
+      throw SLCException("You reached SLC", -2);
     } else if (num >= 7 && num <= 10) {
-      p.move(-1);
+      throw SLCException("You reached SLC", -1);
     } else if (num >= 11 && num <= 13) {
-      p.move(1);
+      throw SLCException("You reached SLC", 1);
     } else if (num >= 14 && num <= 17) {
-      p.move(2);
+      throw SLCException("You reached SLC", 2);
     } else if (num >= 18 && num <= 21) {
-      p.move(3);
+      throw SLCException("You reached SLC", 3);
     } else if (num == 22) {
-      p.move(8);
+      throw SLCException("You reached SLC", 8);
     } else {
-      p.move(-2);
+      throw SLCException("You reached SLC", -2);
     }
   }
 }
@@ -96,7 +96,7 @@ Goose::Goose(std::string name, int position) : NonProperty{name, position} {}
 Goose::~Goose(){}
 
 void Goose::accept(Player & p) {
-  //throw WatopolyException("Attacked by geese!");
+  throw GooseException("Attacked by geese!");
 }
 
 NeedlesHall::NeedlesHall(std::string name, int position, std::shared_ptr<RimCup> r) : NonProperty{name, position}, rimCup{r} {}
@@ -111,23 +111,24 @@ void NeedlesHall::accept(Player & p) {
   
   if (a == 44) {
     rimCup->giveCup(p);
+    throw getRimCup("Got a rim cup");
   } else {
     srand (time(NULL));
     int num = rand() % 18;
     if (num == 0) {
-      p.addMoney(-200);
+      throw NeedlesHallException("You reached Needles hall", -200);
     } else if (num >= 1 && num <= 2) {
-      p.addMoney(-100);
+      throw NeedlesHallException("You reached Needles hall", -100);
     } else if (num >= 3 && num <= 5) {
-      p.addMoney(-50);
+      throw NeedlesHallException("You reached Needles hall", -50);
     } else if (num >= 6 && num <= 11) {
-      p.addMoney(25);
+      throw NeedlesHallException("You reached Needles hall", 25);
     } else if (num >= 12 && num <= 14) {
-      p.addMoney(50);
+      throw NeedlesHallException("You reached Needles hall", 50);
     } else if (num >= 15 && num <= 16) {
-      p.addMoney(100);
+      throw NeedlesHallException("You reached Needles hall", 100);
     } else {
-      p.addMoney(200);
+      throw NeedlesHallException("You reached Needles hall", 200);
     }
   }
 }
