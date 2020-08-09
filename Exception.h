@@ -5,6 +5,8 @@ class WatopolyException {
     std::string message;
 };
 
+class NoOwner : public Watopoly {};
+
 class NotEnoughMoney : public WatopolyException {
   public:
     int needAmount;
