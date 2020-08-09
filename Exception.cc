@@ -20,5 +20,5 @@ GooseException::GooseException(std::string m) : WatopolyException(m) {}
 
 NeedlesHallException::NeedlesHallException(std::string m) : WatopolyException(m) {}
 
-ImprovementException::ImprovementException(std::string m) : WatopolyException(m) {}
+ImprovementException::ImprovementException(std::string m, int amount) : WatopolyException(m), amount{amount} {}
 
