@@ -25,6 +25,7 @@ class Game {
   public:
     Game(std::map<std::string, std::string> player_names);
     Game(std::ifstream & file);
+    std::shared_ptr<Board> getBoard();
     void nextPlayer();
     void movePlayer(int steps);
     std::shared_ptr<Player> findPlayer(std::string s);
