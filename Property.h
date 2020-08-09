@@ -14,7 +14,7 @@ class Property: public Building {
   unsigned int purchaseCost;
   
   public:
-    Property(std::string name, int position, std::shared_ptr<Player> owner);
+    Property(std::string name, int position, std::shared_ptr<Player> owner, unsigned int p);
     virtual ~Property() = 0;
     std::shared_ptr<Player> getOwner();
     void setOwner(std::shared_ptr<Player> owner);
@@ -29,7 +29,7 @@ class Academic : public Property {
     std::vector<unsigned int> tuition;
   public:
     Academic(std::string name, int position, std::shared_ptr<Player> owner, std::string monopoly, 
-                     unsigned int purchaseCost, unsigned int improvementCost, std::vector<unsigned int > tuition);
+                     unsigned int p, unsigned int improvementCost, std::vector<unsigned int > tuition, unsigned int p);
     std::string getMonopoly();
     unsigned int getImprovement();
     unsigned int getImprovementCost();
@@ -41,14 +41,14 @@ class Academic : public Property {
 
 class Gym: public Property {
   public:
-  Gym(std::string name, int position, std::shared_ptr<Player> owner);
+  Gym(std::string name, int position, std::shared_ptr<Player> owner, unsigned int p);
   unsigned int getFee(Player & p);
   virtual void accept(Player & p) override;
 };
   
 class Residence: public Property {
   public:
-  Residence(std::string name, int position, std::shared_ptr<Player> owner);
+  Residence(std::string name, int position, std::shared_ptr<Player> owner, unsigned int p);
   unsigned int getRent();
   virtual void accept(Player & p) override;
 };
