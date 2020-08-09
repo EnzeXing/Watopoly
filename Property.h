@@ -12,25 +12,26 @@
 class Property: public Building {
   std::shared_ptr<Player> owner;
   unsigned int purchaseCost;
+  std::string monopoly;
   
   public:
-    Property(std::string name, int position, std::shared_ptr<Player> owner, unsigned int p);
+    Property(std::string name, int position, std::shared_ptr<Player> owner, unsigned int p, std::string monopoly);
     virtual ~Property() = 0;
     std::shared_ptr<Player> getOwner();
     void setOwner(std::shared_ptr<Player> owner);
     unsigned int getPurchaseCost();
+    std::string getMonopoly();
 };
 
 class Academic : public Property {
   private:
-    std::string monopoly;
+    
     unsigned int improvement;
     unsigned int improvementCost;
     std::vector<unsigned int> tuition;
   public:
     Academic(std::string name, int position, std::shared_ptr<Player> owner, std::string monopoly, 
                      unsigned int p, unsigned int improvementCost, std::vector<unsigned int > tuition);
-    std::string getMonopoly();
     unsigned int getImprovement();
     unsigned int getImprovementCost();
     unsigned int getTuition();
