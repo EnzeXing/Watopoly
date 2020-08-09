@@ -54,7 +54,7 @@ class GooseException : public WatopolyException {
 class NeedlesHallException : public WatopolyException {
   public:
   int amount;
-  NeedlesHallException(std::string m, int amount);
+  NeedlesHallException(std::string m, int a);
 };
 
 class ImprovementException : public WatopolyException {
