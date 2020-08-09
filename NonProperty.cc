@@ -8,13 +8,13 @@ NonProperty::NonProperty (std::string name, int position) : Building(name, posit
 NonProperty::~NonProperty() {}
 
 void RimCup::giveCup(Player & p) {
-  ActiveCup++;
   p.addCup();
+  ActiveCup++;
 }
 
 void RimCup::receiveCup(Player & p) {
-  ActiveCup--;
   p.removeCup();
+  ActiveCup--;
 }
 
 Tuition::Tuition(std::string name, int position) : NonProperty{name, position} {}
