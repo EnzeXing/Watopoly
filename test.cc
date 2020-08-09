@@ -14,10 +14,13 @@ int main() {
     players["Steven"] = "S";
     
     Game game = Game(players);
+    game.drawBoard();
     game.nextPlayer();
     game.movePlayer(5);
+    game.drawBoard();
     game.nextPlayer();
     game.movePlayer(5);
+    game.drawBoard();
     std::ofstream outfile{"Game1.txt"};
     game.saveGame(outfile);
 }
