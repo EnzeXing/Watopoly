@@ -1,6 +1,7 @@
 #include "Property.h"
 
-Property::Property(std::string name, int position, std::shared_ptr<Player> owner, unsigned int p) : Building(name, position), owner{owner}, purchaseCost{p} {}
+Property::Property(std::string name, int position, std::shared_ptr<Player> owner, 
+                   unsigned int p, std::string monopoly) : Building(name, position), owner{owner}, purchaseCost{p}, monopoly{monopoly} {}
 
 Property::~Property() {}
 
@@ -15,9 +16,12 @@ void Property::setOwner(std::shared_ptr<Player> p) {
 unsigned int Property::getPurchaseCost() {
     return purchaseCost;
 }
-    
 
-Gym::Gym(std::string name, int position, std::shared_ptr<Player> owner) : Property(name, position, owner, 150) {}
+std::string Property::getMonopoly() {
+    return monopoly;
+}
+
+Gym::Gym(std::string name, int position, std::shared_ptr<Player> owner) : Property(name, position, owner, 150, "Gym") {}
 
 unsigned int Gym::getFee(Player & p) {
     unsigned int diceSum = p.roll() + p.roll();
@@ -40,7 +44,7 @@ void Gym::accept(Player & p) {
 }
 
 
-Residence::Residence(std::string name, int position, std::shared_ptr<Player> owner) : Property(name, position, owner, 200) {}
+Residence::Residence(std::string name, int position, std::shared_ptr<Player> owner) : Property(name, position, owner, 200, "Residence") {}
 
 unsigned int Residence::getRent() {
     unsigned int residence = this->getOwner()->getProperties("Residence");
@@ -68,11 +72,7 @@ void Residence::accept(Player & p) {
 
 Academic::Academic(std::string name, int position, std::shared_ptr<Player> owner, 
          std::string monopoly, unsigned int p, unsigned int improvementCost, 
-         std::vector<unsigned int> tuition) : Property(name, position, owner, p), monopoly{monopoly}, improvement{0}, improvementCost{improvementCost}, tuition{tuition} {}
-
-std::string Academic::getMonopoly() {
-    return monopoly;
-}
+         std::vector<unsigned int> tuition) : Property(name, position, owner, p, monopoly), improvement{0}, improvementCost{improvementCost}, tuition{tuition} {}
 
 unsigned int Academic::getImprovement() {
     return improvement;
