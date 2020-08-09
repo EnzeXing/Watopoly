@@ -6,6 +6,7 @@
 #include <map>
 #include <memory>
 #include "Dice.h"
+#include "Exception.h"
 
 class Building;
 
