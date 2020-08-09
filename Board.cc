@@ -99,6 +99,13 @@ void Board::updateImprovement(std::shared_ptr<Academic> academic) {
 }
 
 void Board::updatePlayer(int oldPosition, int newPosition, std::string playerName) {
+	for (int i = 0; i < 7; i += 2) {
+		if (board[oldPosition][4][i] == playerName) {
+			board[oldPosition][4][i] = " ";
+		}
+	}
+	
+	
   board[oldPosition][4] = "       ";
   std::string temp = playerName;
   int length = 7 - playerName.length();
