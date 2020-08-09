@@ -246,7 +246,7 @@ void Game::saveGame(std::ofstream & file) {
         file << n->getName() << " ";
         auto n2 = std::dynamic_pointer_cast<Property>(n);
         if (n2 != nullptr) {
-            if (n2->owner != nullptr) {
+            if (n2->getOwner() != nullptr) {
                 file << n2->getOwner()->getName() << " ";
             } else {
                 file << "BANK ";
@@ -255,7 +255,7 @@ void Game::saveGame(std::ofstream & file) {
             if (n3 != nullptr) {
                 file << n3->getImprovement() << std::endl;
             } else {
-                file << "0\n"
+                file << "0\n";
             }
         } else {
             file << "BANK 0" << std::endl;
