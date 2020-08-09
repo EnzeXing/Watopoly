@@ -11,13 +11,13 @@ class NoOwner : public Watopoly {
   NoOwner(std::string m);
 };
 
-class NotEnoughMoney : public WatopolyException {
+class NoEnoughMoney : public WatopolyException {
   public:
   int needAmount;
-  NotEnoughMoney(std::string m, int a);
+  NoEnoughMoney(std::string m, int a);
 };
 
-class NotEnoughCup : public WatopolyException {
+class NoEnoughCup : public WatopolyException {
   public:
   NoEnoughCup(std::string m);
 };
