@@ -31,6 +31,7 @@ class Game {
     std::shared_ptr<Player> findPlayer(std::string s);
     void bankrupt(std::shared_ptr<Player>);
     void saveGame(std::ofstream & file);
+    void drawBoard();
 };
 
 #endif
