@@ -171,8 +171,9 @@ void Game::movePlayer(int steps) {
     } catch (NoOwner & e) {
         board->printMessage(e.message, std::cout);
         auto property = std::dynamic_pointer_cast<Property>(buildings[(*currentPlayer)->getPosition()]);
-        property->setOwner(*currentPlayer);
         (*currentPlayer)->giveMoney(nullptr, property->getPurchaseCost());
+        property->setOwner(*currentPlayer);
+        (*currentPlayer)->addBuilding(property->getMonopoly());
         std::string message = (*currentPlayer)->getName() + " has bought " + property->getName();
         board->printMessage(message, std::cout);
         // need to call input.purchaseOrNot()
