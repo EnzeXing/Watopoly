@@ -2,6 +2,7 @@
 #define NONPROPERTY_H
 #include "Building.h"
 #include "Player.h"
+#include "Exception.h"
 #include <vector>
 #include <memory>
 
