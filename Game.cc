@@ -155,6 +155,10 @@ Game::Game(std::ifstream & file) {
     }
 }
 
+std::shared_ptr<Board> Game::getBoard() {
+    return board;
+}
+
 void Game::nextPlayer() {
     currentPlayer++;
     if (currentPlayer == players.end()) currentPlayer = players.begin();
