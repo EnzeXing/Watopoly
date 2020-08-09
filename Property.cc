@@ -17,7 +17,7 @@ unsigned int Property::getPurchaseCost() {
 }
     
 
-Gym::Gym(std::string name, int position, std::shared_ptr<Player> owner, unsigned int p) : Property(name, position, owner, p) {}
+Gym::Gym(std::string name, int position, std::shared_ptr<Player> owner) : Property(name, position, owner, 150) {}
 
 unsigned int Gym::getFee(Player & p) {
     unsigned int diceSum = p.roll() + p.roll();
@@ -40,7 +40,7 @@ void Gym::accept(Player & p) {
 }
 
 
-Residence::Residence(std::string name, int position, std::shared_ptr<Player> owner, unsigned int p) : Property(name, position, owner, p) {}
+Residence::Residence(std::string name, int position, std::shared_ptr<Player> owner) : Property(name, position, owner, 200) {}
 
 unsigned int Residence::getRent() {
     unsigned int residence = this->getOwner()->getProperties("Residence");
