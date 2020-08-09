@@ -60,6 +60,6 @@ class NeedlesHallException : public WatopolyException {
 class ImprovementException : public WatopolyException {
   public:
   ImprovementException(std::string m);
-}
+};
 
 #endif
