@@ -2,32 +2,54 @@
 
 class WatopolyException {
   public:
-    std::string message;
+  std::string message;
+  WatopolyException(std::string m);
 };
 
-class NoOwner : public Watopoly {};
+class NoOwner : public Watopoly {
+  public:
+  NoOwner(std::string m);
+};
 
 class NotEnoughMoney : public WatopolyException {
   public:
-    int needAmount;
+  int needAmount;
+  NotEnoughMoneyException(std::string m, int a);
 };
 
-class NotEnoughCup : public WatopolyException {};
+class NotEnoughCup : public WatopolyException {
+  public:
+  NoEnoughCup(std::string m);
+};
 
-class TuitionException : public WatopolyException {};
+class TuitionException : public WatopolyException {
+  public:
+  TuitionException(std::string m);
+};
 
-class TimHortonsException : public WatopolyException {};
+class TimHortonsException : public WatopolyException {
+  public:
+  TimHortonsException(std::string m);
+};
 
-class getRimCup : public WatopolyException {};
+class getRimCup : public WatopolyException {
+  public:
+  getRimCup(std::string m);
+};
 
 class SLCException : public WatopolyException {
   public:
-    int steps;
+  int steps;
+  SLCException(std::string m, int s);
 };
 
-class GooseException : public WatopolyException {};
+class GooseException : public WatopolyException {
+  public:
+  GooseException(std::string m);
+};
 
 class NeedlesHallException : public WatopolyException {
   public:
-    int amount;
+  int amount;
+  NeedlesHallException(std::string m);
 };
