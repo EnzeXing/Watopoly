@@ -5,10 +5,11 @@
 Game::Game(std::map<std::string, std::string> p) {
     dice = std::make_shared<Dice>();
     rimcup = std::make_shared<RimCup>();
-    board = nullptr;
+    board = std::make_shared<Board>();
     
     for (auto n : p) {
         players.emplace_back(std::make_shared<Player>(n.first, n.second, 0, dice, 0, 1500, 0));
+        board->updatePlayer(0, 0, n.second);
     }
     currentPlayer = players.begin();
     
