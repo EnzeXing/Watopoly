@@ -1,10 +1,22 @@
 #include "Exception.h"
 
-WatopolyException::WatopolyExeption(std::string m) : message{m} {}
+WatopolyException::WatopolyException(std::string m) : message{m} {}
 
 NoOwner::NoOwner(std::string m) : WatopolyExeption(m) {}
 
-NotEnoughMoney::NotEnoughMoney(std::string m, int a) : WatopolyExeption(m), needAmount{a} {}
+NoEnoughMoney::NoEnoughMoney(std::string m, int a) : WatopolyExeption(m), needAmount{a} {}
 
+NoEnoughCup::NoEnoughCup(std::string m) : WatopolyExeption(m) {}
 
+TuitionException::TuitionException(std::string m): WatopolyExeption(m) {}
+
+TimHortonsException::TimHortonsException(std::string m) : WatopolyExeption(m) {}
+
+getRimCup::getRimCup(std::string m) : WatopolyExeption(m) {}
+
+SLCException::SLCException(std::string m, int s) : WatopolyExeption(m), steps{s} {}
+
+GooseException::GooseException(std::string m) : WatopolyExeption(m) {}
+
+NeedlesHallException::NeedlesHallException(std::string m) : WatopolyExeption(m) {}
 
