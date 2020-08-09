@@ -102,25 +102,25 @@ void Board::updatePlayer(int oldPosition, int newPosition, std::string playerNam
 	char symbol = playerName[0];
 	
 	if (!((oldPosition == 0) && (newPosition == 0))) {
-		for (int i = 0; i < 7; i += 2) {
+		for (int i = 1; i < 9; i += 2) {
 			if (board[oldPosition][4][i] == symbol) {
 			board[oldPosition][4][i] = ' ';
 			}
 		}
-		for (int i = 0; i < 7; i += 2) {
+		for (int i = 1; i < 9; i += 2) {
 			if (board[oldPosition][5][i] == symbol) {
 			board[oldPosition][5][i] = ' ';
 			}
 		}
 	}
 	
-	for (int i = 0; i < 7; i += 2) {
+	for (int i = 1; i < 9; i += 2) {
 		if (board[newPosition][4][i] == ' ') {
 		board[newPosition][4][i] = symbol;
 		return;
 		}
 	}
-	for (int i = 0; i < 7; i += 2) {
+	for (int i = 1; i < 9; i += 2) {
 		if (board[newPosition][5][i] == ' ') {
 		board[newPosition][5][i] = symbol;
 		return;
