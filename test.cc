@@ -16,4 +16,8 @@ int main() {
     Game game = Game(players);
     game.nextPlayer();
     game.movePlayer(5);
+    game.nextPlayer();
+    game.movePlayer(5);
+    std::ofstream outfile{"Game1.txt"};
+    game.saveGame(outfile);
 }
