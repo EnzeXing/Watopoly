@@ -32,7 +32,7 @@ int Player::getMoney() {
 
 void Player::giveMoney(std::shared_ptr<Player> other, int amount) {
     if (money < amount) {
-        throw NotEnoughMoney("Not enough money!", amount - money);
+        throw NoEnoughMoney("Not enough money!", amount - money);
     }
     
     money -= amount;
@@ -101,7 +101,7 @@ void Player::addCup() {
 
 void Player::removeCup() {
     if (rimCup == 0) {
-        throw NotEnoughCup("Not enough Rim Cup!");
+        throw NoEnoughCup("Not enough Rim Cup!");
     }
     rimCup--;
 }
