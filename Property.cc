@@ -56,6 +56,8 @@ unsigned int Residence::getRent() {
         return 100;
     } else if (residence == 4) {
         return 200;
+    } else {
+        return 0;
     }
 }
      
