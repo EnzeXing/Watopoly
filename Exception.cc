@@ -18,7 +18,7 @@ SLCException::SLCException(std::string m, int s) : WatopolyException(m), steps{s
 
 GooseException::GooseException(std::string m) : WatopolyException(m) {}
 
-NeedlesHallException::NeedlesHallException(std::string m) : WatopolyException(m) {}
+NeedlesHallException::NeedlesHallException(std::string m, int a) : WatopolyException(m), amount{a} {}
 
 ImprovementException::ImprovementException(std::string m, int amount) : WatopolyException(m), amount{amount} {}
 
