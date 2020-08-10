@@ -147,7 +147,7 @@ Game::Game(std::ifstream & file) {
         
         ss1 >> name;
         ss1 >> owner;
-        std::cerr << "Building info" << std::endl;
+        std::cerr << owner << std::endl;
         
         if (owner != "BANK") {
             ss1 >> improvement;
