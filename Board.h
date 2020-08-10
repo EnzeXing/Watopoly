@@ -8,6 +8,7 @@
 #include <iostream>
 #include <iomanip>
 #include "Property.h"
+#include "commandInput.h"
 
 class Board {
   std::vector<std::vector<std::string>> board;
@@ -15,6 +16,7 @@ class Board {
 
   public:
   Board();
+  void Board::setCommand(std::shared_ptr<CommandInput> c);
   void updateImprovement(std::shared_ptr<Academic> academic);
   void updatePlayer(int oldPosition, int newPosition, std::string playerName);
   void printMessage(std::string message, std::ostream & out);
