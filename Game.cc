@@ -139,7 +139,7 @@ Game::Game(std::ifstream & file) {
     for (int i = 0; i < 40; ++i) {
         std::string buildingInfo;
         getline(file, buildingInfo);
-        std::istringstream ss1;
+        std::istringstream ss1{buildingInfo};
         
         std::string name;
         std::string owner;
