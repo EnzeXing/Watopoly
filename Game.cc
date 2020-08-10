@@ -93,6 +93,8 @@ Game::Game(std::ifstream & file) {
         std::cerr << "Player info" << std::endl;
     }
     
+    file.ignore();
+    
     currentPlayer = players.begin();
     
     buildings.emplace_back(std::make_shared<OSAP>("OSAP", 0));
