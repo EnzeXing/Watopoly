@@ -32,7 +32,7 @@ class Game {
     void bankrupt(std::shared_ptr<Player>);
     void saveGame(std::ofstream & file);
     void drawBoard();
-    std::shared_ptr<Player> currPlayer();
+    void roll();
 };
 
 #endif
