@@ -292,7 +292,8 @@ void Game::drawBoard() {
     board->drawBoard(std::cout);
 }
 
-std::shared_ptr<Player> Game::currPlayer() {
-    return *currentPlayer;
+void Game::roll() {
+    int a = (*currentPlayer)->roll();
+    int b = (*currentPlayer)->roll();
+    (*currentPlayer)->move(a + b);    
 }
-
