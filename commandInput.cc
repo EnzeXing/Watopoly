@@ -15,8 +15,24 @@ void CommandInput::readInput(std::istream in) {
       game->nextPlayer();
     } else if (s == "trade") {
       std::string name;
-      
+      std::string give;
+      std::string get;
       in >> name;
+      in >> give;
+      in >> get;
+      if (!in.fail()) {
+        try {
+          int giveMoney = std::stoi(give);
+          int getMoney = std::stoi(get);
+          std::shared_ptr<Board> board = game->getBoard();
+          board->printMessage("Cannot trade money for money!", std::cout);
+          continue;
+        } catch (std::invalid_argument) {
+          
+        } catch (std::out_of_range) {
+          
+        }
+      }
     }
   }
 }
