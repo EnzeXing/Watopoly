@@ -90,6 +90,7 @@ Game::Game(std::ifstream & file) {
         }
         
         players.emplace_back(std::make_shared<Player>(name, symbol, position, dice, TimCup, money, TimRound));
+        std::cerr << "Player info" << std::endl;
     }
     
     currentPlayer = players.begin();
@@ -154,6 +155,7 @@ Game::Game(std::ifstream & file) {
             findPlayer(name)->addBuilding(academic->getMonopoly());
             academic->setImprovement(improvement);
         }
+        std::cerr << "Building info" << std::endl;
     }
 }
 
