@@ -5,17 +5,17 @@
 #include <string>
 
 int main() {
-    /*std::map<std::string, std::string> players;
+    std::map<std::string, std::string> players;
     players["Andrew"] = "A";
     players["Ivan"] = "I";
     players["Fatday"] = "F";
     players["Klaus"] = "K";
     players["Lingwei"] = "L";
-    players["Steven"] = "S";*/
+    players["Steven"] = "S";
     
-    std::ifstream infile{"Game1.txt"};
+    // std::ifstream infile{"Game1.txt"};
     
-    Game game = Game(infile);
+    Game game = Game(players);
     game.drawBoard();
     game.nextPlayer();
     game.movePlayer(5);
