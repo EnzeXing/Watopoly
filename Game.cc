@@ -91,7 +91,6 @@ Game::Game(std::ifstream & file) {
         }
         
         players.emplace_back(std::make_shared<Player>(name, symbol, position, dice, TimCup, money, TimRound));
-        std::cerr << "Player info" << std::endl;
     }
     
     
@@ -154,11 +153,14 @@ Game::Game(std::ifstream & file) {
         if (owner != "BANK") {
             ss1 >> improvement;
             auto property = std::dynamic_pointer_cast<Property>(buildings[i]);
+            std::cerr << "Convert1" << std::endl;
             property->setOwner(findPlayer(name));
             findPlayer(name)->addBuilding(property->getMonopoly());
             auto academic = std::dynamic_pointer_cast<Academic>(property);
+            std::cerr << "Convert2" << std::endl;
             if (academic != nullptr) {
                 academic->setImprovement(improvement);
+                std::cerr << "Set Improvement" << std::endl;
             } 
         }
         
