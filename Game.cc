@@ -297,3 +297,7 @@ void Game::roll() {
     int b = (*currentPlayer)->roll();
     (*currentPlayer)->move(a + b);    
 }
+
+void Game::printMessage(std::string message) {
+    board->printMessage(message, std::cout);
+}
