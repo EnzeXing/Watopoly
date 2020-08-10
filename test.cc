@@ -16,6 +16,7 @@ int main() {
     std::ifstream infile{"Game1.txt"};
     
     Game game = Game(infile);
+    std::cerr << "Finished loading." << std::endl;
     game.drawBoard();
     game.nextPlayer();
     game.movePlayer(5);
