@@ -11,7 +11,7 @@
 
 class Board {
   std::vector<std::vector<std::string>> board;
-  std::shared_ptr<co>
+  std::shared_ptr<CommandInput> command;
 
   public:
   Board();
