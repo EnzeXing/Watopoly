@@ -147,6 +147,7 @@ Game::Game(std::ifstream & file) {
         
         ss1 >> name;
         ss1 >> owner;
+        std::cerr << "Building info" << std::endl;
         
         if (owner != "BANK") {
             ss1 >> improvement;
@@ -155,7 +156,7 @@ Game::Game(std::ifstream & file) {
             findPlayer(name)->addBuilding(academic->getMonopoly());
             academic->setImprovement(improvement);
         }
-        std::cerr << "Building info" << std::endl;
+        
     }
 }
 
