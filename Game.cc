@@ -140,6 +140,7 @@ Game::Game(std::ifstream & file) {
         std::string buildingInfo;
         getline(file, buildingInfo);
         std::istringstream ss1{buildingInfo};
+        std::cerr << buildingInfo << std::endl;
         
         std::string name;
         std::string owner;
@@ -147,7 +148,6 @@ Game::Game(std::ifstream & file) {
         
         ss1 >> name;
         ss1 >> owner;
-        std::cerr << owner << std::endl;
         
         if (owner != "BANK") {
             ss1 >> improvement;
