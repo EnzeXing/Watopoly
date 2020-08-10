@@ -62,6 +62,7 @@ Game::Game(std::ifstream & file) {
     
     int numPlayer;
     file >> numPlayer;
+    file.ignore();
     for (int i = 0; i < numPlayer; ++i) {
         std::string playerInfo;
         getline(file, playerInfo);
@@ -93,7 +94,6 @@ Game::Game(std::ifstream & file) {
         std::cerr << "Player info" << std::endl;
     }
     
-    file.ignore();
     
     currentPlayer = players.begin();
     
