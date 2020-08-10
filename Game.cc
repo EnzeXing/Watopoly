@@ -292,5 +292,7 @@ void Game::drawBoard() {
     board->drawBoard(std::cout);
 }
 
-
+std::shared_ptr<Player> Game::currPlayer() {
+    return *currentPlayer;
+}
 
