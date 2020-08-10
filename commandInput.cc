@@ -22,13 +22,23 @@ void CommandInput::readInput(std::istream in) {
           int giveMoney = std::stoi(give);
           try {
             int getMoney = std::stoi(get);
-            std::shared_ptr<Board> board = game->getBoard();
-            board->printMessage("Cannot trade money for money!", std::cout);
+            game->printMessage("Cannot trade money for money!");
             continue;
           } catch (std::invalid_argument) {
-            
+            game->printMessage("Does " + name + " accept the trade of giving " + get + " in exchange for $" + give + " ?");
+            std::string response;
+            std::cin >> response;
+            if (response == "accept") {
+              // do the trade
+            } else if (response == "reject") {
+              continue;
+            } else {
+              game->printMessage("Invalid response, trade cancelled.");
+              continue;
+            }
           } catch (std::out_of_range) {
-          
+            game->printMessage("Cannot trade money for money and invalid amount of money to receive.");
+            continue;
           }
         } catch (std::invalid_argument) {
           try {
