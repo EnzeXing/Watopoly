@@ -52,7 +52,12 @@ std::map <int, std::string> other = {
 };
 
 
+void Board::setCommand(std::shared_ptr<CommandInput> c) {
+	command = c;
+}
+
 Board::Board() {
+	command = nullptr;
 	std::vector<std::string> piece(7, "");
 	board = std::vector<std::vector<std::string>>(40, piece);
 	for (int i = 0; i < 40; i++) {	
