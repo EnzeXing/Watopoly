@@ -154,7 +154,7 @@ Game::Game(std::ifstream & file) {
             ss1 >> improvement;
             auto property = std::dynamic_pointer_cast<Property>(buildings[i]);
             std::cerr << "Convert1" << std::endl;
-            property->setOwner(findPlayer(name));
+            property->setOwner(findPlayer(owner));
             std::cerr << owner << std::endl;
             findPlayer(owner)->addBuilding(property->getMonopoly());
             std::cerr << "Find player" << std::endl;
