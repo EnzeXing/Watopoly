@@ -153,10 +153,13 @@ Game::Game(std::ifstream & file) {
         
         if (owner != "BANK") {
             ss1 >> improvement;
-            auto academic = std::dynamic_pointer_cast<Property>(buildings[i]);
-            academic->setOwner(findPlayer(name));
-            findPlayer(name)->addBuilding(academic->getMonopoly());
-            academic->setImprovement(improvement);
+            auto property = std::dynamic_pointer_cast<Property>(buildings[i]);
+            property->setOwner(findPlayer(name));
+            findPlayer(name)->addBuilding(property->getMonopoly());
+            auto academic = std::dynamic_pointer_cast<Academic>(property);
+            if (academic != nullptr) {
+                academic->setImprovement(improvement);
+            } 
         }
         
     }
