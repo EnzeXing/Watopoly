@@ -11,6 +11,7 @@
 
 class Board {
   std::vector<std::vector<std::string>> board;
+  std::shared_ptr<co>
 
   public:
   Board();
