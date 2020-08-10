@@ -155,7 +155,7 @@ Game::Game(std::ifstream & file) {
             auto property = std::dynamic_pointer_cast<Property>(buildings[i]);
             std::cerr << "Convert1" << std::endl;
             property->setOwner(findPlayer(name));
-            std::cerr << "Set Owner" << std::endl;
+            std::cerr << name << std::endl;
             findPlayer(name)->addBuilding(property->getMonopoly());
             std::cerr << "Find player" << std::endl;
             auto academic = std::dynamic_pointer_cast<Academic>(property);
