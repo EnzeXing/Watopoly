@@ -13,6 +13,7 @@ class Property: public Building {
   std::shared_ptr<Player> owner;
   unsigned int purchaseCost;
   std::string monopoly;
+  bool mortgage;
   
   public:
     Property(std::string name, int position, std::shared_ptr<Player> owner, unsigned int p, std::string monopoly);
@@ -21,6 +22,7 @@ class Property: public Building {
     void setOwner(std::shared_ptr<Player> owner);
     unsigned int getPurchaseCost();
     std::string getMonopoly();
+    bool mortgage();
 };
 
 class Academic : public Property {
