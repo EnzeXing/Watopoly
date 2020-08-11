@@ -251,6 +251,58 @@ std::shared_ptr<Player> Game::findPlayer(std::string s) {
     return nullptr;
 }
 
+std::shared_ptr<Building> Game::findBuilding(std::string name) {
+    for (auto n : buildings) {
+        if (n->getName() == name) return nl
+    }
+    return nullptr;
+}
+
+void Game::tradeBuilding(std::string buildingName, std::string receiver) {
+    auto building = findBuilding(buildingName);
+    if (building == nullptr) {
+        printMessage("This building does not exist!");
+        throw WrongBuildingException("");
+    }
+    
+    auto property = std::dynamic_pointer_cast<Property>(building);
+    if (property == nullptr || property->getOwner() != (*currentPlayer)) {
+        printMessage("This building is not your property!");
+        throw WrongBuildingException("");
+    }
+    
+    auto player = findPlayer(receiver);
+    if (player == nullptr) {
+        printMessage("Wrong player name.");
+        throw WrongPlayerException("");
+    }
+    
+    property->setOwner(player);
+}
+
+void Game::tradeBuilding(std::string giver, std::string receiver, std::string buildingName) {
+    auto building = findBuilding(buildingName);
+    if (building == nullptr) {
+        printMessage("This building does not exist!");
+        throw WrongBuildingException("");
+    }
+    
+    auto property = std::dynamic_pointer_cast<Property>(building);
+    auto g = findPlayer(giver);
+    auto r = findPlayer(receiver);
+    if (g == nullptr || r == nullptr) {
+        printMessage("Wrong player name.");
+        throw WrongPlayerException("");
+    }
+    
+    if (property == nullptr || property->getOwner() != g) {
+        printMessage("This building is not your property!");
+        throw WrongBuildingException("");
+    }
+    
+    property->setOwner(r);
+}
+
 void Game::saveGame(std::ofstream & file) {
     file << players.size() << std::endl;
     auto n1 = currentPlayer;
