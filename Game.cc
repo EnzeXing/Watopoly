@@ -467,12 +467,36 @@ void Game::drawBoard() {
 
 void Game::roll() {
     int a = (*currentPlayer)->roll();
+    printMessage("Dice1: " + std::to_string(a));
     int b = (*currentPlayer)->roll();
+    printMessage("Dice2: " + std::to_string(b));
     (*currentPlayer)->move(a + b);    
+}
+
+bool Game::rollDouble() {
+    int a = (*currentPlayer)->roll();
+    printMessage("Dice1: " + std::to_string(a));
+    int b = (*currentPlayer)->roll();
+    printMessage("Dice2: " + std::to_string(b));
+    return (a == b);
 }
 
 void Game::useRimCup() {
     rimcup->receiveCup(**currentPlayer);
+    leaveLine();
+}
+
+void Game::buyCoffee() {
+    (*currentPlayer)->giveMoney(50, nullptr);
+    leaveLine();
+}
+
+void Game::stayInLine() {
+    (*currentPlayer)->addTimRound();
+}
+
+void Game::leaveLine() {
+    (*currentPlayer)->resetTimRound();
 }
 
 void Game::printMessage(std::string message) {
