@@ -155,7 +155,7 @@ void CommandInput::purchaseOrNot(std::istream & in, std::string building) {
   }
   if (option == "yes") {
     game->purchase(building);
-  } eles if (option == "no") {
+  } else if (option == "no") {
     game->printMessage("Not purchased, auction activated.");
     auction(std::cin, building);
   } else {
