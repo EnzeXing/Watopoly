@@ -17,6 +17,7 @@ class Board {
 
   public:
   Board();
+  std::shared_ptr<CommandInput> getCommandInput();
   void setCommand(std::shared_ptr<CommandInput> c);
   void updateImprovement(std::shared_ptr<Academic> academic);
   void updatePlayer(int oldPosition, int newPosition, std::string playerName);
