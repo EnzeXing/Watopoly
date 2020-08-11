@@ -92,6 +92,9 @@ Board::Board() {
 
 
 
+std::shared_ptr<CommandInput> getCommandInput() {
+	return command;
+}
 
 
 void Board::updateImprovement(std::shared_ptr<Academic> academic) {
