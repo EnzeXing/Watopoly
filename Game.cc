@@ -200,6 +200,8 @@ void Game::movePlayer(int steps) {
         std::string message = "You don't have enough cash! You need " + std::to_string(e.needAmount) + " dollars.";
         board->printMessage(message, std::cout);
         // need to call input.NotEnoughMoney()
+    } catch (giveMoneyAlert & e) {
+        printMessage(e.message);
     } catch (NoEnoughCup & e) {
         board->printMessage(e.message, std::cout);
     } catch (TuitionException & e) {
