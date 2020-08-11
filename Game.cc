@@ -278,6 +278,8 @@ void Game::tradeBuilding(std::string buildingName, std::string receiver) {
     }
     
     property->setOwner(player);
+    (*currentPlayer)->loseBuilding(property->getMonopoly());
+    player->addBuilding(propert->getMonopoly());
     std::string message = player->getName() + " now has " + property->getName() + ".";
     printMessage(message);
 }
@@ -303,6 +305,8 @@ void Game::tradeBuilding(std::string giver, std::string receiver, std::string bu
     }
     
     property->setOwner(r);
+    g->loseBuilding(property->getMonopoly());
+    r->addBuilding(property->getMonopoly());
     std::string message = r->getName() + " now has " + property->getName() + ".";
     printMessage(message);
 }
