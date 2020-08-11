@@ -24,6 +24,6 @@ NeedlesHallException::NeedlesHallException(std::string m, int a) : WatopolyExcep
 
 ImprovementException::ImprovementException(std::string m) : WatopolyException(m) {}
 
-WrongBuildings::WrongBuildings(std::string m) : WatopolyException(m) {}
+WrongBuildingException::WrongBuildingException(std::string m) : WatopolyException(m) {}
 
-WrongPlayer::WrongPlayer(std::string m) : WatopolyException(m) {}
+WrongPlayerException::WrongPlayerException(std::string m) : WatopolyException(m) {}
