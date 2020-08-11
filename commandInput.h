@@ -1,7 +1,7 @@
 #ifndef COMMAND_INPUT_H
 #define COMMAND_INPUT_H
 
-#include "game.h"
+#include "Game.h"
 #include <iostream>
 
 class CommandInput {
