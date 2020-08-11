@@ -2,7 +2,7 @@
 
 CommandInput::CommandInput(std::shared_ptr<Game> game) : game{game} {}
 
-void CommandInput::readInput(std::istream in) {
+void CommandInput::readInput(std::istream & in) {
   std::string s;
   while (!in.fail()) {
     in >> s;
