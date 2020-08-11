@@ -72,4 +72,10 @@ class WrongBuildings : public WatopolyException {
   WrongBuildings(std::string m);
 };
 
+class WrongPlayer : public WatopolyException {
+  public:
+  WrongBuildings(std::string m);
+};
+
+
 #endif
