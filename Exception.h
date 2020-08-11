@@ -67,14 +67,14 @@ class ImprovementException : public WatopolyException {
   ImprovementException(std::string m);
 };
 
-class WrongBuildings : public WatopolyException {
+class WrongBuildingException : public WatopolyException {
   public:
-  WrongBuildings(std::string m);
+  WrongBuildingException(std::string m);
 };
 
-class WrongPlayer : public WatopolyException {
+class WrongPlayerException : public WatopolyException {
   public:
-  WrongBuildings(std::string m);
+  WrongPlayerException(std::string m);
 };
 
 
