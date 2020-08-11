@@ -42,6 +42,7 @@ class Game {
     void saveGame(std::ofstream & file);
     void drawBoard();
     void roll();
+    void useRimCup();
     void printMessage(std::string message);
 };
 
