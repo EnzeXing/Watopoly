@@ -253,7 +253,7 @@ std::shared_ptr<Player> Game::findPlayer(std::string s) {
 
 std::shared_ptr<Building> Game::findBuilding(std::string name) {
     for (auto n : buildings) {
-        if (n->getName() == name) return nl
+        if (n->getName() == name) return n;
     }
     return nullptr;
 }
