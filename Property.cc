@@ -3,7 +3,7 @@
 Property::Property(std::string name, int position, std::shared_ptr<Player> owner, 
                    unsigned int p, std::string monopoly) : Building(name, position), owner{owner}, purchaseCost{p}, monopoly{monopoly}, mortgage{false} {}
 
-bool Property::mortgage() {
+bool Property::Mortgage() {
   return mortgage;
 }
 
