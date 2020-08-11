@@ -36,7 +36,16 @@ void Player::giveMoney(std::shared_ptr<Player> other, int amount) {
     }
     
     money -= amount;
-    if (other != nullptr) other->addMoney(amount);
+    std::string otherName;
+    if (other != nullptr) {
+       other->addMoney(amount);
+       otherName = other->getName();
+    } else {
+       otherName = "Bank";
+    }
+  
+    std::string message = Name + " pays $" + std::to_string(amount) + " to " + otherName + ".\n";
+    throw giveMoneyAlert(message);
 }
 
 void Player::addMoney(int amount) {
