@@ -215,9 +215,9 @@ void CommandInput::auction(std::istream & in, std::string building) {
 void CommandInput::notEnoughMoney(std::istream & in, int amount) {
   int currAmount = amount;
   std::string option;
+  in >> option;
   while (!in.fail() && amount > 0) {
-    in >> option;
-    if (in.fail()) {
+    if (in == 
       
     }
   }
