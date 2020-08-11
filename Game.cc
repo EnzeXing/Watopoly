@@ -278,6 +278,8 @@ void Game::tradeBuilding(std::string buildingName, std::string receiver) {
     }
     
     property->setOwner(player);
+    std::string message = player->getName() + " now has " + property->getName() + ".";
+    printMessage(message);
 }
 
 void Game::tradeBuilding(std::string giver, std::string receiver, std::string buildingName) {
@@ -301,6 +303,51 @@ void Game::tradeBuilding(std::string giver, std::string receiver, std::string bu
     }
     
     property->setOwner(r);
+    std::string message = r->getName() + " now has " + property->getName() + ".";
+    printMessage(message);
+}
+
+void Game::trade(std::string receiver, int giveAmount, std::string buildingName) {
+    auto r = findPlayer(receiver);
+    if (r == nullptr) {
+        printMessage("Wrong player name.");
+        throw WrongPlayerException("");
+    }
+    
+    try {
+        (*currentPlayer)->giveMoney(giveAmount, r);
+    } catch (NoEnoughMoney & e) {
+        printMessage(e.message);
+        throw e;
+    } catch (giveMoneyAlert & e) {
+        printMessage(e.message);
+    }
+    
+    tradeBuilding(receiver, (*currentPlayer)->getName(), buildingName);
+}
+
+void trade(std::string receiver, std::string buildingName, int receiveAmount) {
+    auto r = findPlayer(receiver);
+    if (r == nullptr) {
+        printMessage("Wrong player name.");
+        throw WrongPlayerException("");
+    }
+    
+    try {
+        r->giveMoney(giveAmount, *currentPlayer);
+    } catch (NoEnoughMoney & e) {
+        printMessage(e.message);
+        throw e;
+    } catch (giveMoneyAlert & e) {
+        printMessage(e.message);
+    }
+    
+    tradeBuilding((*currentPlayer)->getName(), receiver, buildingName);
+}
+
+void Game::trade(std::string receiver, std::string giveBuildingName, int receiveBuildingName) {
+    tradeBuilding((*currentPlayer)->getName(), receiver, giveBuildingName);
+    tradeBuilding(receiver, (*currentPlayer)->getName(), receiveBuildingName);
 }
 
 void Game::saveGame(std::ofstream & file) {
@@ -340,6 +387,69 @@ void Game::saveGame(std::ofstream & file) {
     }
     
     board->printMessage("This game has been saved.", std::cout);
+}
+
+void Game::mortgage(std::string buildingName) {
+    auto building = findBuilding(buildingName);
+    if (building == nullptr) {
+        printMessage("Wrong building name.");
+        throw WrongBuildingException("");
+    }
+    
+    auto property = std::dynamic_pointer_cast<Property>(building);
+    if (property == nullptr || property->getOwner() != (*currentPlayer)) {
+        printMessage("This building is not your property!");
+        throw WrongBuildingException("");
+    }
+    
+    auto academic = std::dynamic_pointer_cast<Academic>(property);
+    if (academic != nullptr && acacemic->getImprovement() > 0) {
+        printMessage("You need to sell all improvements of this building before mortgage.");
+        throw WrongBuildingException("");
+    }
+    
+    if (property->mortgage()) {
+        printMessage("This building has been mortgaged!");
+        throw WrongBuildingException("");
+    } else {
+        property->setMortgage(true);
+        (*currentPlayer)->addMoney(property->getPurchaseCost() / 2);
+        std::string message = "You have mortgaged " + property->getName() + " and received $" + std::to_string(property->getPurchaseCost() / 2) + ".";
+        printMessage(message);
+    }
+}
+
+void unmortgage(std::string buildingName) {
+    auto building = findBuilding(buildingName);
+    if (building == nullptr) {
+        printMessage("Wrong building name.");
+        throw WrongBuildingException("");
+    }
+    
+    auto property = std::dynamic_pointer_cast<Property>(building);
+    if (property == nullptr || property->getOwner() != (*currentPlayer)) {
+        printMessage("This building is not your property!");
+        throw WrongBuildingException("");
+    }
+    
+    if (!property->mortgage()) {
+        printMessage("This building is not mortgaged!");
+        throw WrongBuildingException("");
+    }
+    
+    int pay = property->getPurchaseCost() * 0.6;
+    
+    try {
+        (*currentPlayer)->giveMoney(pay, nullptr);
+    } catch (NoEnoughMoney & e) {
+        printMessage(e.message);
+        throw e;
+    } catch (giveMoneyAlert & e) {
+        printMessage(e.message);
+        std::string message = "You have unmortgaged " + property->getName() + ".";
+        printMessage(message);
+        property->setMortgage(false);
+    }
 }
 
 void Game::drawBoard() {
