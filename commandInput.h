@@ -12,7 +12,7 @@ class CommandInput {
     void purchaseOrNot(std::istream & in);
     void auction(std::istream & in, std::string building);
     void notEnoughMoney(std::istream & in);
-    void TimHortons(std::istream & in);
+    void TimHortons(std::istream & in, shared_ptr<Player> p);
 };
 
 #endif
