@@ -172,6 +172,10 @@ std::shared_ptr<Board> Game::getBoard() {
     return board;
 }
 
+std::string Game::currentPlayerName() {
+    return (*currentPlayer)->getName();
+}
+
 void Game::nextPlayer() {
     currentPlayer++;
     if (currentPlayer == players.end()) currentPlayer = players.begin();
