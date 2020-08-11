@@ -38,6 +38,8 @@ class Player {
     void addCup();
     void removeCup(); // Note exception
     int getTimRound();
+    void resetTimRound();
+    void addTimRound();
     void stayInLine();
     void leaveLine();
     int roll();
