@@ -29,6 +29,9 @@ class Game {
     void nextPlayer();
     void movePlayer(int steps);
     std::shared_ptr<Player> findPlayer(std::string s);
+    std::shared_ptr<Building> findBuilding(std::string name);
+    void sellBuilding();
+    void sellBuilding(std::shared_ptr<Player> player);
     void bankrupt(std::shared_ptr<Player>);
     void saveGame(std::ofstream & file);
     void drawBoard();
