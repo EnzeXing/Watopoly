@@ -119,6 +119,14 @@ int Player::getTimRound() {
     return TimRound;
 }
 
+void Player::resetTimRound() {
+  TimRound = 0;
+}
+
+void Player::addTimRound() {
+  TimROund++;
+}
+
 void Player::stayInLine() {
     TimRound++;
 }
