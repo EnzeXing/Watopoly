@@ -1,7 +1,15 @@
 #include "Property.h"
 
 Property::Property(std::string name, int position, std::shared_ptr<Player> owner, 
-                   unsigned int p, std::string monopoly) : Building(name, position), owner{owner}, purchaseCost{p}, monopoly{monopoly} {}
+                   unsigned int p, std::string monopoly) : Building(name, position), owner{owner}, purchaseCost{p}, monopoly{monopoly}, mortgage{false} {}
+
+bool Property::mortgage() {
+  return mortgage;
+}
+
+void Property::setMortgage(bool m) {
+  mortgage = m;
+}
 
 Property::~Property() {}
 
