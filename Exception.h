@@ -20,6 +20,11 @@ class NoEnoughMoney : public WatopolyException {
   NoEnoughMoney(std::string m, int a);
 };
 
+class giveMoneyAlert : public WatopolyException {
+  public:
+  giveMoneyAlert(std::string m);
+};
+
 class NoEnoughCup : public WatopolyException {
   public:
   NoEnoughCup(std::string m);
