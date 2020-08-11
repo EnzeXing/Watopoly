@@ -6,6 +6,8 @@ NoOwner::NoOwner(std::string m) : WatopolyException(m) {}
 
 NoEnoughMoney::NoEnoughMoney(std::string m, int a) : WatopolyException(m), needAmount{a} {}
 
+giveMoneyAlert::giveMoneyAlert(std::string m) : WatopolyException(m) {}
+
 NoEnoughCup::NoEnoughCup(std::string m) : WatopolyException(m) {}
 
 TuitionException::TuitionException(std::string m): WatopolyException(m) {}
