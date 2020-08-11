@@ -8,7 +8,8 @@
 #include <iostream>
 #include <iomanip>
 #include "Property.h"
-#include "commandInput.h"
+
+class commandInput
 
 class Board {
   std::vector<std::vector<std::string>> board;
