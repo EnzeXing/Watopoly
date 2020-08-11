@@ -77,5 +77,10 @@ class WrongPlayerException : public WatopolyException {
   WrongPlayerException(std::string m);
 };
 
+class MortgageException : public WatopolyException {
+  public:
+  MortgageException(std::string m);
+};
+
 
 #endif
