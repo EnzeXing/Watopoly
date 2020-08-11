@@ -23,7 +23,7 @@ class Property: public Building {
     unsigned int getPurchaseCost();
     std::string getMonopoly();
     void setMortgage(bool m);
-    bool mortgage();
+    bool Mortgage();
 };
 
 class Academic : public Property {
