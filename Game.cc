@@ -213,7 +213,8 @@ void Game::movePlayer(int steps) {
         // need to call input.PayTuition()
     } catch (TimHortonsException & e) {
         board->printMessage(e.message, std::cout);
-        // need to call input.TimHortons()
+        (*currentPlayer)->addTimRound();
+        move
     } catch (getRimCup & e) {
         board->printMessage(e.message, std::cout);
         rimcup->giveCup(**currentPlayer);
