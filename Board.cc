@@ -1,4 +1,5 @@
 #include "Board.h"
+#include "commandInput.h"
 
 
 std::map <int, std::string> academic = {
