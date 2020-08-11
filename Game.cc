@@ -263,6 +263,21 @@ std::shared_ptr<Building> Game::findBuilding(std::string name) {
     return nullptr;
 }
 
+void Game::purchase(std::string buildingName) {
+    auto building = findBuilding(buildingName);
+    auto property = std::dynamic_pointer_cast<Property>(building);
+    try {
+        (*currentPlayer)->giveMoney(property->getPurchaseCost(), nullptr);
+    } catch (NoEnoughMoney & e) {
+        // call input.notEnoughMoney()
+    } catch (giveMoneyAlert & e) {
+        printMessage(e.message);
+    } 
+    property->setOwner(*currentPlayer);
+    (*currentPlayer)->addBuilding(property->getMonopoly());
+    printMessage((*currentPlayer)->getName() + " has bought " + property->getName() + ".");
+}
+
 void Game::tradeBuilding(std::string buildingName, std::string receiver) {
     auto building = findBuilding(buildingName);
     if (building == nullptr) {
