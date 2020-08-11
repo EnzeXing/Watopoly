@@ -180,7 +180,7 @@ void CommandInput::auction(std::istream & in, std::string building) {
           game->tradeBuilding(building, currBuyer);
           break;
         } catch (NoEnoughMoney & e) {
-          game->printMessage(currBuyer + " needs $" + e.needAmount + " more to complete purchase");
+          game->printMessage(currBuyer + " needs $" + std::to_string(e.needAmount) + " more to complete purchase");
           in.clear();
           game->printMessage("Redo the auction round, please enter your price again.");
           continue;
@@ -206,7 +206,7 @@ void CommandInput::auction(std::istream & in, std::string building) {
       highestPrice = price;
       currBuyer = buyer;
     } else {
-      game->printMessage("Need to spend more money than $" + highestPrice);
+      game->printMessage("Need to spend more money than $" + std::to_string(highestPrice));
       continue;
     }
   }
@@ -237,7 +237,7 @@ void CommandInput::TimHortons(std::istream & in) {
         game->stayInLine();
       }
     } else if (command == "pay") {
-      game->buyCoffee()
+      game->buyCoffee();
       game->printMessage("You payed $50!\nYou are out of the line!");
     } else if (command == "use") {
       game->useRimCup();
