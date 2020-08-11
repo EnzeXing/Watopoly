@@ -143,7 +143,7 @@ void CommandInput::readInput(std::istream in) {
       //game->purchase();
     } else if (s == "no") {
       game->printMessage("Not purchased.");
-      auction();
+      auction(std::cin);
     }
   }
 }
