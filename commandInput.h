@@ -10,7 +10,7 @@ class CommandInput {
     CommandInput(std::shared_ptr<Game> game);
     void readInput(std::istream & in);
     void purchaseOrNot(std::istream & in);
-    void auction(std::istream in);
+    void auction(std::istream & in);
     void notEnoughMoney(std::istream & in);
 };
 
