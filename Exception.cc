@@ -27,3 +27,5 @@ ImprovementException::ImprovementException(std::string m) : WatopolyException(m)
 WrongBuildingException::WrongBuildingException(std::string m) : WatopolyException(m) {}
 
 WrongPlayerException::WrongPlayerException(std::string m) : WatopolyException(m) {}
+
+MortgageException::MortgageException(std::string m) : WatopolyException(m) {}
