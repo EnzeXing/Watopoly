@@ -91,14 +91,14 @@ void CommandInput::readInput(std::istream in) {
       if (op == "sell") {
         try{
           //sellImprovement(buildingName);
-        } catch(/*to be added*/) {
+        } catch(ImprovementException & e) {
           game->printMessage("Cannot sell.");
           continue;
         }
       } else if (op == "buy") {
         try{
           //buyImprovement(buildingName);
-        } catch (/*to be added*/) {
+        } catch (ImprovementException & e) {
           game->printMessage("Cannot buy.");
           continue;
         }
@@ -114,7 +114,7 @@ void CommandInput::readInput(std::istream in) {
       }
       try {
         //mortgage(buildingName);
-      } catch (/*to be added*/) {
+      } catch (MortgageException & e) {
         game->printMessage("Cannot mortgage.");
       }
     } else if (s == "unmortgage") {
@@ -126,7 +126,7 @@ void CommandInput::readInput(std::istream in) {
       }
       try {
         //unmortgage(buildingName);
-      } catch (/*to be added*/) {
+      } catch (MortgageException & e) {
         game->printMessage("Cannot unmortgage.");
       }
     } else if (s == "bankrupt") {
@@ -143,7 +143,7 @@ void CommandInput::readInput(std::istream in) {
       //game->purchase();
     } else if (s == "no") {
       game->printMessage("Not purchased.");
-      game->auction();
+      auction();
     }
   }
 }
