@@ -139,11 +139,86 @@ void CommandInput::readInput(std::istream & in) {
       std::string fileName;
       std::ofstream realFile {fileName};
       game->saveGame(realFile);
-    } else if (s == "yes") {
-      //game->purchase();
-    } else if (s == "no") {
-      game->printMessage("Not purchased.");
-      auction(std::cin);
+    } else {
+      game->printMessage("Invalid input.");
+      continue;
+    }
+  }
+}
+
+void CommandInput::purchaseOrNot(std::istream & in, std::string building) {
+  std::string option;
+  in >> option;
+  if (in.fail()) {
+    game->printMessage("No option is given, auction activated.");
+    auction(std::cin, building);
+  }
+  if (option == "yes") {
+    game->purchase(building);
+  } eles if (option == "no") {
+    game->printMessage("Not purchased, auction activated.");
+    auction(std::cin, building);
+  } else {
+    game->printMessage("Invalid input, auction activated.");
+    auction(std::cin, building);
+  }
+}
+
+void CommandInput::auction(std::istream & in, std::string building) {
+  std::string buyer;
+  int price;
+  int highestPrice = 0;
+  std::string currBuyer;
+  
+  while(!in.fail()) {
+    in >> buyer;
+    if (in.fail()) {
+      game->printMessage("No more input.");
+      if (currBuyer.length() != 0) {
+        try {
+          game->findPlayer(currBuyer)->giveMoney(nullptr, highestPrice);
+          game->tradeBuilding(building, currBuyer);
+          break;
+        } catch (NoEnoughMoney & e) {
+          game->printMessage(currBuyer + " needs $" + e.needAmount + " more to complete purchase");
+          in.clear();
+          game->printMessage("Redo the auction round, please enter your price again.");
+          continue;
+        } catch (giveMoneyAlert) {}
+      } else {
+        in.clear();
+        game->printMessage("Redo the auction round, please enter your price again.");
+        continue;
+      }
+    }
+    if (game->findPlayer(buyer) == nullptr) {
+      game->printMessage("Invalid buyer name, please re-enter.");
+      continue;
+    }
+    
+    in >> price;
+    if (in.fail()) {
+      game->printMessage("Invalid input for price.");
+      in.clear();
+      continue;
+    }
+    if (price > highestPrice) {
+      highestPrice = price;
+      currBuyer = buyer;
+    } else {
+      game->printMessage("Need to spend more money than $" + highestPrice);
+      continue;
+    }
+  }
+}
+
+void CommandInput::notEnoughMoney(std::istream & in, int amount) {
+  int currAmount = amount;
+  std::string option;
+  while (!in.fail() && amount > 0) {
+    in >> option;
+    if (in.fail()) {
+      
     }
   }
 }
