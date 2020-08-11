@@ -31,6 +31,7 @@ class Game {
     void movePlayer(int steps);
     std::shared_ptr<Player> findPlayer(std::string s);
     std::shared_ptr<Building> findBuilding(std::string name);
+    void purchase(std::string buildingName);
     void tradeBuilding(std::string buildingName, std::string receiver);
     void tradeBuilding(std::string giver, std::string receiver, std::string buildingName);
     void trade(std::string receiver, int giveAmount, std::string buildingName);
