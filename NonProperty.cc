@@ -36,7 +36,7 @@ GoToTims::GoToTims(std::string name, int position) : NonProperty{name, position}
 GoToTims::~GoToTims() {}
 
 void GoToTims::accept(Player & p) {
-  throw GoToTimsException("Go to Tims");
+  throw TimHortonsException("Go to Tims");
 }
 
 SLC::SLC(std::string name, int position, std::shared_ptr<RimCup> r) : NonProperty{name, position}, rimCup{r} {}
