@@ -42,7 +42,11 @@ class Game {
     void saveGame(std::ofstream & file);
     void drawBoard();
     void roll();
+    bool rollDouble();
     void useRimCup();
+    void buyCoffee();
+    void stayInLine();
+    void leaveLine();
     void printMessage(std::string message);
 };
 
