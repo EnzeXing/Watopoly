@@ -216,12 +216,36 @@ void CommandInput::notEnoughMoney(std::istream & in, int amount) {
   int currAmount = amount;
   std::string option;
   in >> option;
-  while (!in.fail() && amount > 0) {
-    if (in == 
-      
+  while (!in.fail() && currAmount > 0) {
+    if (option == "improve") {
+      std::string bulidingName;
+      std::string m;
+      in >> buildingName;
+      in >> m;
+      if (m == "sell") {
+        int temp = game->sellImprovement(buildingName);
+        currAmount -= temp;
+      } else {
+        continue;
+      }
+    } else if (option == "mortgage") {
+      std::string buildingName;
+      in >> buildingName;
+      int temp = game->mortgage(buildingName);
+      currAmount -= temp;
+    } else if (option == "trade") {
+      // do trade
+    } else {
+      game->printMessage("Invalid option!");
+      continue;
     }
   }
 }
+      
+      
+    
+  
+
 
 
 void CommandInput::TimHortons(std::istream & in) {
