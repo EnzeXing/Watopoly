@@ -44,7 +44,7 @@ void Player::giveMoney(std::shared_ptr<Player> other, int amount) {
        otherName = "Bank";
     }
   
-    std::string message = Name + " pays $" + std::to_string(amount) + " to " + otherName + ".\n";
+    std::string message = name + " pays $" + std::to_string(amount) + " to " + otherName + ".\n";
     throw giveMoneyAlert(message);
 }
 
