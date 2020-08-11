@@ -32,6 +32,11 @@ class Game {
     std::shared_ptr<Building> findBuilding(std::string name);
     void tradeBuilding(std::string buildingName, std::string receiver);
     void tradeBuilding(std::string giver, std::string receiver, std::string buildingName);
+    void trade(std::string receiver, int giveAmount, std::string buildingName);
+    void trade(std::string receiver, std::string buildingName, int receiveAmount);
+    void trade(std::string receiver, std::string giveBuildingName, int receiveBuildingName);
+    void mortgage(std::string buildingName);
+    void unmortgage(std::string buildingName);
     void bankrupt(std::shared_ptr<Player>);
     void saveGame(std::ofstream & file);
     void drawBoard();
