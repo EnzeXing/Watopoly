@@ -470,6 +470,10 @@ void Game::roll() {
     (*currentPlayer)->move(a + b);    
 }
 
+void Game::useRimCup() {
+    rimcup->receiveCup(**currentPlayer);
+}
+
 void Game::printMessage(std::string message) {
     board->printMessage(message, std::cout);
 }
