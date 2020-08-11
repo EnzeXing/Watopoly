@@ -9,7 +9,7 @@
 #include <iomanip>
 #include "Property.h"
 
-class commandInput
+class commandInput;
 
 class Board {
   std::vector<std::vector<std::string>> board;
