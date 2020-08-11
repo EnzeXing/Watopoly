@@ -67,4 +67,9 @@ class ImprovementException : public WatopolyException {
   ImprovementException(std::string m);
 };
 
+class WrongBuildings : public WatopolyException {
+  public:
+  WrongBuildings(std::string m);
+};
+
 #endif
