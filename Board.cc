@@ -92,7 +92,7 @@ Board::Board() {
 
 
 
-std::shared_ptr<CommandInput> getCommandInput() {
+std::shared_ptr<CommandInput> Board::getCommandInput() {
 	return command;
 }
 
