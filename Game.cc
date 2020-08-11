@@ -335,7 +335,7 @@ void Game::trade(std::string receiver, int giveAmount, std::string buildingName)
     tradeBuilding(receiver, (*currentPlayer)->getName(), buildingName);
 }
 
-void trade(std::string receiver, std::string buildingName, int receiveAmount) {
+void Game::trade(std::string receiver, std::string buildingName, int receiveAmount) {
     auto r = findPlayer(receiver);
     if (r == nullptr) {
         printMessage("Wrong player name.");
@@ -354,7 +354,7 @@ void trade(std::string receiver, std::string buildingName, int receiveAmount) {
     tradeBuilding((*currentPlayer)->getName(), receiver, buildingName);
 }
 
-void Game::trade(std::string receiver, std::string giveBuildingName, int receiveBuildingName) {
+void Game::trade(std::string receiver, std::string giveBuildingName, std::string receiveBuildingName) {
     tradeBuilding((*currentPlayer)->getName(), receiver, giveBuildingName);
     tradeBuilding(receiver, (*currentPlayer)->getName(), receiveBuildingName);
 }
@@ -417,7 +417,7 @@ void Game::mortgage(std::string buildingName) {
         throw WrongBuildingException("");
     }
     
-    if (property->mortgage()) {
+    if (property->Mortgage()) {
         printMessage("This building has been mortgaged!");
         throw WrongBuildingException("");
     } else {
@@ -441,7 +441,7 @@ void unmortgage(std::string buildingName) {
         throw WrongBuildingException("");
     }
     
-    if (!property->mortgage()) {
+    if (!property->Mortgage()) {
         printMessage("This building is not mortgaged!");
         throw WrongBuildingException("");
     }
