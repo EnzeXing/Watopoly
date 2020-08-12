@@ -1,4 +1,5 @@
 #include "Game.h"
+#include "commandInput.h"
 #include <algorithm>
 #include <sstream>
 
