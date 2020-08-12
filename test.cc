@@ -1,4 +1,4 @@
-#include "CommandInput.h"
+#include "commandInput.h"
 #include <iostream>
 #include <map>
 #include <memory>
@@ -11,7 +11,8 @@ int main() {
     players["Fatday"] = "F";
     players["Klaus"] = "K";
     players["Lingwei"] = "L";
-    players["Steven"] = "S"; 
+    players["Steven"] = "S";
+    std::ofstream outfile{"Game1.txt"};
     
     // std::ifstream infile{"Game1.txt"};
     
