@@ -21,6 +21,8 @@ class CommandInput {
     void notEnoughMoney(std::istream & in, int amount);
     // handles the sitution when the player is at Tim Hortons
     void TimHortons(std::istream & in);
+    // handles the sitution when the player is at Tuition
+    void payTuition(std::istream & in);
 };
 
 #endif
