@@ -413,7 +413,31 @@ void Game::saveGame(std::ofstream & file) {
     board->printMessage("This game has been saved.", std::cout);
 }
 
-void Game::mortgage(std::string buildingName) {
+int Game::sellImprovement(std::string buildingName) {
+    auto building = findBuilding(buildingName);
+    if (building == nullptr) {
+        printMessage("Wrong building name.");
+        throw WrongBuildingException("");
+    }
+    
+    auto academic = std::dynamic_pointer_cast<Academic>(building);
+    if (academic == nullptr || academic->getOwner() != (*currentPlayer)) {
+        printMessage("This building is not your property.");
+        throw WrongBuildingException("");
+    }
+    
+    if (academic->getImprovement() == 0) {
+        printMessage("This building has no improvement.");
+        throw WrongBuildingException("");
+    }
+    
+    int addAmount = academic->getImprovementCost() / 2;
+    (*currentPlayer)->addMoney(addAmount);
+    printMessage("You have sold an improvement of " + academic->getName() + " and received $" + std::to_string(addAmount) + ".");
+    return addAmount;
+}
+
+int Game::mortgage(std::string buildingName) {
     auto building = findBuilding(buildingName);
     if (building == nullptr) {
         printMessage("Wrong building name.");
@@ -441,6 +465,8 @@ void Game::mortgage(std::string buildingName) {
         std::string message = "You have mortgaged " + property->getName() + " and received $" + std::to_string(property->getPurchaseCost() / 2) + ".";
         printMessage(message);
     }
+    
+    return property->getPurchaseCost() / 2;
 }
 
 void unmortgage(std::string buildingName) {
