@@ -97,7 +97,7 @@ Board::Board() {
 
 
 
-CommandInput * Board::getCommandInput() {
+CommandInput * Board::getCommand() {
 	return command;
 }
 
