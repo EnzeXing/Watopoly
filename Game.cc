@@ -196,7 +196,7 @@ void Game::movePlayer(int steps) {
     } catch (NoEnoughMoney & e) {
         std::string message = "You don't have enough cash! You need " + std::to_string(e.needAmount) + " dollars.";
         board->printMessage(message, std::cout);
-        board->getCommand()->NotEnoughMoney();
+        board->getCommand()->NotEnoughMoney(std::cin, e.needAmount, e.playerName);
         (*currentPlayer)->visit(*(buildings[(*currentPlayer)->getPosition()]));
     } catch (giveMoneyAlert & e) {
         printMessage(e.message);
@@ -204,7 +204,7 @@ void Game::movePlayer(int steps) {
         board->printMessage(e.message, std::cout);
     } catch (TuitionException & e) {
         board->printMessage(e.message, std::cout);
-        // need to call input.PayTuition()
+        board->payTuition(std::cin);
     } catch (TimHortonsException & e) {
         board->printMessage(e.message, std::cout);
         (*currentPlayer)->stayInLine();
@@ -239,7 +239,7 @@ void Game::movePlayer(int steps) {
             try {
                 (*currentPlayer)->giveMoney(nullptr, e.amount);
             } catch (NoEnoughMoney & e) {
-                if (board->getCommand()->NotEnoughMoney(std::cin, e.amount, e.other)) {
+                if (board->getCommand()->NotEnoughMoney(std::cin, e.needAmount, e.playerName)) {
                     try {
                         (*currentPlayer)->giveMoney(nullptr, e.amount);
                     } catch (giveMoneyAlert & e) {
@@ -276,7 +276,7 @@ void Game::purchase(std::string buildingName) {
     try {
         (*currentPlayer)->giveMoney(nullptr, property->getPurchaseCost());
     } catch (NoEnoughMoney & e) {
-        if (board->getCommand()->NotEnoughMoney(std::cin, e.amount, e.other)) {
+        if (board->getCommand()->NotEnoughMoney(std::cin, e.needAmount, e.playerName)) {
              purchase(buildingName); 
         }
     } catch (giveMoneyAlert & e) {
@@ -476,7 +476,7 @@ void Game::buyImprovement(std::string buildingName) {
         printMessage(e.message);
     } catch (NoEnoughMoney & e) {
         printMessage(e.message);
-        if (board->getCommand()->NoEnoughMoney()) {
+        if (board->getCommand()->NotEnoughMoney(std::cin, e.needAmount, e.playerName);) {
             buyImprovement(buildingName);
         }
     }
@@ -541,7 +541,7 @@ void Game::unmortgage(std::string buildingName) {
         (*currentPlayer)->giveMoney(nullptr, pay);
     } catch (NoEnoughMoney & e) {
         printMessage(e.message);
-        if (board->getCommand()->NoEnoughMoney()) {
+        if (board->getCommand()->NotEnoughMoney(std::cin, e.needAmount, e.playerName)) {
             unmortgage(buildingName);
         }
     } catch (giveMoneyAlert & e) {
@@ -619,7 +619,7 @@ void Game::howToPayTuition(std::string option) {
             (*currentPlayer)->giveMoney(nullptr, totalAsset(*currentPlayer));
         }
     } catch (NoEnoughMoney & e) {
-        board->getCommand()->NotEnoughMoney();
+        board->getCommand()->NotEnoughMoney(std::cin, e.needAmount, e.playerName);
         howToPayTuition(option);
     } catch (giveMoneyAlert & e) {
         printMessage(e.message);
