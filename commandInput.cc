@@ -90,14 +90,14 @@ void CommandInput::readInput(std::istream & in) {
       }
       if (op == "sell") {
         try{
-          sellImprovement(buildingName);
+          game->sellImprovement(buildingName);
         } catch(ImprovementException & e) {
           game->printMessage("Cannot sell.");
           continue;
         }
       } else if (op == "buy") {
         try{
-          //buyImprovement(buildingName);
+          //game->buyImprovement(buildingName);
         } catch (ImprovementException & e) {
           game->printMessage("Cannot buy.");
           continue;
