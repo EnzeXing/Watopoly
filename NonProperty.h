@@ -24,6 +24,7 @@ class NonProperty : public Building {
     virtual ~NonProperty() = 0;
 };
 
+// Tuition
 class Tuition : public NonProperty {
   public:
     Tuition(std::string name, int position);
@@ -31,6 +32,7 @@ class Tuition : public NonProperty {
     virtual void accept(Player & p) override;
 };
 
+// Tim Hortons
 class TimHortons : public NonProperty {
   public:
     TimHortons(std::string name, int position);
@@ -38,6 +40,7 @@ class TimHortons : public NonProperty {
     virtual void accept(Player & p) override;
 };
 
+// GoToTims
 class GoToTims : public NonProperty {
   public:
     GoToTims(std::string name, int position);
@@ -45,6 +48,7 @@ class GoToTims : public NonProperty {
     virtual void accept(Player & p) override;
 };
 
+// SLC
 class SLC : public NonProperty {
   std::shared_ptr<RimCup> rimCup;
   public:
@@ -53,6 +57,7 @@ class SLC : public NonProperty {
     virtual void accept(Player & p) override;
 };
 
+// OSAP
 class OSAP : public NonProperty {
   public:
     OSAP(std::string name, int position);
@@ -60,6 +65,7 @@ class OSAP : public NonProperty {
     virtual void accept(Player & p) override;
 };
 
+// Coop Fee
 class CoopFee : public NonProperty {
   public:
     CoopFee(std::string name, int position);
@@ -67,6 +73,7 @@ class CoopFee : public NonProperty {
     virtual void accept(Player & p) override;
 };
 
+// Goose nesting
 class Goose : public NonProperty {
   public:
     Goose(std::string name, int position);
@@ -74,6 +81,7 @@ class Goose : public NonProperty {
     virtual void accept(Player & p) override;
 };
 
+// Needles Hall
 class NeedlesHall : public NonProperty {
   std::shared_ptr<RimCup> rimCup;
   public:
