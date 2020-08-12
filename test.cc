@@ -24,6 +24,7 @@ int main() {
     game.movePlayer(5);
     game.drawBoard();
     game.trade("Andrew", 200, "MKV");
+    game.trade("Lingwei", "MKV", 250);
     std::ofstream outfile{"Game1.txt"};
     game.saveGame(outfile);
 }
