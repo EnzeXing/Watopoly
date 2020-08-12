@@ -5,13 +5,20 @@ CommandInput::CommandInput(std::shared_ptr<Game> game) : game{game} {
 }
 
 void CommandInput::readInput(std::istream & in) {
+  bool roll = false;
   std::string s;
   while (!in.fail()) {
     in >> s;
     if (s == "roll") {
-      game->roll();
+      if (!roll) {
+        game->roll();
+        roll = true;
+      } else {
+        game->printMessage("You have already rolled!");
+      }
     } else if (s == "next") {
       game->nextPlayer();
+      roll = false;
     } else if (s == "trade") {
       std::string name;
       std::string give;
