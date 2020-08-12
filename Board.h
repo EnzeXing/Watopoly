@@ -16,15 +16,15 @@ class Board {
   // Stores the visual representation of the board in the form of strings
   std::vector<std::vector<std::string>> board;
   // Also stores the CommandInput class(controller module) of the MVC model
-  std::shared_ptr<CommandInput> command;
+  CommandInput * command;
 
   public:
   // Constructor
   Board();
   // Returns a shared pointer to CommandInput
-  std::shared_ptr<CommandInput> getCommandInput();
+  CommandInput * getCommandInput();
   // Sets CommandInput
-  void setCommand(std::shared_ptr<CommandInput> c);
+  void setCommand(CommandInput * c);
   // Updates the improvement information stored in the board 
   void updateImprovement(std::shared_ptr<Academic> academic);
   // Updates the player position information stored in the board
