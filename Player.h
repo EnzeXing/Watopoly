@@ -50,8 +50,6 @@ class Player {
     void removeCup(); // Note exception
   // accessor and mutator for Tim Round 
     int getTimRound();
-    void resetTimRound();
-    void addTimRound();
     void stayInLine();
     void leaveLine();
   // returns a random number with uniform distribution between 1 to 6
