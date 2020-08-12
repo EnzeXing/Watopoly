@@ -113,7 +113,7 @@ void CommandInput::readInput(std::istream & in) {
         break;
       }
       try {
-        //mortgage(buildingName);
+        game->mortgage(buildingName);
       } catch (MortgageException & e) {
         game->printMessage("Cannot mortgage.");
       }
@@ -125,7 +125,7 @@ void CommandInput::readInput(std::istream & in) {
         break;
       }
       try {
-        //unmortgage(buildingName);
+        game->unmortgage(buildingName);
       } catch (MortgageException & e) {
         game->printMessage("Cannot unmortgage.");
       }
