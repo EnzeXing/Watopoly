@@ -442,8 +442,44 @@ int Game::sellImprovement(std::string buildingName) {
     
     int addAmount = academic->getImprovementCost() / 2;
     (*currentPlayer)->addMoney(addAmount);
+    academic->improve("sell");
     printMessage("You have sold an improvement of " + academic->getName() + " and received $" + std::to_string(addAmount) + ".");
     return addAmount;
+}
+
+void Game::buyImprovement(std::string buildingName) {
+    auto building = findBuilding(buildingName);
+    if (building == nullptr) {
+        printMessage("Wrong building name.");
+        throw WrongBuildingException("");
+    }
+    
+    auto academic = std::dynamic_pointer_cast<Academic>(building);
+    if (academic == nullptr || academic->getOwner() != (*currentPlayer)) {
+        printMessage("This building cannot improve.");
+        throw WrongBuildingException("");
+    }
+    
+    if (!(*currentPlayer)->hasFullMonopoly(academic->getMonopoly())) {
+        printMessage("You need to own the entire " + academic->getMonopoly() + " monopoly before buying improvement of " + academic->getName() + ".");
+        throw WrongBuildingException("");
+    }
+    
+    if (academic->getImprovement() == 5) {
+        printMessage("This building has full improvement.");
+        throw WrongBuildingException("");
+    }
+    
+    try {
+        (*currentPlayer)->giveMoney(nullptr, academic->getImprovementCost());
+    } catch (giveMoneyAlert & e) {
+        printMessage(e.message);
+    } catch (NoEnoughMoney & e) {
+        printMessage(e.message);
+    }
+    
+    academic->improve("buy");
+    printMessage("You have bought improvement for " + academic->getName() + ".");
 }
 
 int Game::mortgage(std::string buildingName) {
