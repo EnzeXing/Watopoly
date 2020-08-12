@@ -6,6 +6,7 @@
 
 Player::Player(std::string name, std::string symbol, int position, std::shared_ptr<Dice> dice, 
                int TimCup, int money, int TimRound) : name{name}, symbol{symbol}, position{position}, money{money}, rimCup{TimCup}, TimRound{TimRound}, dice{dice} {
+    // sets initial count to 0
     properties["Arts1"] = 0;
     properties["Arts2"] = 0;
     properties["Eng"] = 0;
@@ -31,6 +32,7 @@ int Player::getMoney() {
 }
 
 void Player::giveMoney(std::shared_ptr<Player> other, int amount) {
+  // checks if money is enough
     if (money < amount) {
         throw NoEnoughMoney("Not enough money!", amount - money);
     }
