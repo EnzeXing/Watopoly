@@ -74,6 +74,8 @@ class Game {
     void buyCoffee();
   // current player leaves the DC Tims Line
     void leaveLine();
+  // current player's Tim Round plus one
+    void stayInLine();
   // prints message
     void printMessage(std::string message);
 };
