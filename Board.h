@@ -22,7 +22,7 @@ class Board {
   // Constructor
   Board();
   // Returns a shared pointer to CommandInput
-  CommandInput * getCommandInput();
+  CommandInput * getCommand();
   // Sets CommandInput
   void setCommand(CommandInput * c);
   // Updates the improvement information stored in the board 
