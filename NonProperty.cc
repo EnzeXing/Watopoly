@@ -44,14 +44,17 @@ SLC::SLC(std::string name, int position, std::shared_ptr<RimCup> r) : NonPropert
 SLC::~SLC(){}
 
  void SLC::accept(Player & p) {
+  // random numebr generation algorithm
   std::random_device r;
   std::default_random_engine e1(r());
   std::uniform_int_distribution<int> uniform_dist(1, 100);
   int a = uniform_dist(e1);
   
+   // models the 1% chance of recieving the Roll Up the rim cup
   if (a == 44) {
     rimCup->giveCup(p);
     throw getRimCup("Got a rim cup");
+    // models the variety of consequence when landing on SLC
   } else {
     srand (time(NULL));
     int num = rand() % 24;
@@ -96,6 +99,7 @@ Goose::Goose(std::string name, int position) : NonProperty{name, position} {}
 Goose::~Goose(){}
 
 void Goose::accept(Player & p) {
+  // prints message
   throw GooseException("Attacked by geese!");
 }
 
@@ -104,14 +108,17 @@ NeedlesHall::NeedlesHall(std::string name, int position, std::shared_ptr<RimCup>
 NeedlesHall::~NeedlesHall(){}
 
 void NeedlesHall::accept(Player & p) {
+  // random numebr generation algorithm
   std::random_device r;
   std::default_random_engine e1(r());
   std::uniform_int_distribution<int> uniform_dist(1, 100);
   int a = uniform_dist(e1);
   
+  // models the 1% chance of recieving the Roll Up the rim cup 
   if (a == 44) {
     rimCup->giveCup(p);
     throw getRimCup("Got a rim cup");
+    // models the variety of consequences when landing on Needles Hall
   } else {
     srand (time(NULL));
     int num = rand() % 18;
