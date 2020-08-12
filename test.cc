@@ -1,4 +1,4 @@
-#include "Game.h"
+#include "CommandInput.h"
 #include <iostream>
 #include <map>
 #include <memory>
@@ -15,16 +15,7 @@ int main() {
     
     // std::ifstream infile{"Game1.txt"};
     
-    Game game = Game(players);
-    game.drawBoard();
-    std::cout << "Game started.\n";
-    game.movePlayer(5);
-    game.drawBoard();
-    game.nextPlayer();
-    game.movePlayer(5);
-    game.drawBoard();
-    game.trade("Andrew", 200, "MKV");
-    game.trade("Lingwei", "MKV", 250);
-    std::ofstream outfile{"Game1.txt"};
+    CommandInput input{std::make_shared<Game>(players)};
+    input.readInput(std::cin);
     game.saveGame(outfile);
 }
