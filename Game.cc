@@ -359,7 +359,7 @@ void Game::trade(std::string receiver, std::string buildingName, int receiveAmou
     }
     
     try {
-        r->giveMoney(*currentPlayer, giveAmount);
+        r->giveMoney(*currentPlayer, receiveAmount);
     } catch (NoEnoughMoney & e) {
         printMessage(e.message);
         throw e;
@@ -491,7 +491,7 @@ void Game::unmortgage(std::string buildingName) {
     int pay = property->getPurchaseCost() * 0.6;
     
     try {
-        (*currentPlayer)->giveMoney(pay, nullptr);
+        (*currentPlayer)->giveMoney(nullptr, pay);
     } catch (NoEnoughMoney & e) {
         printMessage(e.message);
         throw e;
@@ -534,11 +534,11 @@ void Game::buyCoffee() {
 }
 
 void Game::stayInLine() {
-    (*currentPlayer)->addTimRound();
+    (*currentPlayer)->stayInLine();
 }
 
 void Game::leaveLine() {
-    (*currentPlayer)->resetTimRound();
+    (*currentPlayer)->leaveLine();
 }
 
 void Game::printMessage(std::string message) {
