@@ -13,16 +13,25 @@ class CommandInput; // Forward declaration
 
 // Board class that takes the role of view in MVC model 
 class Board {
+  // Stores the visual representation of the board in the form of strings
   std::vector<std::vector<std::string>> board;
+  // Also stores the CommandInput class(controller module) of the MVC model
   std::shared_ptr<CommandInput> command;
 
   public:
+  // Constructor
   Board();
+  // Returns a shared pointer to CommandInput
   std::shared_ptr<CommandInput> getCommandInput();
+  // Sets CommandInput
   void setCommand(std::shared_ptr<CommandInput> c);
+  // Updates the improvement information stored in the board 
   void updateImprovement(std::shared_ptr<Academic> academic);
+  // Updates the player position information stored in the board
   void updatePlayer(int oldPosition, int newPosition, std::string playerName);
+  // Outputs message
   void printMessage(std::string message, std::ostream & out);
+  // Outputs the visual representation of the baord
   void drawBoard(std::ostream & out);
 };
 
