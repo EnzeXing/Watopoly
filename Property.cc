@@ -105,10 +105,8 @@ unsigned int Academic::getTuition() {
 void Academic::improve(std::string s) {
     if ((s == "buy") && (improvement < 5)) {
         improvement++;
-        this->getOwner()->giveMoney(nullptr, improvementCost);
     } else if ((s == "sell") && (improvement > 0)) {
         improvement--;
-        this->getOwner()->addMoney(improvementCost / 2);
     } else {
         throw ImprovementException("invalid improvement command!");
     }
