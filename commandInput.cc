@@ -218,7 +218,7 @@ void CommandInput::notEnoughMoney(std::istream & in, int amount) {
   in >> option;
   while (!in.fail() && currAmount > 0) {
     if (option == "improve") {
-      std::string bulidingName;
+      std::string buildingName;
       std::string m;
       in >> buildingName;
       in >> m;
