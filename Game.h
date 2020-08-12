@@ -80,6 +80,7 @@ class Game {
     void stayInLine();
   // prints message
     void printMessage(std::string message);
+    int totalAsset();
 };
 
 #endif
