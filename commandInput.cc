@@ -249,6 +249,10 @@ void CommandInput::notEnoughMoney(std::istream & in, int amount) {
 
 
 void CommandInput::TimHortons(std::istream & in) {
+  
+  // player has been in the line for 3 rounds
+  // ...
+  
     game->printMessage("You are in the DC Tims Line :(\nDo you want to roll dice, pay $50 or use a Roll Up the Rim Cup?");
     std::string command;
     in >> command;
