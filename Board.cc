@@ -55,7 +55,7 @@ std::map <int, std::string> other = {
 };
 
 
-void Board::setCommand(std::shared_ptr<CommandInput> c) {
+void Board::setCommand(CommandInput * c) {
 	command = c;
 }
 
@@ -97,7 +97,7 @@ Board::Board() {
 
 
 
-std::shared_ptr<CommandInput> Board::getCommandInput() {
+CommandInput * Board::getCommandInput() {
 	return command;
 }
 
