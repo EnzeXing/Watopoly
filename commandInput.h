@@ -18,7 +18,7 @@ class CommandInput {
     // handles the sitution of aution
     void auction(std::istream & in, std::string building);
     // handles the sitution when the player does not have enough money
-    void notEnoughMoney(std::istream & in, int amount, std::string playerName);
+    bool notEnoughMoney(std::istream & in, int amount, std::string playerName);
     // handles the sitution when the player is at Tim Hortons
     void TimHortons(std::istream & in);
     // handles the sitution when the player is at Tuition
