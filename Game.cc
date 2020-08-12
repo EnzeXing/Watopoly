@@ -193,7 +193,7 @@ void Game::movePlayer(int steps) {
     try {
         (*currentPlayer)->visit(*(buildings[(*currentPlayer)->getPosition()]));
     } catch (NoOwner & e) {
-        board->getCommand()->purchaseOrNot();
+        board->getCommand()->purchaseOrNot(std::cin, buildings[(*currentPlayer)->getPosition()]->getName());
     } catch (NoEnoughMoney & e) {
         std::string message = "You don't have enough cash! You need " + std::to_string(e.needAmount) + " dollars.";
         board->printMessage(message, std::cout);
