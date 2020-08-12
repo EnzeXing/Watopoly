@@ -94,15 +94,13 @@ void CommandInput::readInput(std::istream & in) {
       if (op == "sell") {
         try{
           game->sellImprovement(buildingName);
-        } catch(ImprovementException & e) {
-          game->printMessage("Cannot sell.");
+        } catch(WrongBuildingException & e) {
           continue;
         }
       } else if (op == "buy") {
         try{
-          //game->buyImprovement(buildingName);
-        } catch (ImprovementException & e) {
-          game->printMessage("Cannot buy.");
+          game->buyImprovement(buildingName);
+        } catch (WrongBuildingException & e) {
           continue;
         }
       } else {
@@ -246,8 +244,7 @@ void CommandInput::notEnoughMoney(std::istream & in, int amount) {
       } catch (WrongBuildingException & w1) {
         continue;
       }
-    } else if (option == "trade") {
-      // do trade
+    } else if (s == "trade") {
       std::string name;
       std::string give;
       std::string get;
@@ -270,7 +267,8 @@ void CommandInput::notEnoughMoney(std::istream & in, int amount) {
             std::string response;
             std::cin >> response;
             if (response == "accept") {
-              // do the trade
+              // do the trade give money, receive building
+              game->trade(name, giveMoney, get);
             } else if (response == "reject") {
               continue;
             } else {
@@ -288,7 +286,8 @@ void CommandInput::notEnoughMoney(std::istream & in, int amount) {
             std::string response;
             std::cin >> response;
             if (response == "accept") {
-              // do the trade
+              // do the trade give building receive money
+              game->trade(name, give, getMoney);
             } else if (response == "reject") {
               continue;
             } else {
@@ -300,7 +299,8 @@ void CommandInput::notEnoughMoney(std::istream & in, int amount) {
             std::string response;
             std::cin >> response;
             if (response == "accept") {
-              // do the trade
+              // do the trade give building, receive building
+              game->trade(name, give, get);
             } else if (response == "reject") {
               continue;
             } else {
@@ -315,7 +315,7 @@ void CommandInput::notEnoughMoney(std::istream & in, int amount) {
           game->printMessage("Invalid amount of money to give.");
           continue;
         }
-      } 
+      }
     } else {
       game->printMessage("Invalid option!");
       continue;
