@@ -361,3 +361,15 @@ void CommandInput::TimHortons(std::istream & in) {
       game->printMessage("You used a Roll Up the Rim Cup!\nYou are out of the line!");
     }
 }
+
+void CommandInput::payTuition(std::istream & in) {
+  game->printMessage("You need to pay tuition :(\nDo you want to pay $300(A) or 10% of your total worth(B)?");
+  std::string command;
+  game->howToPay(command);
+}
+    
+    
+  
+  
+  
+  
