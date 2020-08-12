@@ -193,8 +193,9 @@ void Game::movePlayer(int steps) {
     try {
         (*currentPlayer)->visit(*(buildings[(*currentPlayer)->getPosition()]));
     } catch (NoOwner & e) {
+        auto property = std::dynamic_pointer_cast<Property>(buildings[(*currentPlayer)->getPosition()]);
         printMessage("This building has no owner! Do you want to purchase this building?");
-        printMessage("Purchase cost is $" + std::to_string(buildings[(*currentPlayer)->getPosition()]->getPurchaseCost()));
+        printMessage("Purchase cost is $" + std::to_string(property->getPurchaseCost()));
         board->getCommand()->purchaseOrNot(std::cin, buildings[(*currentPlayer)->getPosition()]->getName());
     } catch (NoEnoughMoney & e) {
         std::string message = "You don't have enough cash! You need " + std::to_string(e.needAmount) + " dollars.";
