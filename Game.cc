@@ -194,7 +194,15 @@ void Game::movePlayer(int steps) {
     } catch (NoOwner & e) {
         board->printMessage(e.message, std::cout);
         auto property = std::dynamic_pointer_cast<Property>(buildings[(*currentPlayer)->getPosition()]);
-        (*currentPlayer)->giveMoney(nullptr, property->getPurchaseCost());
+        try {
+            (*currentPlayer)->giveMoney(nullptr, property->getPurchaseCost());
+        } catch (giveMoneyAlert & e) {
+            printMessage(e.message);
+        } catch (NoEnoughMoney & e) {
+            std::string message = "You don't have enough cash! You need " + std::to_string(e.needAmount) + " dollars.";
+            board->printMessage(message, std::cout);
+        }
+        
         property->setOwner(*currentPlayer);
         (*currentPlayer)->addBuilding(property->getMonopoly());
         std::string message = (*currentPlayer)->getName() + " has bought " + property->getName();
