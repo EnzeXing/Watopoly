@@ -1,5 +1,5 @@
 CXX=g++
-CXXFLAGS=-std=c++14 -MMD
+CXXFLAGS=-std=c++14 -MMD -g
 OBJECTS=Board.o Building.o commandInput.o Dice.o Exception.o Game.o NonProperty.o Player.o Property.o test.o
 DEPENDS=${OBJECTS:.o=.d}
 EXEC=watopoly
