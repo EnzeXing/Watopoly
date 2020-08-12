@@ -204,7 +204,7 @@ void Game::movePlayer(int steps) {
         board->printMessage(e.message, std::cout);
     } catch (TuitionException & e) {
         board->printMessage(e.message, std::cout);
-        board->payTuition(std::cin);
+        board->getCommand()->payTuition(std::cin);
     } catch (TimHortonsException & e) {
         board->printMessage(e.message, std::cout);
         (*currentPlayer)->stayInLine();
@@ -238,16 +238,16 @@ void Game::movePlayer(int steps) {
             board->printMessage(message, std::cout);
             try {
                 (*currentPlayer)->giveMoney(nullptr, e.amount);
-            } catch (NoEnoughMoney & e) {
-                if (board->getCommand()->NotEnoughMoney(std::cin, e.needAmount, e.playerName)) {
+            } catch (NoEnoughMoney & e1) {
+                if (board->getCommand()->NotEnoughMoney(std::cin, e1.needAmount, e1.playerName)) {
                     try {
                         (*currentPlayer)->giveMoney(nullptr, e.amount);
-                    } catch (giveMoneyAlert & e) {
-                        printMessage(e.message);
+                    } catch (giveMoneyAlert & e2) {
+                        printMessage(e2.message);
                     } 
                 }
-            } catch (giveMoneyAlert & e) {
-                printMessage(e.message);
+            } catch (giveMoneyAlert & e3) {
+                printMessage(e3.message);
             }
         }
     } catch (ImprovementException & e) {
@@ -476,7 +476,7 @@ void Game::buyImprovement(std::string buildingName) {
         printMessage(e.message);
     } catch (NoEnoughMoney & e) {
         printMessage(e.message);
-        if (board->getCommand()->NotEnoughMoney(std::cin, e.needAmount, e.playerName);) {
+        if (board->getCommand()->NotEnoughMoney(std::cin, e.needAmount, e.playerName)) {
             buyImprovement(buildingName);
         }
     }
@@ -601,7 +601,7 @@ int Game::totalAsset() {
         auto property = std::dynamic_pointer_cast<Property>(n);
         if (property != nullptr && property->getOwner() == *currentPlayer) {
             asset += property->getPurchaseCost();
-            academic = std::dynamic_pointer_cast<Academic>(property);
+            auto academic = std::dynamic_pointer_cast<Academic>(property);
             if (academic != nullptr) {
                 asset += academic->getImprovementCost() * academic->getImprovement();
             }
@@ -616,7 +616,7 @@ void Game::howToPayTuition(std::string option) {
         if (option == "A") {
             (*currentPlayer)->giveMoney(nullptr, 300);
         } else {
-            (*currentPlayer)->giveMoney(nullptr, totalAsset(*currentPlayer));
+            (*currentPlayer)->giveMoney(nullptr, totalAsset());
         }
     } catch (NoEnoughMoney & e) {
         board->getCommand()->NotEnoughMoney(std::cin, e.needAmount, e.playerName);
