@@ -154,7 +154,7 @@ void CommandInput::readInput(std::istream & in) {
         game->printMessage("Cannot unmortgage.");
       }
     } else if (s == "bankrupt") {
-      game->printMessage("Your total worth is positive so bankruptcy cannot be declared!")
+      game->printMessage("Your total worth is positive so bankruptcy cannot be declared!");
     } else if (s == "assets") {
       //game->printAssets();
     } else if (s == "all") {
@@ -243,7 +243,7 @@ void CommandInput::auction(std::istream & in, std::string building) {
 
 bool CommandInput::notEnoughMoney(std::istream & in, int amount, std::string playerName) {
   if (game->totalAsset() < amount) {
-    game->bankrupt(playerName);
+    //game->bankrupt(playerName);
     return false;
   }
   int currAmount = amount;
@@ -295,7 +295,7 @@ bool CommandInput::notEnoughMoney(std::istream & in, int amount, std::string pla
             game->printMessage("Cannot trade money for money!");
             continue;
           } catch (std::invalid_argument) {
-            game->message("Currently You can only exchange building for money ...");
+            game->printMessage("Currently You can only exchange building for money ...");
             continue;
           } catch (std::out_of_range) {
             game->printMessage("Cannot trade money for money and invalid amount of money to receive.");
@@ -366,7 +366,7 @@ void CommandInput::TimHortons(std::istream & in) {
 void CommandInput::payTuition(std::istream & in) {
   game->printMessage("You need to pay tuition :(\nDo you want to pay $300(A) or 10% of your total worth(B)?");
   std::string command;
-  game->howToPay(command);
+  game->howToPayTuition(command);
 }
     
     
