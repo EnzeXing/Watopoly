@@ -241,7 +241,7 @@ void CommandInput::auction(std::istream & in, std::string building) {
   }
 }
 
-bool CommandInput::notEnoughMoney(std::istream & in, int amount, std::string playerName) {
+bool CommandInput::NotEnoughMoney(std::istream & in, int amount, std::string playerName) {
   if (game->totalAsset() < amount) {
     //game->bankrupt(playerName);
     return false;
