@@ -3,6 +3,7 @@
 
 #include <string>
 
+// base class for different exceptions
 class WatopolyException {
   public:
   std::string message;
