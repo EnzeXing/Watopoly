@@ -213,8 +213,9 @@ void Game::movePlayer(int steps) {
         // need to call input.PayTuition()
     } catch (TimHortonsException & e) {
         board->printMessage(e.message, std::cout);
-        (*currentPlayer)->addTimRound();
-        move
+        (*currentPlayer)->stayInLine();
+        (*currentPlayer)->move(-20);
+        printMessage("You are sent to DC Tims Line.");
     } catch (getRimCup & e) {
         board->printMessage(e.message, std::cout);
         rimcup->giveCup(**currentPlayer);
@@ -267,7 +268,7 @@ void Game::purchase(std::string buildingName) {
     auto building = findBuilding(buildingName);
     auto property = std::dynamic_pointer_cast<Property>(building);
     try {
-        (*currentPlayer)->giveMoney(property->getPurchaseCost(), nullptr);
+        (*currentPlayer)->giveMoney(nullptr, property->getPurchaseCost());
     } catch (NoEnoughMoney & e) {
         // call input.notEnoughMoney()
     } catch (giveMoneyAlert & e) {
@@ -299,7 +300,7 @@ void Game::tradeBuilding(std::string buildingName, std::string receiver) {
     
     property->setOwner(player);
     (*currentPlayer)->loseBuilding(property->getMonopoly());
-    player->addBuilding(propert->getMonopoly());
+    player->addBuilding(property->getMonopoly());
     std::string message = player->getName() + " now has " + property->getName() + ".";
     printMessage(message);
 }
@@ -339,7 +340,7 @@ void Game::trade(std::string receiver, int giveAmount, std::string buildingName)
     }
     
     try {
-        (*currentPlayer)->giveMoney(giveAmount, r);
+        (*currentPlayer)->giveMoney(r, giveAmount);
     } catch (NoEnoughMoney & e) {
         printMessage(e.message);
         throw e;
@@ -358,7 +359,7 @@ void Game::trade(std::string receiver, std::string buildingName, int receiveAmou
     }
     
     try {
-        r->giveMoney(giveAmount, *currentPlayer);
+        r->giveMoney(*currentPlayer, giveAmount);
     } catch (NoEnoughMoney & e) {
         printMessage(e.message);
         throw e;
@@ -451,7 +452,7 @@ int Game::mortgage(std::string buildingName) {
     }
     
     auto academic = std::dynamic_pointer_cast<Academic>(property);
-    if (academic != nullptr && acacemic->getImprovement() > 0) {
+    if (academic != nullptr && academic->getImprovement() > 0) {
         printMessage("You need to sell all improvements of this building before mortgage.");
         throw WrongBuildingException("");
     }
@@ -469,7 +470,7 @@ int Game::mortgage(std::string buildingName) {
     return property->getPurchaseCost() / 2;
 }
 
-void unmortgage(std::string buildingName) {
+void Game::unmortgage(std::string buildingName) {
     auto building = findBuilding(buildingName);
     if (building == nullptr) {
         printMessage("Wrong building name.");
@@ -528,7 +529,7 @@ void Game::useRimCup() {
 }
 
 void Game::buyCoffee() {
-    (*currentPlayer)->giveMoney(50, nullptr);
+    (*currentPlayer)->giveMoney(nullptr, 50);
     leaveLine();
 }
 
