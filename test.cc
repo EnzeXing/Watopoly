@@ -12,11 +12,9 @@ int main() {
     players["Klaus"] = "K";
     players["Lingwei"] = "L";
     players["Steven"] = "S";
-    std::ofstream outfile{"Game1.txt"};
     
     // std::ifstream infile{"Game1.txt"};
     
     CommandInput input{std::make_shared<Game>(players)};
     input.readInput(std::cin);
-    game.saveGame(outfile);
 }
