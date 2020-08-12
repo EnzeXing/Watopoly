@@ -38,7 +38,12 @@ void CommandInput::readInput(std::istream & in) {
               try {
                 // do the trade give money, receive building
                 game->trade(name, giveMoney, get);
-              } catch (WrongBuildingException) { continue; }
+              } catch (WrongBuildingException) { 
+                continue; 
+              } catch (NoEnoughMoney n) {
+                game->printMessage("You total worth is not enough!");
+                continue;
+              }
             } else if (response == "reject") {
               continue;
             } else {
@@ -59,7 +64,12 @@ void CommandInput::readInput(std::istream & in) {
               // do the trade give building receive money
               try {
                 game->trade(name, give, getMoney); 
-              } catch (WrongBuildingException) { continue; }
+              } catch (WrongBuildingException) { 
+                continue;
+              } catch (NoEnoughMoney n) {
+                game->printMessage("You total worth is not enough!");
+                continue;
+              }
             } else if (response == "reject") {
               continue;
             } else {
@@ -74,7 +84,12 @@ void CommandInput::readInput(std::istream & in) {
               try {
                 // do the trade give building, receive building
                 game->trade(name, give, get);
-              } catch (WrongBuildingException) { continue; }
+              } catch (WrongBuildingException) { 
+                continue; 
+              } catch (NoEnoughMoney n) {
+                game->printMessage("You total worth is not enough!");
+                continue;
+              }
             } else if (response == "reject") {
               continue;
             } else {
