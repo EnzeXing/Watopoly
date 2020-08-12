@@ -35,8 +35,10 @@ void CommandInput::readInput(std::istream & in) {
             std::string response;
             std::cin >> response;
             if (response == "accept") {
-              // do the trade give money, receive building
-              game->trade(name, giveMoney, get);
+              try {
+                // do the trade give money, receive building
+                game->trade(name, giveMoney, get);
+              } catch (WrongBuildingException) { continue; }
             } else if (response == "reject") {
               continue;
             } else {
@@ -55,7 +57,9 @@ void CommandInput::readInput(std::istream & in) {
             std::cin >> response;
             if (response == "accept") {
               // do the trade give building receive money
-              game->trade(name, give, getMoney);
+              try {
+                game->trade(name, give, getMoney); 
+              } catch (WrongBuildingException) { continue; }
             } else if (response == "reject") {
               continue;
             } else {
@@ -67,8 +71,10 @@ void CommandInput::readInput(std::istream & in) {
             std::string response;
             std::cin >> response;
             if (response == "accept") {
-              // do the trade give building, receive building
-              game->trade(name, give, get);
+              try {
+                // do the trade give building, receive building
+                game->trade(name, give, get);
+              } catch (WrongBuildingException) { continue; }
             } else if (response == "reject") {
               continue;
             } else {
