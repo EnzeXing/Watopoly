@@ -310,6 +310,7 @@ bool CommandInput::notEnoughMoney(std::istream & in, int amount, std::string pla
             if (response == "accept") {
               // do the trade give building receive money
               game->trade(name, give, getMoney);
+              continue;
             } else if (response == "reject") {
               continue;
             } else {
@@ -317,18 +318,8 @@ bool CommandInput::notEnoughMoney(std::istream & in, int amount, std::string pla
               continue;
             }
           } catch (std::invalid_argument) {
-            game->printMessage("Does " + name + " accept the trade of giving " + get + " in exchange for " + give + " ?");
-            std::string response;
-            std::cin >> response;
-            if (response == "accept") {
-              // do the trade give building, receive building
-              game->trade(name, give, get);
-            } else if (response == "reject") {
-              continue;
-            } else {
-              game->printMessage("Invalid response, trade cancelled.");
-              continue;
-            }
+            game->printMessage("Currently You can only exchange building for money ...");
+            continue;
           } catch (std::out_of_range) {
             game->printMessage("Invalid amount of money to receive.");
             continue;
