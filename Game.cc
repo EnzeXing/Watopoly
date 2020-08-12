@@ -552,11 +552,12 @@ void Game::drawBoard() {
 }
 
 void Game::roll() {
+    // if ((*currentPlayer)->getTimRound() > 0) throw 
     int a = (*currentPlayer)->roll();
     printMessage("Dice1: " + std::to_string(a));
     int b = (*currentPlayer)->roll();
     printMessage("Dice2: " + std::to_string(b));
-    (*currentPlayer)->move(a + b);    
+    movePlayer(a + b);    
 }
 
 bool Game::rollDouble() {
