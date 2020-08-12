@@ -9,8 +9,9 @@
 #include <iomanip>
 #include "Property.h"
 
-class CommandInput;
+class CommandInput; // Forward declaration
 
+// Board class that takes the role of view in MVC model 
 class Board {
   std::vector<std::vector<std::string>> board;
   std::shared_ptr<CommandInput> command;
