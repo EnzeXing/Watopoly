@@ -246,7 +246,7 @@ void CommandInput::notEnoughMoney(std::istream & in, int amount) {
       } catch (WrongBuildingException & w1) {
         continue;
       }
-    } else if (s == "trade") {
+    } else if (option == "trade") {
       std::string name;
       std::string give;
       std::string get;
