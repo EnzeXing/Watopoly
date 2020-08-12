@@ -55,6 +55,7 @@ class Game {
     void trade(std::string receiver, std::string buildingName, int receiveAmount);
     void trade(std::string receiver, std::string giveBuildingName, std::string receiveBuildingName);
     int sellImprovement(std::string buildingName);
+    void butImprovement(std::string buildingName);
   // mortgage building 
     int mortgage(std::string buildingName);
   // unmortgage building
