@@ -140,6 +140,11 @@ void CommandInput::readInput(std::istream & in) {
       //game->printAllAssets();
     } else if (s == "save") {
       std::string fileName;
+      in >> fileName;
+      if (in.fail()) {
+        game->printMessage("Need a file to store the information.");
+        break;
+      }
       std::ofstream realFile {fileName};
       game->saveGame(realFile);
     } else {
