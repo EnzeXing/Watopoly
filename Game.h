@@ -81,6 +81,7 @@ class Game {
   // prints message
     void printMessage(std::string message);
     int totalAsset();
+    void howToPayTuition(std::string option);
 };
 
 #endif
