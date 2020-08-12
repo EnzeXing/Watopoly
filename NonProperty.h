@@ -6,13 +6,18 @@
 #include <vector>
 #include <memory>
 
+
+// RimCup class that stores and maintains the number of active cups
 class RimCup {
   int ActiveCup;
   public:
+  // give a cup to player
   void giveCup(Player & p);
+  // allows player to use a cup
   void receiveCup(Player & p);
 };
 
+// abstract base class for all Non-Property buildings
 class NonProperty : public Building {
   public:
     NonProperty(std::string name, int position);
