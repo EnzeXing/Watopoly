@@ -1,7 +1,7 @@
 #include "Board.h"
 #include "commandInput.h"
 
-
+// map that stores the information of all Academic buildings
 std::map <int, std::string> academic = {
     {1, "AL     "},
     {3, "ML     "},
@@ -27,6 +27,7 @@ std::map <int, std::string> academic = {
     {39, "DC     "}
   };
 
+// map that stores the information of all longname buildings
 std::map <int, std::vector<std::string>> longName = {
   {0, {"COLLECT", "OSAP   "}},
   {7, {"NEEDLES", "HALL   "}},
@@ -39,6 +40,7 @@ std::map <int, std::vector<std::string>> longName = {
   {38, {"COOP   ", "FEE    "}}
 };
 
+// map that stores the information of all other buildings
 std::map <int, std::string> other = {
   {2, "SLC    "},
   {4, "TUITION"},
@@ -58,9 +60,12 @@ void Board::setCommand(std::shared_ptr<CommandInput> c) {
 }
 
 Board::Board() {
+	// initializes the command to null pointer
 	command = nullptr;
+	// sets the length of vector for easier storage
 	std::vector<std::string> piece(7, "");
 	board = std::vector<std::vector<std::string>>(40, piece);
+	// constructs the initial board template
 	for (int i = 0; i < 40; i++) {	
 		if (academic.count(i) == 1) {
 			board[i][0] = " ------- ";
@@ -98,8 +103,11 @@ std::shared_ptr<CommandInput> Board::getCommandInput() {
 
 
 void Board::updateImprovement(std::shared_ptr<Academic> academic) {
+  // gets the current improvement number
   int improvementNumber = academic->getImprovement();
+  // gets the position of the building
   int position = academic->getPosition();
+  // sets the old string to empty
   std::string temp = "       ";
   for (int i = 0; i < improvementNumber; i++) {
     temp[i] = 'I';
@@ -109,7 +117,7 @@ void Board::updateImprovement(std::shared_ptr<Academic> academic) {
 
 void Board::updatePlayer(int oldPosition, int newPosition, std::string playerName) {
 	char symbol = playerName[0];
-	
+	// for initial representation of players' position
 	if (!((oldPosition == 0) && (newPosition == 0))) {
 		for (int i = 1; i < 9; i += 2) {
 			if (board[oldPosition][4][i] == symbol) {
