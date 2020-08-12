@@ -139,7 +139,7 @@ void CommandInput::readInput(std::istream & in) {
         game->printMessage("Cannot unmortgage.");
       }
     } else if (s == "bankrupt") {
-      //to be added;
+      game->printMessage("Your total worth is positive so bankruptcy cannot be declared!")
     } else if (s == "assets") {
       //game->printAssets();
     } else if (s == "all") {
@@ -226,7 +226,11 @@ void CommandInput::auction(std::istream & in, std::string building) {
   }
 }
 
-void CommandInput::notEnoughMoney(std::istream & in, int amount) {
+bool CommandInput::notEnoughMoney(std::istream & in, int amount, std::string playerName) {
+  if (game->totalAsset() < amount) {
+    game->bankrupt(playerName);
+    return false;
+  }
   int currAmount = amount;
   std::string option;
   in >> option;
@@ -334,8 +338,9 @@ void CommandInput::notEnoughMoney(std::istream & in, int amount) {
       continue;
     }
   }
+  return true;
 }
-     
+
 
 void CommandInput::TimHortons(std::istream & in) {
   
