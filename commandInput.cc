@@ -1,6 +1,8 @@
 #include "commandInput.h"
 
-CommandInput::CommandInput(std::shared_ptr<Game> game) : game{game} {}
+CommandInput::CommandInput(std::shared_ptr<Game> game) : game{game} {
+  game->getBoard()->setCommand(this);
+}
 
 void CommandInput::readInput(std::istream & in) {
   std::string s;
