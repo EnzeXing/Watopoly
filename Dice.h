@@ -13,7 +13,7 @@
 class Dice {
   
   public:
-  // returns a random number in the range of 1 to 6
+  // returns a random number of uniform distribution in the range of 1 to 6
   // mimics the function of the dice
   unsigned int roll();
 };
