@@ -19,7 +19,8 @@ class NoEnoughMoney : public WatopolyException {
   public:
   int needAmount;
   std::string playerName;
-  NoEnoughMoney(std::string m, int a, std::string playerName);
+  std::string receiver;
+  NoEnoughMoney(std::string m, int a, std::string playerName, std::string receiver);
 };
 
 class giveMoneyAlert : public WatopolyException {
