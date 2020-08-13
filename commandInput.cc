@@ -1,5 +1,6 @@
 #include "commandInput.h"
 #include <fstream>
+#include <algorithm>
 
 CommandInput::CommandInput(std::shared_ptr<Game> game) : game{game} {
   game->getBoard()->setCommand(this);
@@ -147,7 +148,7 @@ void CommandInput::readInput(std::istream & in, bool testing) {
       }
       if (op == "sell") {
         try{
-          game->sellImprovement(buildingName);
+          game->sellImprovement(playerName, buildingName);
         } catch(WrongBuildingException & e) {
           continue;
         }
@@ -168,7 +169,7 @@ void CommandInput::readInput(std::istream & in, bool testing) {
         break;
       }
       try {
-        game->mortgage(buildingName);
+        game->mortgage(playerName, buildingName);
       } catch (MortgageException & e) {
         game->printMessage("Cannot mortgage.");
       }
@@ -260,9 +261,9 @@ void CommandInput::auction(std::istream & in, std::string building) {
       continue;
     }
     
-    if (secodOp == "withdraw") {
+    if (secondOp == "withdraw") {
       if (currBuyer != buyer) {
-        playerNames.erase(playerNames.find(buyer));
+        playerNames.erase(std::find(playerNames.begin(), playerNames.end(), buyer));
       } else {
         game->printMessage("You are the hightest bidder, cannot withdraw.");
         continue;
@@ -270,7 +271,7 @@ void CommandInput::auction(std::istream & in, std::string building) {
     } else {
       try {
         price = stoi(secondOp);
-      } catch (std::invalide_argument) {
+      } catch (std::invalid_argument) {
         game->printMessage("Invalid input, type again.");
         continue;
       } catch (std::out_of_range) {
@@ -330,10 +331,10 @@ bool CommandInput::NotEnoughMoney(std::istream & in, int amount, std::string pla
     std::string bkrpt;
     in >> bkrpt;
     if (bkrpt == "bankrupt") {
-      bankrupt(playerName, toPlayer);
+      game->bankrupt(playerName, toPlayer);
     } else {
       game->printMessage("Invalid input, forced bankruptcy.");
-      bankrupt(playerName, toPlayer);
+      game->bankrupt(playerName, toPlayer);
     }
     return false;
   }
@@ -341,11 +342,11 @@ bool CommandInput::NotEnoughMoney(std::istream & in, int amount, std::string pla
 }
 
 
-void CommandInput::TimHortons(std::istream & in) {
+void CommandInput::TimHortons(std::istream & in, int currentRound) {
   
   // player has been in the line for 3 rounds
   // ...
-    if (game->currentPlayer->getTimRound() == 3) {
+    if (currentRound == 3) {
         game->printMessage("It is your third turn in the DC Tims line. If you do not roll doubles, you must leave the line by either paying $50 or using a Roll Up the Rim cup.\nDo you want to roll dice, pay $50 or use a Roll Up the Rim Cup?");
         std::string command;
         in >> command;
@@ -399,7 +400,7 @@ void CommandInput::TimHortons(std::istream & in) {
           game->useRimCup();
       } catch (NoEnoughCup & e) {
           game->printMessage(e.message);
-          TimHortons(in);
+          TimHortons(in, currentRound);
       }
       
       game->printMessage("You used a Roll Up the Rim Cup!\nYou are out of the line!");
@@ -429,7 +430,7 @@ void CommandInput::TimHortons(std::istream & in) {
           game->useRimCup();
       } catch (NoEnoughCup & e) {
           game->printMessage(e.message);
-          TimHortons(in);
+          TimHortons(in, currentRound);
       }
       game->printMessage("You used a Roll Up the Rim Cup!\nYou are out of the line!");
     }
