@@ -61,7 +61,7 @@ class Game {
   // unmortgage building
     void unmortgage(std::string buildingName);
   // allows player to declares bankrupcy
-    void bankrupt(std::shared_ptr<Player>);
+    void bankrupt(std::string bankruptTo);
   // save game into a file
     void saveGame(std::ofstream & file);
   // displays the current state of the board
