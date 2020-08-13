@@ -216,6 +216,7 @@ void Game::movePlayer(int steps) {
     } catch (TimHortonsException & e) {
         board->printMessage(e.message, std::cout);
         (*currentPlayer)->stayInLine();
+        board->updatePlayer(30, 10, (*currentPlayer)->getSymbol());
         (*currentPlayer)->move(-20);
         printMessage("You are sent to DC Tims Line.");
     } catch (getRimCup & e) {
