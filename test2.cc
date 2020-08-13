@@ -4,6 +4,7 @@
 #include <memory>
 #include <string>
 #include <fstream>
+#include <sstream>
 
 void usage() {
     std::cerr << "Too many arguments!" << std::endl;
@@ -15,20 +16,47 @@ void usage() {
 
 int main(int argc, char ** argv) {
     std::map<std::string, std::string> players;
-      players["Andrew"] = "A";
+      /*players["Andrew"] = "A";
       players["Ivan"] = "I";
       players["Fatday"] = "F";
       players["Klaus"] = "K";
       players["Lingwei"] = "L";
-      players["Steven"] = "S";
+      players["Steven"] = "S";*/
     if (argc >= 4) {
       usage();
       return 1;
     } else if ((argc == 1) || (argv[0] == "./Watopoly")) {
+      int numPlayers;
+      std::string line;
+      std::cout << "Welcome to Watopoly! Please type \"add Player_name Player_symbol\" to add an player. After adding players, type begin to begin the game.\n";
       
-    // std::ifstream infile{"Game1.txt"};
-      CommandInput input{std::make_shared<Game>(players)};
-      input.readInput(std::cin, false);
+      while (getline(std::cin, line)) {
+          std::istringstream ss1{line};
+          std::string command
+          std::string name;
+          std::string symbol;
+          ss1 >> command;
+          if (command == "add") {
+              ss1 >> name;
+              if (ss1.fail()) {
+                  std::cout << "Please type \"add Player_name Player_symbol\" to add an player.\n";
+                  continue;
+              }
+              ss1 >> symbol;
+              if (ss1.fail()) {
+                  std::cout << "Please type \"add Player_name Player_symbol\" to add an player.\n";
+                  continue;
+              }
+              players[name] = symbol;
+          } else if (command == "begin") {
+              CommandInput input{std::make_shared<Game>(players)};
+              input.readInput(std::cin, false);
+          } else {
+              std::cout << "Invalid command. Please type \"add Player_name Player_symbol\" to add an player. After adding players, type begin to begin the game.\n";
+              continue;
+          }
+      }
+      
       return 0;
     } else if (argc == 3) {
       std::ifstream infile{argv[2]};
@@ -37,8 +65,36 @@ int main(int argc, char ** argv) {
       return 0;
     } else if (argc == 2) {
       //testing mode
-        CommandInput input{std::make_shared<Game>(players)};
-        input.readInput(std::cin, true);
+        int numPlayers;
+      std::string line;
+      std::cout << "Welcome to Watopoly! Please type \"add Player_name Player_symbol\" to add an player. After adding players, type begin to begin the game.\n";
+      
+      while (getline(std::cin, line)) {
+          std::istringstream ss1{line};
+          std::string command
+          std::string name;
+          std::string symbol;
+          ss1 >> command;
+          if (command == "add") {
+              ss1 >> name;
+              if (ss1.fail()) {
+                  std::cout << "Please type \"add Player_name Player_symbol\" to add an player.\n";
+                  continue;
+              }
+              ss1 >> symbol;
+              if (ss1.fail()) {
+                  std::cout << "Please type \"add Player_name Player_symbol\" to add an player.\n";
+                  continue;
+              }
+              players[name] = symbol;
+          } else if (command == "begin") {
+              CommandInput input{std::make_shared<Game>(players)};
+              input.readInput(std::cin, true);
+          } else {
+              std::cout << "Invalid command. Please type \"add Player_name Player_symbol\" to add an player. After adding players, type begin to begin the game.\n";
+              continue;
+          }
+      }
       return 0;
     } else if (argv[1] == "-load") {
       std::ifstream infile{argv[2]};
