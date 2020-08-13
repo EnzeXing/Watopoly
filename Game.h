@@ -80,7 +80,7 @@ class Game {
     void stayInLine();
   // prints message
     void printMessage(std::string message);
-    int totalAsset(sted::string playerName);
+    int totalAsset(std::string playerName);
     void howToPayTuition(std::string option);
     std::vector<std::string> getPlayerNames();
 };
