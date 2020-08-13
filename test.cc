@@ -17,4 +17,5 @@ int main() {
     
     CommandInput input{std::make_shared<Game>(players)};
     input.readInput(std::cin);
+    return 0;
 }
