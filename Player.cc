@@ -33,8 +33,15 @@ int Player::getMoney() {
 
 void Player::giveMoney(std::shared_ptr<Player> other, int amount) {
   // checks if money is enough
+    std::string receiver;
+    if (other == nullptr) {
+        receiver = "Bank";
+    } else {
+        receiver = other->getName();  
+    }
+  
     if (money < amount) {
-        throw NoEnoughMoney("Not enough money!", amount - money, other->getName());
+        throw NoEnoughMoney("Not enough money!", amount - money, name, receiver);
     }
     
     money -= amount;
