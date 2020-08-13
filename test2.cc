@@ -25,14 +25,14 @@ int main(int argc, char ** argv) {
     if (argc >= 4) {
       usage();
       return 1;
-    } else if ((argc == 1) || (argv[0] == "./Watopoly")) {
+    } else if ((argc == 1) && (strcmp(argv[0], "./Watopoly"))) {
       int numPlayers;
       std::string line;
       std::cout << "Welcome to Watopoly! Please type \"add Player_name Player_symbol\" to add an player. After adding players, type begin to begin the game.\n";
       
       while (getline(std::cin, line)) {
           std::istringstream ss1{line};
-          std::string command
+          std::string command;
           std::string name;
           std::string symbol;
           ss1 >> command;
@@ -71,7 +71,7 @@ int main(int argc, char ** argv) {
       
       while (getline(std::cin, line)) {
           std::istringstream ss1{line};
-          std::string command
+          std::string command;
           std::string name;
           std::string symbol;
           ss1 >> command;
@@ -96,7 +96,7 @@ int main(int argc, char ** argv) {
           }
       }
       return 0;
-    } else if (argv[1] == "-load") {
+    } else if ((strcmp(argv[1], "-load"))) {
       std::ifstream infile{argv[2]};
       CommandInput input{std::make_shared<Game>(infile)};
       input.readInput(std::cin, true);
