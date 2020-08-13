@@ -5,7 +5,7 @@ CommandInput::CommandInput(std::shared_ptr<Game> game) : game{game} {
   game->getBoard()->setCommand(this);
 }
 
-void CommandInput::readInput(std::istream & in, testingMode = false) {
+void CommandInput::readInput(std::istream & in) {
   bool roll = false;
   std::string s;
   while (in >> s) {
@@ -248,11 +248,7 @@ void CommandInput::auction(std::istream & in, std::string building) {
   }
 }
 
-bool CommandInput::NotEnoughMoney(std::istream & in, int amount, std::string playerName) {
-  if (game->totalAsset() < amount) {
-    //game->bankrupt(playerName);
-    return false;
-  }
+bool CommandInput::NotEnoughMoney(std::istream & in, int amount, std::string playerName, std::string toPlayer) {
   int currAmount = amount;
   std::string option;
   in >> option;
@@ -265,9 +261,10 @@ bool CommandInput::NotEnoughMoney(std::istream & in, int amount, std::string pla
       in >> m;
       if (m == "sell") {
         try {
-          int temp = game->sellImprovement(buildingName);
+          int temp = game->sellImprovement(playerName, buildingName);
           currAmount -= temp;
         } catch (WrongBuildingException & w1) {
+          game->printMessage("You don't own the building" + buildingName);
           continue;
         }
       } else {
@@ -278,68 +275,27 @@ bool CommandInput::NotEnoughMoney(std::istream & in, int amount, std::string pla
       std::string buildingName;
       in >> buildingName;
       try {
-        int temp = game->mortgage(buildingName);
+        int temp = game->mortgage(playerName, buildingName);
         currAmount -= temp;
       } catch (WrongBuildingException & w1) {
         continue;
-      }
-    } else if (option == "trade") {
-      std::string name;
-      std::string give;
-      std::string get;
-      in >> name;
-      in >> give;
-      in >> get;
-      if (in.fail()) {
-        game->printMessage("Not enough arguments.");
-        break;
-      }
-      if (!in.fail()) {
-        try {
-          int giveMoney = std::stoi(give);
-          try {
-            int getMoney = std::stoi(get);
-            game->printMessage("Cannot trade money for money!");
-            continue;
-          } catch (std::invalid_argument) {
-            game->printMessage("Currently You can only exchange building for money ...");
-            continue;
-          } catch (std::out_of_range) {
-            game->printMessage("Cannot trade money for money and invalid amount of money to receive.");
-            continue;
-          }
-        } catch (std::invalid_argument) {
-          try {
-            int getMoney = std::stoi(get);
-            game->printMessage("Does " + name + " accept the trade of giving $" + get + " in exchange for " + give + " ?");
-            std::string response;
-            std::cin >> response;
-            if (response == "accept") {
-              // do the trade give building receive money
-              game->trade(name, give, getMoney);
-              continue;
-            } else if (response == "reject") {
-              continue;
-            } else {
-              game->printMessage("Invalid response, trade cancelled.");
-              continue;
-            }
-          } catch (std::invalid_argument) {
-            game->printMessage("Currently You can only exchange building for money ...");
-            continue;
-          } catch (std::out_of_range) {
-            game->printMessage("Invalid amount of money to receive.");
-            continue;
-          }
-        } catch (std::out_of_range) {
-          game->printMessage("Invalid amount of money to give.");
-          continue;
-        }
       }
     } else {
       game->printMessage("Invalid option!");
       continue;
     }
+  }
+  if (game->totalAsset(playerName) < currAmount) {
+    game->printMessage("You do not have enough money to pay the money, type \"bankrupt\" to declare bankruptcy.");
+    std::string bkrpt;
+    in >> bkrpt;
+    if (bkrpt == "bankrupt") {
+      bankrupt(playerName, toPlayer);
+    } else {
+      game->printMessage("Invalid input, forced bankruptcy.");
+      bankrupt(playerName, toPlayer);
+    }
+    return false;
   }
   return true;
 }
