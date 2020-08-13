@@ -600,7 +600,7 @@ void Game::drawBoard() {
 
 int Game::roll() {
     if ((*currentPlayer)->getTimRound() > 0 && (*currentPlayer)->getTimRound() <= 3) {
-        board->getCommand()->TimHortons(std::cin);
+        board->getCommand()->TimHortons(std::cin, (*currentPlayer)->getTimRound());
         return;
     }
     int a = (*currentPlayer)->roll();
