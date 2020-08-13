@@ -102,7 +102,8 @@ int main(int argc, char ** argv) {
       input.readInput(std::cin, true);
       return 0;
     } else {
-      std::ifstream infile{argv[3]};
+      std::string fileName = argv[3];
+      std::ifstream infile{fileName};
       CommandInput input{std::make_shared<Game>(infile)};
       input.readInput(std::cin, true);
       return 0;
