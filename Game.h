@@ -37,6 +37,7 @@ class Game {
     Game(std::ifstream & file);
     std::shared_ptr<Board> getBoard();
     std::string currentPlayerName();
+    int currentTimRound();
   // updates currentPlayer field
     void nextPlayer();
   // updates current player's location
