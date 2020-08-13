@@ -22,7 +22,7 @@ int main(int argc, char ** argv) {
       players["Klaus"] = "K";
       players["Lingwei"] = "L";
       players["Steven"] = "S";*/
-    if (argc >= 4) {
+    if (argc > 4) {
       usage();
       return 1;
     } else if ((argc == 1) && (strcmp(argv[0], "./Watopoly"))) {
