@@ -7,8 +7,7 @@ CommandInput::CommandInput(std::shared_ptr<Game> game) : game{game} {
 void CommandInput::readInput(std::istream & in) {
   bool roll = false;
   std::string s;
-  while (!in.fail()) {
-    in >> s;
+  while (in >> s) {
     if (s == "roll") {
       if (!roll) {
         game->roll();
