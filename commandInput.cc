@@ -241,8 +241,6 @@ void CommandInput::auction(std::istream & in, std::string building) {
       if (currBuyer.length() != 0) {
         try {
           game->findPlayer(currBuyer)->giveMoney(nullptr, highestPrice);
-          game->tradeBuilding(building, currBuyer);
-          break;
         } catch (NoEnoughMoney & e) {
           game->printMessage(currBuyer + " needs $" + std::to_string(e.needAmount) + " more to complete purchase");
           in.clear();
@@ -250,6 +248,8 @@ void CommandInput::auction(std::istream & in, std::string building) {
           continue;
         } catch (giveMoneyAlert & e) {
           game->printMessage(e.message);
+          game->tradeBuilding(building, currBuyer);
+          break;
         }
       } else {
         in.clear();
@@ -274,7 +274,6 @@ void CommandInput::auction(std::istream & in, std::string building) {
       if (playerNames.size() == 1) {
         try {
           game->findPlayer(currBuyer)->giveMoney(nullptr, highestPrice);
-          game->tradeBuilding(building, currBuyer);
         } catch (NoEnoughMoney & e) {
           game->printMessage(currBuyer + " needs $" + std::to_string(e.needAmount) + " more to complete purchase");
           in.clear();
@@ -282,6 +281,7 @@ void CommandInput::auction(std::istream & in, std::string building) {
           continue;
         } catch (giveMoneyAlert & e) {
           game->printMessage(e.message);
+          game->tradeBuilding(building, currBuyer);
         }
         break;
       }
