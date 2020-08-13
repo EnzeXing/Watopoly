@@ -382,9 +382,8 @@ void CommandInput::TimHortons(std::istream & in, int currentRound) {
                             continue;
                         }
                     }
-                }
-            }
-       }
+              }
+         }
     } else if (command == "pay") {
       try {
            game->buyCoffee();
