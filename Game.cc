@@ -173,6 +173,10 @@ std::shared_ptr<Board> Game::getBoard() {
     return board;
 }
 
+int Game::currentTimRound() {
+    return (*currentPlayer)->getTimRound();
+}
+
 std::string Game::currentPlayerName() {
     return (*currentPlayer)->getName();
 }
