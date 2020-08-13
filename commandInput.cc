@@ -265,11 +265,15 @@ void CommandInput::auction(std::istream & in, std::string building) {
       if (currBuyer != buyer) {
         playerNames.erase(std::find(playerNames.begin(), playerNames.end(), buyer));
         game->printMessage(buyer + " has withdrawn from the current auction.");
-        continue;
       } else {
         game->printMessage("You are the hightest bidder, cannot withdraw.");
-        continue;
       }
+      if (playerNames.size() == 1) {
+        game->findPlayer(currBuyer)->giveMoney(nullptr, highestPrice);
+        game->tradeBuilding(building, currBuyer);
+        break;
+      }
+      continue;
     } else {
       try {
         price = stoi(secondOp);
