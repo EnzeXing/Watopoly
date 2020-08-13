@@ -7,6 +7,8 @@ CommandInput::CommandInput(std::shared_ptr<Game> game) : game{game} {
 }
 
 void CommandInput::readInput(std::istream & in, bool testing) {
+  game->drawBoard();
+  game->printMessage("First player is " + game->currentPlayerName() + ".");
   bool roll = false;
   std::string s;
   std::string line;
@@ -44,6 +46,7 @@ void CommandInput::readInput(std::istream & in, bool testing) {
       } else {
         game->printMessage("You have already rolled!");
       }
+      game->drawBoard();
     } else if (s == "next") {
       game->nextPlayer();
       roll = false;
