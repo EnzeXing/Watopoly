@@ -82,6 +82,7 @@ class Game {
     void printMessage(std::string message);
     int totalAsset();
     void howToPayTuition(std::string option);
+    std::vector<std::string> getPlayerNames();
 };
 
 #endif
