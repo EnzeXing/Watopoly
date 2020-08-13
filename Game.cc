@@ -200,7 +200,7 @@ void Game::movePlayer(int steps) {
     } catch (NoEnoughMoney & e) {
         std::string message = "You don't have enough cash! You need " + std::to_string(e.needAmount) + " dollars.";
         board->printMessage(message, std::cout);
-        board->getCommand()->NotEnoughMoney(std::cin, e.needAmount, e.playerName);
+        board->getCommand()->NotEnoughMoney(std::cin, e.needAmount, e.playerName, e.receiver);
         (*currentPlayer)->visit(*(buildings[(*currentPlayer)->getPosition()]));
     } catch (giveMoneyAlert & e) {
         printMessage(e.message);
@@ -243,7 +243,7 @@ void Game::movePlayer(int steps) {
             try {
                 (*currentPlayer)->giveMoney(nullptr, e.amount);
             } catch (NoEnoughMoney & e1) {
-                if (board->getCommand()->NotEnoughMoney(std::cin, e1.needAmount, e1.playerName)) {
+                if (board->getCommand()->NotEnoughMoney(std::cin, e1.needAmount, e1.playerName, e1.receiver)) {
                     try {
                         (*currentPlayer)->giveMoney(nullptr, e.amount);
                     } catch (giveMoneyAlert & e2) {
@@ -280,7 +280,7 @@ void Game::purchase(std::string buildingName) {
     try {
         (*currentPlayer)->giveMoney(nullptr, property->getPurchaseCost());
     } catch (NoEnoughMoney & e) {
-        if (board->getCommand()->NotEnoughMoney(std::cin, e.needAmount, e.playerName)) {
+        if (board->getCommand()->NotEnoughMoney(std::cin, e.needAmount, e.playerName, e.receiver)) {
              purchase(buildingName); 
         }
     } catch (giveMoneyAlert & e) {
@@ -426,7 +426,8 @@ void Game::saveGame(std::ofstream & file) {
     board->printMessage("This game has been saved.", std::cout);
 }
 
-int Game::sellImprovement(std::string buildingName) {
+int Game::sellImprovement(std::string playerName, std::string buildingName) {
+    auto player = findPlayer(playerName);
     auto building = findBuilding(buildingName);
     if (building == nullptr) {
         printMessage("Wrong building name.");
@@ -434,7 +435,7 @@ int Game::sellImprovement(std::string buildingName) {
     }
     
     auto academic = std::dynamic_pointer_cast<Academic>(building);
-    if (academic == nullptr || academic->getOwner() != (*currentPlayer)) {
+    if (academic == nullptr || academic->getOwner() != player) {
         printMessage("This building is not your property.");
         throw WrongBuildingException("");
     }
@@ -445,7 +446,7 @@ int Game::sellImprovement(std::string buildingName) {
     }
     
     int addAmount = academic->getImprovementCost() / 2;
-    (*currentPlayer)->addMoney(addAmount);
+    academic->getOwner()->addMoney(addAmount);
     academic->improve("sell");
     printMessage("You have sold an improvement of " + academic->getName() + " and received $" + std::to_string(addAmount) + ".");
     return addAmount;
@@ -475,7 +476,7 @@ void Game::buyImprovement(std::string buildingName) {
     }
     
     try {
-        (*currentPlayer)->giveMoney(nullptr, academic->getImprovementCost());
+        academic->getOwner()->giveMoney(nullptr, academic->getImprovementCost());
     } catch (giveMoneyAlert & e) {
         printMessage(e.message);
     } catch (NoEnoughMoney & e) {
@@ -489,7 +490,8 @@ void Game::buyImprovement(std::string buildingName) {
     printMessage("You have bought improvement for " + academic->getName() + ".");
 }
 
-int Game::mortgage(std::string buildingName) {
+int Game::mortgage(std::string playerName, std::string buildingName) {
+    auto player = findPlayer(playerName);
     auto building = findBuilding(buildingName);
     if (building == nullptr) {
         printMessage("Wrong building name.");
@@ -497,7 +499,7 @@ int Game::mortgage(std::string buildingName) {
     }
     
     auto property = std::dynamic_pointer_cast<Property>(building);
-    if (property == nullptr || property->getOwner() != (*currentPlayer)) {
+    if (property == nullptr || property->getOwner() != player) {
         printMessage("This building is not your property!");
         throw WrongBuildingException("");
     }
@@ -513,7 +515,7 @@ int Game::mortgage(std::string buildingName) {
         throw WrongBuildingException("");
     } else {
         property->setMortgage(true);
-        (*currentPlayer)->addMoney(property->getPurchaseCost() / 2);
+        property->getOwner()->addMoney(property->getPurchaseCost() / 2);
         std::string message = "You have mortgaged " + property->getName() + " and received $" + std::to_string(property->getPurchaseCost() / 2) + ".";
         printMessage(message);
     }
@@ -542,10 +544,10 @@ void Game::unmortgage(std::string buildingName) {
     int pay = property->getPurchaseCost() * 0.6;
     
     try {
-        (*currentPlayer)->giveMoney(nullptr, pay);
+        property->getOwner()->giveMoney(nullptr, pay);
     } catch (NoEnoughMoney & e) {
         printMessage(e.message);
-        if (board->getCommand()->NotEnoughMoney(std::cin, e.needAmount, e.playerName)) {
+        if (board->getCommand()->NotEnoughMoney(std::cin, e.needAmount, e.playerName, e.receiver)) {
             unmortgage(buildingName);
         }
     } catch (giveMoneyAlert & e) {
@@ -556,7 +558,7 @@ void Game::unmortgage(std::string buildingName) {
     }
 }
 
-void Game::bankrupt(std::string bankruptTo) {
+void Game::bankrupt(std::string playerName, std::string bankruptTo) {
     if (players.size() == 2) {
         nextPlayer();
         std::string name = (*currentPlayer)->getName();
@@ -584,10 +586,12 @@ void Game::bankrupt(std::string bankruptTo) {
         player->addMoney((*currentPlayer)->getMoney());
     }
     
-    currentPlayer = players.erase(currentPlayer);
-    if (currentPlayer == players.end()) {
-        currentPlayer = players.begin();
+    auto nextPlayer = players.erase(currentPlayer);
+    if (nextPlayer == players.end()) {
+        nextPlayer = players.begin();
     }
+    
+    if (playerName == (*currentPlayer)->getName()) currentPlayer = nextPlayer;
 }
 
 void Game::drawBoard() {
@@ -636,12 +640,13 @@ void Game::printMessage(std::string message) {
     board->printMessage(message, std::cout);
 }
 
-int Game::totalAsset() {
+int Game::totalAsset(std::string playerName) {
     int asset = 0;
+    auto player = findPlayer(playerName);
     for (auto n : buildings) {
         auto property = std::dynamic_pointer_cast<Property>(n);
-        if (property != nullptr && property->getOwner() == *currentPlayer) {
-            asset += property->getPurchaseCost();
+        if (property != nullptr && property->getOwner() == player) {
+            asset += property->getPurchaseCost() / 2;
             auto academic = std::dynamic_pointer_cast<Academic>(property);
             if (academic != nullptr) {
                 asset += academic->getImprovementCost() * academic->getImprovement();
@@ -657,10 +662,10 @@ void Game::howToPayTuition(std::string option) {
         if (option == "A") {
             (*currentPlayer)->giveMoney(nullptr, 300);
         } else {
-            (*currentPlayer)->giveMoney(nullptr, totalAsset());
+            (*currentPlayer)->giveMoney(nullptr, (totalAsset() + ));
         }
     } catch (NoEnoughMoney & e) {
-        board->getCommand()->NotEnoughMoney(std::cin, e.needAmount, e.playerName);
+        board->getCommand()->NotEnoughMoney(std::cin, e.needAmount, e.playerName, e.receiver);
         howToPayTuition(option);
     } catch (giveMoneyAlert & e) {
         printMessage(e.message);
