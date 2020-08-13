@@ -54,14 +54,14 @@ class Game {
     void trade(std::string receiver, int giveAmount, std::string buildingName);
     void trade(std::string receiver, std::string buildingName, int receiveAmount);
     void trade(std::string receiver, std::string giveBuildingName, std::string receiveBuildingName);
-    int sellImprovement(std::string buildingName);
+    int sellImprovement(std::string playerName, std::string buildingName);
     void buyImprovement(std::string buildingName);
   // mortgage building 
-    int mortgage(std::string buildingName);
+    int mortgage(std::string playerName, std::string buildingName);
   // unmortgage building
     void unmortgage(std::string buildingName);
   // allows player to declares bankrupcy
-    void bankrupt(std::string bankruptTo);
+    void bankrupt(std::string playerName, std::string bankruptTo);
   // save game into a file
     void saveGame(std::ofstream & file);
   // displays the current state of the board
