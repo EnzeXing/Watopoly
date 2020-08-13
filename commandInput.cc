@@ -256,7 +256,7 @@ void CommandInput::auction(std::istream & in, std::string building) {
       }
     }
     
-    if (game->findPlayer(buyer) == nullptr) {
+    if (std::find(playerNames.begin(), playerNames.end(), buyer) == playerNames.end()) {
       game->printMessage("Invalid buyer name, please re-enter.");
       continue;
     }
@@ -281,6 +281,7 @@ void CommandInput::auction(std::istream & in, std::string building) {
         continue;
       }      
     }
+    
     if (price > highestPrice) {
       highestPrice = price;
       currBuyer = buyer;
