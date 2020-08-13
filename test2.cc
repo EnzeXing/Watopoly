@@ -96,11 +96,6 @@ int main(int argc, char ** argv) {
           }
       }
       return 0;
-    } else if ((strcmp(argv[1], "-load"))) {
-      std::ifstream infile{argv[2]};
-      CommandInput input{std::make_shared<Game>(infile)};
-      input.readInput(std::cin, true);
-      return 0;
     } else {
       std::string fileName = argv[3];
       std::ifstream infile{fileName};
