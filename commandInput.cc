@@ -10,9 +10,7 @@ void CommandInput::readInput(std::istream & in, bool testing) {
   bool roll = false;
   std::string s;
   std::string line;
-  while (getline(in, line)) {
-    std::istringstream s1{line};
-    s1 >> s;
+  while (in >> s) {
     if (s == "roll") {
       if (!roll) {
         if (!testing) {
