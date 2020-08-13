@@ -84,5 +84,10 @@ class MortgageException : public WatopolyException {
   MortgageException(std::string m);
 };
 
+class hasWon : publicWaropolyException {
+  public:
+  hasWon(std::string m);
+}
+
 
 #endif
