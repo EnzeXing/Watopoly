@@ -556,6 +556,40 @@ void Game::unmortgage(std::string buildingName) {
     }
 }
 
+void Game::bankrupt(std::string bankruptTo) {
+    if (players.size() == 2) {
+        nextPlayer();
+        std::string name = (*currentPlayer)->getName();
+        printMessage(name + " is the only player left. " + name + " has won!");
+        throw hasWon("");
+    }
+    
+    if (bankruptTo == "Bank") {
+        printMessage("Current player declares bankrupcy to the bank. All assets will be auctioned.");
+        for (auto n : buildings) {
+            auto property = std::dynamic_pointer_cast<Property>(n);
+            if (property != nullptr && property->getOwner() == *currentPlayer) {
+                board->getCommand()->auction(property->getName());
+            }
+        }
+    } else {
+        auto player = findPlayer(bankruptTo);
+        printMessage("Current player declares bankrupcy to " + bankruptTo + ". All assets will be owned by " + bankruptTo + ".");
+        for (auto n : buildings) {
+            auto property = std::dynamic_pointer_cast<Property>(n);
+            if (property != nullptr && property->getOwner() == *currentPlayer) {
+                tradeBuilding(property->getName(), bankruptTo);
+            }
+        }
+        player->addMoney((*currentPlayer)->getMoney());
+    }
+    
+    currentPlayer = players.erase(currentPlayer);
+    if (currentPlayer == players.end()) {
+        currentPlayer = players.begin();
+    }
+}
+
 void Game::drawBoard() {
     board->drawBoard(std::cout);
 }
