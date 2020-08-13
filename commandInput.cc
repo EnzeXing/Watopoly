@@ -5,14 +5,24 @@ CommandInput::CommandInput(std::shared_ptr<Game> game) : game{game} {
   game->getBoard()->setCommand(this);
 }
 
-void CommandInput::readInput(std::istream & in) {
+void CommandInput::readInput(std::istream & in, bool testing) {
   bool roll = false;
   std::string s;
-  while (in >> s) {
+  std::string line;
+  while (getline(in, line)) {
+    std::istringstream s1{line};
+    s1 >> s;
     if (s == "roll") {
       if (!roll) {
-        game->roll();
-        roll = true;
+        if (!testing) {
+            game->roll();
+            roll = true;
+        } else {
+            int dice1;
+            int dice2;
+            
+        }
+        
       } else {
         game->printMessage("You have already rolled!");
       }
