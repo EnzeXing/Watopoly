@@ -12,7 +12,7 @@ class CommandInput {
     // constructor
     CommandInput(std::shared_ptr<Game> game);
     // takes in commandline input and process it
-    void readInput(std::istream & in);
+    void readInput(std::istream & in, bool testing);
     // handles the sitution of building purchase
     void purchaseOrNot(std::istream & in, std::string building);
     // handles the sitution of aution
