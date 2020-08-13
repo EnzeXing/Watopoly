@@ -67,7 +67,7 @@ class Game {
   // displays the current state of the board
     void drawBoard();
   // roll dice
-    void roll();
+    int roll();
   // determines if the player has rolled doubles
     bool rollDouble();
   // allows the current player to use Rim Cup to get out of the DC Tims Line
