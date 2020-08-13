@@ -13,6 +13,11 @@ void CommandInput::readInput(std::istream & in, bool testing) {
   while (in >> s) {
     if (s == "roll") {
       if (!roll) {
+        if (game->currentTimRound() != 0) {
+          TimHortons(std::cin, game->currentTimRound());
+          roll = true;
+          continue;
+        }
         if (!testing) {
             int dice1 = game->roll();
             int dice2 = game->roll();
