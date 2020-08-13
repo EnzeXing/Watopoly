@@ -46,9 +46,9 @@ void CommandInput::readInput(std::istream & in, bool testing) {
       std::string name;
       std::string give;
       std::string get;
-      s1 >> name;
-      s1 >> give;
-      s1 >> get;
+      in >> name;
+      in >> give;
+      in >> get;
       if (in.fail()) {
         game->printMessage("Not enough arguments.");
         break;
