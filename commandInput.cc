@@ -345,32 +345,94 @@ void CommandInput::TimHortons(std::istream & in) {
   
   // player has been in the line for 3 rounds
   // ...
-  
+    if (game->currentPlayer->getTimRound() == 3) {
+        game->printMessage("It is your third turn in the DC Tims line. If you do not roll doubles, you must leave the line by either paying $50 or using a Roll Up the Rim cup.\nDo you want to roll dice, pay $50 or use a Roll Up the Rim Cup?");
+        std::string command;
+        in >> command;
+        if (command == "roll") {
+            game->leaveLine();
+            int dice1 = game->roll();
+            int dice2 = game->roll();
+            if (dice1 == dice2) {
+                game->printMessage("Your rolled doubles!\nYou are out of the line!");
+            } else {
+                game->printMessage("Your didn't roll doubles...\nYou need to pay $50 or using a Roll Up the Rim Cup.");
+                while (true) {
+                    in >> command;
+                    if (command == "pay") {
+                        try {
+                            game->buyCoffee();
+                        } catch (NoEnoughMoney & e) {
+                            if (NotEnoughMoney(std::cin, e.needAmount, e.playerName, "Bank")) {
+                                game->buyCoffee();
+                            } else break;
+                        }
+                        
+                        game->printMessage("You payed $50!\nYou are out of the line!");
+                        game->movePlayer(dice1 + dice2);
+                        break;
+                    } else {
+                        try {
+                            game->useRimCup();
+                            game->printMessage("You used a Roll Up the Rim Cup!\nYou are out of the line!");
+                            game->movePlayer(dice1 + dice2);
+                        } catch (NoEnoughCup & e) {
+                            game->printMessage(e.message);
+                            continue;
+                        }
+                    }
+                }
+            }
+       }
+    } else if (command == "pay") {
+      try {
+           game->buyCoffee();
+      } catch (NoEnoughMoney & e) {
+           if (NotEnoughMoney(std::cin, e.needAmount, e.playerName, "Bank")) {
+                game->buyCoffee();
+           } else return;
+      }
+                        
+      game->printMessage("You payed $50!\nYou are out of the line!");
+    } else if (command == "use") {
+      try {
+          game->useRimCup();
+      } catch (NoEnoughCup & e) {
+          game->printMessage(e.message);
+          TimHortons(in);
+      }
+      
+      game->printMessage("You used a Roll Up the Rim Cup!\nYou are out of the line!");
+    }
+    
     game->printMessage("You are in the DC Tims Line :(\nDo you want to roll dice, pay $50 or use a Roll Up the Rim Cup?");
     std::string command;
     in >> command;
     if (command == "roll") {
       if (game->rollDouble()) {
         game->printMessage("Your rolled doubles!\nYou are out of the line!");
-        game->leaveLine();
       } else {
         game->printMessage("Your didn't roll doubles...\nYou are still in the line ...");
         game->stayInLine();
       }
     } else if (command == "pay") {
-      game->buyCoffee();
+      try {
+           game->buyCoffee();
+      } catch (NoEnoughMoney & e) {
+           if (NotEnoughMoney(std::cin, e.needAmount, e.playerName, "Bank")) {
+                game->buyCoffee();
+           } else return;
+      }
       game->printMessage("You payed $50!\nYou are out of the line!");
     } else if (command == "use") {
-      game->useRimCup();
+      try {
+          game->useRimCup();
+      } catch (NoEnoughCup & e) {
+          game->printMessage(e.message);
+          TimHortons(in);
+      }
       game->printMessage("You used a Roll Up the Rim Cup!\nYou are out of the line!");
     }
-}
-
-void CommandInput::payTuition(std::istream & in) {
-  game->printMessage("You need to pay tuition :(\nDo you want to pay $300(A) or 10% of your total worth(B)?");
-  std::string command;
-  in >> command;
-  game->howToPayTuition(command);
 }
     
     
