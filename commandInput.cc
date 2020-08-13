@@ -9,11 +9,7 @@ void CommandInput::readInput(std::istream & in) {
   bool roll = false;
   std::string s;
   while (in >> s) {
-    if (in == "-load") {
-      std::string file;
-      in >> file;
-      std::ifstream infile{file};
-    } else if (s == "roll") {
+    if (s == "roll") {
       if (!roll) {
         game->roll();
         roll = true;
