@@ -36,27 +36,25 @@ int main(int argc, std::string argv[]) {
       return 0;
     } else if (argc == 2) {
       //testing mode
+        CommandInput input{std::make_shared<Game>(players)};
+        input.readInput(std::cin, true);
       return 0;
     } else if (argv[1] == "-load") {
       std::ifstream infile{argv[2]};
       CommandInput input{std::make_shared<Game>(infile)};
-      input.readInput(std::cin);
-      //testing mode
+      input.readInput(std::cin, true);
       return 0;
     } else {
       std::ifstream infile{argv[3]};
       CommandInput input{std::make_shared<Game>(infile)};
-      input.readInput(std::cin);
-      //testing mode
+      input.readInput(std::cin, true);
       return 0;
     }
 }
    
-      
-        
-      
-        
-        
+
+
+
 
       
 
