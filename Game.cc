@@ -299,10 +299,10 @@ void Game::tradeBuilding(std::string buildingName, std::string receiver) {
     }
     
     auto property = std::dynamic_pointer_cast<Property>(building);
-    if (property == nullptr || property->getOwner() != (*currentPlayer)) {
+    /*if (property == nullptr || property->getOwner() != (*currentPlayer)) {
         printMessage("This building is not your property!");
         throw WrongBuildingException("");
-    }
+    }*/
     
     auto player = findPlayer(receiver);
     if (player == nullptr) {
@@ -311,7 +311,7 @@ void Game::tradeBuilding(std::string buildingName, std::string receiver) {
     }
     
     property->setOwner(player);
-    (*currentPlayer)->loseBuilding(property->getMonopoly());
+    // (*currentPlayer)->loseBuilding(property->getMonopoly());
     player->addBuilding(property->getMonopoly());
     std::string message = player->getName() + " now has " + property->getName() + ".";
     printMessage(message);
