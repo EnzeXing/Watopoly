@@ -264,6 +264,7 @@ void CommandInput::auction(std::istream & in, std::string building) {
     if (secondOp == "withdraw") {
       if (currBuyer != buyer) {
         playerNames.erase(std::find(playerNames.begin(), playerNames.end(), buyer));
+        continue;
       } else {
         game->printMessage("You are the hightest bidder, cannot withdraw.");
         continue;
