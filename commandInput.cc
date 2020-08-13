@@ -202,12 +202,15 @@ void CommandInput::purchaseOrNot(std::istream & in, std::string building) {
 
 void CommandInput::auction(std::istream & in, std::string building) {
   std::string buyer;
+  std::string secondOp;
   int price;
   int highestPrice = 0;
   std::string currBuyer;
+  std::vector<std::string> playerNames = game->getPlayerNames();
   
   while(!in.fail()) {
     in >> buyer;
+    in >> secondOp;
     if (in.fail()) {
       game->printMessage("No more input.");
       if (currBuyer.length() != 0) {
@@ -227,16 +230,29 @@ void CommandInput::auction(std::istream & in, std::string building) {
         continue;
       }
     }
+    
     if (game->findPlayer(buyer) == nullptr) {
       game->printMessage("Invalid buyer name, please re-enter.");
       continue;
     }
     
-    in >> price;
-    if (in.fail()) {
-      game->printMessage("Invalid input for price.");
-      in.clear();
-      continue;
+    if (secodOp == "withdraw") {
+      if (currBuyer != buyer) {
+        playerNames.erase(playerNames.find(buyer));
+      } else {
+        game->printMessage("You are the hightest bidder, cannot withdraw.");
+        continue;
+      }
+    } else {
+      try {
+        price = stoi(secondOp);
+      } catch (std::invalide_argument) {
+        game->printMessage("Invalid input, type again.");
+        continue;
+      } catch (std::out_of_range) {
+        game->printMessage("Invalid number of money.");
+        continue;
+      }      
     }
     if (price > highestPrice) {
       highestPrice = price;
