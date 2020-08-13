@@ -571,7 +571,7 @@ void Game::bankrupt(std::string playerName, std::string bankruptTo) {
         for (auto n : buildings) {
             auto property = std::dynamic_pointer_cast<Property>(n);
             if (property != nullptr && property->getOwner() == *currentPlayer) {
-                board->getCommand()->auction(property->getName(), property->getName());
+                board->getCommand()->auction(std::cin, property->getName());
             }
         }
     } else {
@@ -660,7 +660,7 @@ void Game::howToPayTuition(std::string option) {
         if (option == "A") {
             (*currentPlayer)->giveMoney(nullptr, 300);
         } else {
-            (*currentPlayer)->giveMoney(nullptr, (totalAsset((*currentPlayer)->getName) + (*currentPlayer)->getMoney()) * 0.1);
+            (*currentPlayer)->giveMoney(nullptr, (totalAsset((*currentPlayer)->getName()) + (*currentPlayer)->getMoney()) * 0.1);
         }
     } catch (NoEnoughMoney & e) {
         board->getCommand()->NotEnoughMoney(std::cin, e.needAmount, e.playerName, e.receiver);
