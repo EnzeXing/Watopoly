@@ -3,6 +3,7 @@
 
 #include "Game.h"
 #include <iostream>
+#include <sstream>
 
 // controller of the MVC model
 class CommandInput {
