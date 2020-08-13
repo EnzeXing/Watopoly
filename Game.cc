@@ -671,3 +671,11 @@ void Game::howToPayTuition(std::string option) {
         printMessage(e.message);
     }
 }
+
+std::vector<std::string> Game::getPlayerNames() {
+    std::vector<std::string> names;
+    for (auto n : players) {
+        names.push_back(n->getName());
+    }
+    return names;
+}
