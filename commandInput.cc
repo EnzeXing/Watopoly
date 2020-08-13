@@ -5,7 +5,7 @@ CommandInput::CommandInput(std::shared_ptr<Game> game) : game{game} {
   game->getBoard()->setCommand(this);
 }
 
-void CommandInput::readInput(std::istream & in) {
+void CommandInput::readInput(std::istream & in, testingMode = false) {
   bool roll = false;
   std::string s;
   while (in >> s) {
