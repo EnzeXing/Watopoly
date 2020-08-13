@@ -21,12 +21,12 @@ void CommandInput::readInput(std::istream & in, bool testing) {
         } else {
             int dice1;
             int dice2;
-            if (!(s1 >> dice1)) {
+            if (!(in >> dice1)) {
                 dice1 = game->roll();
                 dice2 = game->roll();
                 game->movePlayer(dice1 + dice2);
                 roll = true;
-            } else if (!(s1 >> dice2)) {
+            } else if (!(in >> dice2)) {
                 dice2 = game->roll();
                 game->movePlayer(dice1 + dice2);
                 roll = true;
@@ -49,11 +49,11 @@ void CommandInput::readInput(std::istream & in, bool testing) {
       s1 >> name;
       s1 >> give;
       s1 >> get;
-      if (s1.fail()) {
+      if (in.fail()) {
         game->printMessage("Not enough arguments.");
         break;
       }
-      if (!s1.fail()) {
+      if (!in.fail()) {
         try {
           int giveMoney = std::stoi(give);
           try {
@@ -138,9 +138,9 @@ void CommandInput::readInput(std::istream & in, bool testing) {
     } else if (s == "improve") {
       std::string buildingName;
       std::string op;
-      s1 >> buildingName;
-      s1 >> op;
-      if (s1.fail()) {
+      in >> buildingName;
+      in >> op;
+      if (in.fail()) {
         game->printMessage("Not enough arguments.");
         break;
       }
@@ -161,8 +161,8 @@ void CommandInput::readInput(std::istream & in, bool testing) {
       }
     } else if (s == "mortgage") {
       std::string buildingName;
-      s1 >> buildingName;
-      if (s1.fail()) {
+      in >> buildingName;
+      if (in.fail()) {
         game->printMessage("Not enough arguments.");
         break;
       }
@@ -173,8 +173,8 @@ void CommandInput::readInput(std::istream & in, bool testing) {
       }
     } else if (s == "unmortgage") {
       std::string buildingName;
-      s1 >> buildingName;
-      if (s1.fail()) {
+      in >> buildingName;
+      if (in.fail()) {
         game->printMessage("Not enough arguments.");
         break;
       }
@@ -191,8 +191,8 @@ void CommandInput::readInput(std::istream & in, bool testing) {
       //game->printAllAssets();
     } else if (s == "save") {
       std::string fileName;
-      s1 >> fileName;
-      if (s1.fail()) {
+      in >> fileName;
+      if (in.fail()) {
         game->printMessage("Need a file to store the information.");
         break;
       }
