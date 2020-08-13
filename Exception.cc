@@ -4,7 +4,7 @@ WatopolyException::WatopolyException(std::string m) : message{m} {}
 
 NoOwner::NoOwner(std::string m) : WatopolyException(m) {}
 
-NoEnoughMoney::NoEnoughMoney(std::string m, int a, std::string playerName, std::string receiver) : WatopolyException(m), needAmount{a}, playerName{playerName}, receiver{revceiver} {}
+NoEnoughMoney::NoEnoughMoney(std::string m, int a, std::string playerName, std::string receiver) : WatopolyException(m), needAmount{a}, playerName{playerName}, receiver{receiver} {}
 
 giveMoneyAlert::giveMoneyAlert(std::string m) : WatopolyException(m) {}
 
