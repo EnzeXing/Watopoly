@@ -1,4 +1,5 @@
 #include "commandInput.h"
+#include <fstream>
 
 CommandInput::CommandInput(std::shared_ptr<Game> game) : game{game} {
   game->getBoard()->setCommand(this);
@@ -8,7 +9,11 @@ void CommandInput::readInput(std::istream & in) {
   bool roll = false;
   std::string s;
   while (in >> s) {
-    if (s == "roll") {
+    if (in == "-load") {
+      std::string file;
+      in >> file;
+      std::ifstream infile{file};
+    } else if (s == "roll") {
       if (!roll) {
         game->roll();
         roll = true;
