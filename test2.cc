@@ -13,26 +13,27 @@ void usage() {
 } // usage
 
 
-int main(int argc, std::string argv[]) {
-    if (argc >= 4) {
-      usage();
-      return 1;
-    } else if ((argc == 1) || (argv[0] == "./Watopoly")) {
-      std::map<std::string, std::string> players;
+int main(int argc, char ** argv) {
+    std::map<std::string, std::string> players;
       players["Andrew"] = "A";
       players["Ivan"] = "I";
       players["Fatday"] = "F";
       players["Klaus"] = "K";
       players["Lingwei"] = "L";
       players["Steven"] = "S";
+    if (argc >= 4) {
+      usage();
+      return 1;
+    } else if ((argc == 1) || (argv[0] == "./Watopoly")) {
+      
     // std::ifstream infile{"Game1.txt"};
       CommandInput input{std::make_shared<Game>(players)};
-      input.readInput(std::cin);
+      input.readInput(std::cin, false);
       return 0;
     } else if (argc == 3) {
       std::ifstream infile{argv[2]};
       CommandInput input{std::make_shared<Game>(infile)};
-      input.readInput(std::cin);
+      input.readInput(std::cin, false);
       return 0;
     } else if (argc == 2) {
       //testing mode
