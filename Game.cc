@@ -598,16 +598,14 @@ void Game::drawBoard() {
     board->drawBoard(std::cout);
 }
 
-void Game::roll() {
-    if ((*currentPlayer)->getTimRound() > 0) {
+int Game::roll() {
+    if ((*currentPlayer)->getTimRound() > 0 && (*currentPlayer)->getTimRound() < 3) {
         board->getCommand()->TimHortons(std::cin);
         return;
     }
     int a = (*currentPlayer)->roll();
-    printMessage("Dice1: " + std::to_string(a));
-    int b = (*currentPlayer)->roll();
-    printMessage("Dice2: " + std::to_string(b));
-    movePlayer(a + b);    
+    printMessage("Dice: " + std::to_string(a));
+    return a;    
 }
 
 bool Game::rollDouble() {
