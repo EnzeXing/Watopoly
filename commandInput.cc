@@ -248,7 +248,9 @@ void CommandInput::auction(std::istream & in, std::string building) {
           in.clear();
           game->printMessage("Redo the auction round, please enter your price again.");
           continue;
-        } catch (giveMoneyAlert) {}
+        } catch (giveMoneyAlert & e) {
+          game->printMessage(e.message);
+        }
       } else {
         in.clear();
         game->printMessage("Redo the auction round, please enter your price again.");
@@ -270,8 +272,17 @@ void CommandInput::auction(std::istream & in, std::string building) {
         game->printMessage("You are the hightest bidder, cannot withdraw.");
       }
       if (playerNames.size() == 1) {
-        game->findPlayer(currBuyer)->giveMoney(nullptr, highestPrice);
-        game->tradeBuilding(building, currBuyer);
+        try {
+          game->findPlayer(currBuyer)->giveMoney(nullptr, highestPrice);
+          game->tradeBuilding(building, currBuyer);
+        } catch (NoEnoughMoney & e) {
+          game->printMessage(currBuyer + " needs $" + std::to_string(e.needAmount) + " more to complete purchase");
+          in.clear();
+          game->printMessage("Redo the auction round, please enter your price again.");
+          continue;
+        } catch (giveMoneyAlert & e) {
+          game->printMessage(e.message);
+        }
         break;
       }
       continue;
