@@ -664,11 +664,11 @@ int Game::totalAsset(std::string playerName) {
 
 void Game::asset() {
     game->printMessage("Current player: " + (*currentPlayer)->getName());
-    game->printMessage("Cash: " + (*currentPlayer)->getMoney());
+    game->printMessage("Cash: " + std::to_string((*currentPlayer)->getMoney()));
     std::string house = "";
     for (auto n : buildings) {
         auto property = std::dynamic_pointer_cast<Property>(n);
-        if (property != nullptr && property->getOwner() == (*currentPlayer)->getName()) {
+        if (property != nullptr && property->getOwner() == (*currentPlayer)) {
             house = property->getName() + " ";
         }
     }
