@@ -87,6 +87,7 @@ class Game {
     void asset();
     void howToPayTuition(std::string option);
     std::vector<std::string> getPlayerNames();
+    void allassets();
 };
 
 #endif
