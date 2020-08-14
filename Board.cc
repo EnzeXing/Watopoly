@@ -108,9 +108,9 @@ void Board::updateImprovement(std::shared_ptr<Academic> academic) {
   // gets the position of the building
   int position = academic->getPosition();
   // sets the old string to empty
-  std::string temp = "       ";
+  std::string temp = "|       |";
   for (int i = 0; i < improvementNumber; i++) {
-    temp[i] = 'I';
+    temp[i + 1] = 'I';
   }
   board[position][1] = temp;
 }
