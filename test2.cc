@@ -97,10 +97,18 @@ int main(int argc, char ** argv) {
       }
       return 0;
     } else {
-      std::string fileName = argv[3];
-      std::ifstream infile{fileName};
-      CommandInput input{std::make_shared<Game>(infile)};
-      input.readInput(std::cin, true);
+      std::string command1 = argv[1];
+      if (command1 == "-load") {
+          std::string fileName = argv[2];
+          std::ifstream infile{fileName};
+          CommandInput input{std::make_shared<Game>(infile)};
+          input.readInput(std::cin, true);
+      } else {
+          std::string fileName = argv[3];
+          std::ifstream infile{fileName};
+          CommandInput input{std::make_shared<Game>(infile)};
+          input.readInput(std::cin, true);
+      }
       return 0;
     }
 }
