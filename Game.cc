@@ -662,6 +662,8 @@ int Game::totalAsset(std::string playerName) {
     return asset;
 }
 
+void Game::asset()
+
 void Game::howToPayTuition(std::string option) {
     try {
         if (option == "A") {
