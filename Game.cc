@@ -4,6 +4,7 @@
 #include <sstream>
 
 Game::Game(std::map<std::string, std::string> p) {
+    hasRolled = false;
     dice = std::make_shared<Dice>();
     rimcup = std::make_shared<RimCup>();
     board = std::make_shared<Board>();
@@ -62,8 +63,16 @@ Game::Game(std::ifstream & file) {
     rimcup = std::make_shared<RimCup>();
     
     int numPlayer;
+    std::string roll;
+    file >> roll;
+    file.ignore();
     file >> numPlayer;
     file.ignore();
+    if (roll == "false") {
+        hasRolled = false;
+    } else {
+        hasRolled = true;
+    }
     for (int i = 0; i < numPlayer; ++i) {
         std::string playerInfo;
         getline(file, playerInfo);
@@ -402,6 +411,11 @@ void Game::trade(std::string receiver, std::string giveBuildingName, std::string
 }
 
 void Game::saveGame(std::ofstream & file) {
+    if (hasRolled) {
+        file << "true" << std::endl;
+    } else {
+        file << "false" << std::endl;
+    }
     file << players.size() << std::endl;
     auto n1 = currentPlayer;
     for (unsigned int i = 0; i < players.size(); ++i) {
@@ -576,7 +590,7 @@ void Game::unmortgage(std::string buildingName) {
     }
 }
 
-void Game::bankrupt(std::string playerName, std::string bankruptTo, bool & roll) {
+void Game::bankrupt(std::string playerName, std::string bankruptTo) {
     if (players.size() == 2) {
         nextPlayer();
         std::string name = (*currentPlayer)->getName();
@@ -613,7 +627,7 @@ void Game::bankrupt(std::string playerName, std::string bankruptTo, bool & roll)
     
     if (playerName == current->getName()) {
         currentPlayer = nextPlayer;
-        roll = false;
+        hasRolled = false;
         printMessage("Next player is " + (*currentPlayer)->getName() + ".");
     }
 }
@@ -622,7 +636,15 @@ void Game::drawBoard() {
     board->drawBoard(std::cout);
 }
 
+void Game::setRolled(bool roll) {
+    hasRolled = roll;
+}
+
 int Game::roll() {
+    if (hasRolled) {
+        printMessage("You have already rolled!");
+        return 0;
+    }
     if ((*currentPlayer)->getTimRound() > 0 && (*currentPlayer)->getTimRound() <= 3) {
         board->getCommand()->TimHortons(std::cin, (*currentPlayer)->getTimRound());
         return 0;
