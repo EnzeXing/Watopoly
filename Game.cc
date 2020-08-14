@@ -701,3 +701,20 @@ std::vector<std::string> Game::getPlayerNames() {
     }
     return names;
 }
+
+void Game::allassets() {
+    std::map<std::string, std::string> map;
+    for (auto n : buildings) {
+        auto property = std::dynamic_pointer_cast<Property>(n);
+        if (property != nullptr && property->getOwner() != nullptr) {
+            map[property->getOwner()->getName()] += property->getName() + " ";
+        }
+    }
+    
+    for (auto p : players) {
+        printMessage("Player: " + p->getName());
+        printMessage("Cash: " + std::to_string(p->getMoney()));
+        printMessage("Properties: " + map[p->getName()]);
+        printMessage("Roll Up the Rim Cup: " + std::to_string(p->getCup()));
+    }
+}
