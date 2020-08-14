@@ -591,6 +591,8 @@ void Game::unmortgage(std::string buildingName) {
 }
 
 void Game::bankrupt(std::string playerName, std::string bankruptTo) {
+    auto player = findPlayer(playerName);
+    board->removePlayer(player->getPosition(), player->getSymbol());
     if (players.size() == 2) {
         nextPlayer();
         std::string name = (*currentPlayer)->getName();
