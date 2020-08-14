@@ -357,15 +357,17 @@ void Game::trade(std::string receiver, int giveAmount, std::string buildingName)
     }
     
     try {
+        tradeBuilding(receiver, (*currentPlayer)->getName(), buildingName);
         (*currentPlayer)->giveMoney(r, giveAmount);
     } catch (NoEnoughMoney & e) {
         printMessage(e.message);
         throw e;
     } catch (giveMoneyAlert & e) {
         printMessage(e.message);
+    } catch (WrongBuildingException & e) {
+        printMessage("This trade is cancelled.");
+        return;
     }
-    
-    tradeBuilding(receiver, (*currentPlayer)->getName(), buildingName);
 }
 
 void Game::trade(std::string receiver, std::string buildingName, int receiveAmount) {
@@ -376,15 +378,19 @@ void Game::trade(std::string receiver, std::string buildingName, int receiveAmou
     }
     
     try {
+        tradeBuilding((*currentPlayer)->getName(), receiver, buildingName);
         r->giveMoney(*currentPlayer, receiveAmount);
     } catch (NoEnoughMoney & e) {
         printMessage(e.message);
         throw e;
     } catch (giveMoneyAlert & e) {
         printMessage(e.message);
+    } catch (WrongBuildingException & e) {
+        printMessage("This trade is cancelled.");
+        return;
     }
     
-    tradeBuilding((*currentPlayer)->getName(), receiver, buildingName);
+    
 }
 
 void Game::trade(std::string receiver, std::string giveBuildingName, std::string receiveBuildingName) {
