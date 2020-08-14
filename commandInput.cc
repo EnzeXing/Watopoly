@@ -54,7 +54,7 @@ void CommandInput::readInput(std::istream & in, bool testing) {
     } else if (s == "assets") {
       game->asset();
     } else if (s == "all") {
-      game->allasset();
+      game->allassets();
     } else if (s == "trade") {
       std::string name;
       std::string give;
