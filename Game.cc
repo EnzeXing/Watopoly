@@ -662,7 +662,13 @@ int Game::totalAsset(std::string playerName) {
     return asset;
 }
 
-void Game::asset()
+void Game::asset() {
+    game->printMessage("Current player: " + (*currentPlayer)->getName());
+    
+    
+    
+    
+    
 
 void Game::howToPayTuition(std::string option) {
     try {
