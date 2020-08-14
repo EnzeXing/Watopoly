@@ -218,7 +218,7 @@ void CommandInput::readInput(std::istream & in, bool testing) {
         } 
      }
   } catch (hasWon & e) {
-     return
+     return;
   }
 }
 
