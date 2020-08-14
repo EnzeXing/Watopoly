@@ -29,6 +29,7 @@ class Board {
   void updateImprovement(std::shared_ptr<Academic> academic);
   // Updates the player position information stored in the board
   void updatePlayer(int oldPosition, int newPosition, std::string playerName);
+  void removePlayer(int position, std::string playerName);
   // Outputs message
   void printMessage(std::string message, std::ostream & out);
   // Outputs the visual representation of the baord
