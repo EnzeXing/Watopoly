@@ -673,7 +673,7 @@ void Game::asset() {
         }
     }
     printMessage("Properties: " + house);
-    printMessage("Roll Up the Rim Cup: " + (*currentPlayer)->getCup());
+    printMessage("Roll Up the Rim Cup: " + std::to_string((*currentPlayer)->getCup()));
 }   
     
 
