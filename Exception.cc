@@ -32,4 +32,4 @@ MortgageException::MortgageException(std::string m) : WatopolyException(m) {}
 
 hasWon::hasWon(std::string m) : WatopolyException(m) {}
 
-Bankrupt::Exception(std::string m) : WatopolyException(m) {}
+BankruptException::BankruptException(std::string m) : WatopolyException(m) {}
