@@ -146,7 +146,7 @@ void Board::updatePlayer(int oldPosition, int newPosition, std::string playerNam
 }
 
 void Board::removePlayer(int position, std::string playerName) {
-	char symbol = palyerName[0];
+	char symbol = playerName[0];
 	for (int i = 1; i < 9; i += 2) {
 		if (board[position][4][i] == symbol) {
 			board[oldPosition][4][i] = ' ';
