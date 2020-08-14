@@ -664,10 +664,17 @@ int Game::totalAsset(std::string playerName) {
 
 void Game::asset() {
     game->printMessage("Current player: " + (*currentPlayer)->getName());
-    
-    
-    
-    
+    game->printMessage("Cash: " + (*currentPlayer)->getMoney());
+    std::string house = "";
+    for (auto n : buildings) {
+        auto property = std::dynamic_pointer_cast<Property>(n);
+        if (property != nullptr && property->getOwner() == (*currentPlayer)->getName()) {
+            house = property->getName() + " ";
+        }
+    }
+    game->printMessage("Properties: " + house);
+    game->printMessage("Roll Up the Rim Cup: " + (*currentPlayer)->getCup());
+}   
     
 
 void Game::howToPayTuition(std::string option) {
