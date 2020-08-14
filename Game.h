@@ -19,6 +19,7 @@
 // location where main game takes palce
 class Game {
   private:
+  bool hasRolled;
   // stores all buildings in vector
     std::vector<std::shared_ptr<Building>> buildings;
   // stores all players in vector
