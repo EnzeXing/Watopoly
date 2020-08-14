@@ -576,7 +576,7 @@ void Game::unmortgage(std::string buildingName) {
     }
 }
 
-void Game::bankrupt(std::string playerName, std::string bankruptTo) {
+void Game::bankrupt(std::string playerName, std::string bankruptTo, bool & roll) {
     if (players.size() == 2) {
         nextPlayer();
         std::string name = (*currentPlayer)->getName();
@@ -613,6 +613,7 @@ void Game::bankrupt(std::string playerName, std::string bankruptTo) {
     
     if (playerName == current->getName()) {
         currentPlayer = nextPlayer;
+        roll = false;
         printMessage("Next player is " + (*currentPlayer)->getName() + ".");
     }
 }
