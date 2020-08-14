@@ -71,6 +71,7 @@ class Game {
   // roll dice
     int roll();
     void setRolled(bool roll);
+    bool getRolled();
   // determines if the player has rolled doubles
     bool rollDouble();
   // allows the current player to use Rim Cup to get out of the DC Tims Line
