@@ -246,7 +246,7 @@ void Game::movePlayer(int steps) {
             std::string message = "You lose " + std::to_string(a) + " dollars.";
             board->printMessage(message, std::cout);
             try {
-                (*currentPlayer)->giveMoney(nullptr, e.amount);
+                (*currentPlayer)->giveMoney(nullptr, a);
             } catch (NoEnoughMoney & e1) {
                 if (board->getCommand()->NotEnoughMoney(std::cin, e1.needAmount, e1.playerName, e1.receiver)) {
                     try {
