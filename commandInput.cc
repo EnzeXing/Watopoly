@@ -50,6 +50,8 @@ void CommandInput::readInput(std::istream & in, bool testing) {
     } else if (s == "next") {
       game->nextPlayer();
       roll = false;
+    } else if (s == "assets") {
+      game->assets();
     } else if (s == "trade") {
       std::string name;
       std::string give;
