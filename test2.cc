@@ -49,14 +49,14 @@ int main(int argc, char ** argv) {
               }
               players[name] = symbol;
           } else if (command == "begin") {
-              CommandInput input{std::make_shared<Game>(players)};
-              input.readInput(std::cin, false);
+              break;
           } else {
               std::cout << "Invalid command. Please type \"add Player_name Player_symbol\" to add an player. After adding players, type begin to begin the game.\n";
               continue;
           }
       }
-      
+      CommandInput input{std::make_shared<Game>(players)};
+      input.readInput(std::cin, false);
       return 0;
     } else if (argc == 3) {
       std::ifstream infile{argv[2]};
@@ -88,13 +88,14 @@ int main(int argc, char ** argv) {
               }
               players[name] = symbol;
           } else if (command == "begin") {
-              CommandInput input{std::make_shared<Game>(players)};
-              input.readInput(std::cin, true);
+              break;
           } else {
               std::cout << "Invalid command. Please type \"add Player_name Player_symbol\" to add an player. After adding players, type begin to begin the game.\n";
               continue;
           }
       }
+      CommandInput input{std::make_shared<Game>(players)};
+      input.readInput(std::cin, true);
       return 0;
     } else {
       std::string command1 = argv[1];
