@@ -453,6 +453,7 @@ int Game::sellImprovement(std::string playerName, std::string buildingName) {
     int addAmount = academic->getImprovementCost() / 2;
     academic->getOwner()->addMoney(addAmount);
     academic->improve("sell");
+    board->updateImprovement(academic);
     printMessage("You have sold an improvement of " + academic->getName() + " and received $" + std::to_string(addAmount) + ".");
     drawBoard();
     return addAmount;
@@ -493,6 +494,7 @@ void Game::buyImprovement(std::string buildingName) {
     }
     
     academic->improve("buy");
+    board->updateImprovement(academic);
     printMessage("You have bought improvement for " + academic->getName() + ".");
     drawBoard();
 }
