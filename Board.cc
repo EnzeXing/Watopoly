@@ -163,7 +163,7 @@ void Board::drawBoard(std::ostream & out) {
   	for (int h = 0; h < 7; h++) {
 		out << board[i][h];
 		out << std::setw(90);
-		out << board[40 - i][h];
+		out << board[40 - i + 10][h];
 		out << "\n";
 	}
   }
