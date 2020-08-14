@@ -21,11 +21,12 @@ void CommandInput::readInput(std::istream & in, bool testing) {
               continue;
             }
             if (!testing) {
+                game->setRolled(true);
                 int dice1 = game->roll();
                 int dice2 = game->roll();
                 game->movePlayer(dice1 + dice2);
-                game->setRolled(true);
             } else {
+                game->setRolled(true);
                 int dice1;
                 int dice2;
                 getline(in, line);
@@ -34,14 +35,13 @@ void CommandInput::readInput(std::istream & in, bool testing) {
                     dice1 = game->roll();
                     dice2 = game->roll();
                     game->movePlayer(dice1 + dice2);
-                    game->setRolled(true);
                 } else if (!(ss1 >> dice2)) {
+                    game->setRolled(true);
                     dice2 = game->roll();
                     game->movePlayer(dice1 + dice2);
-                    game->setRolled(true);
                 } else {
-                    game->movePlayer(dice1 + dice2);
                     game->setRolled(true);
+                    game->movePlayer(dice1 + dice2);
                 }
             }
             game->drawBoard();
