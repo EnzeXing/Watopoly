@@ -206,7 +206,9 @@ void Game::movePlayer(int steps) {
         board->printMessage(message, std::cout);
         if (board->getCommand()->NotEnoughMoney(std::cin, e.needAmount, e.playerName, e.receiver)) {
             (*currentPlayer)->visit(*(buildings[(*currentPlayer)->getPosition()]));
-        }   
+        } else if (e.receiver == "Bank") {
+            board->getCommand()->auction(std::cin, buildings[(*currentPlayer)->getPosition()]->getName());
+        } else return;
     } catch (giveMoneyAlert & e) {
         printMessage(e.message);
     } catch (NoEnoughCup & e) {
@@ -288,7 +290,7 @@ void Game::purchase(std::string buildingName) {
     } catch (NoEnoughMoney & e) {
         if (board->getCommand()->NotEnoughMoney(std::cin, e.needAmount, e.playerName, e.receiver)) {
              purchase(buildingName); 
-        }
+        } else return;
     } catch (giveMoneyAlert & e) {
         printMessage(e.message);
     } 
@@ -582,6 +584,8 @@ void Game::bankrupt(std::string playerName, std::string bankruptTo) {
         throw hasWon("");
     }
     
+    auto current = *currentPlayer;
+    
     auto nextPlayer = players.erase(currentPlayer);
     if (nextPlayer == players.end()) {
         nextPlayer = players.begin();
@@ -591,7 +595,7 @@ void Game::bankrupt(std::string playerName, std::string bankruptTo) {
         printMessage("Current player declares bankrupcy to the bank. All assets will be auctioned.");
         for (auto n : buildings) {
             auto property = std::dynamic_pointer_cast<Property>(n);
-            if (property != nullptr && property->getOwner() == *currentPlayer) {
+            if (property != nullptr && property->getOwner() == current) {
                 board->getCommand()->auction(std::cin, property->getName());
             }
         }
@@ -607,7 +611,7 @@ void Game::bankrupt(std::string playerName, std::string bankruptTo) {
         player->addMoney((*currentPlayer)->getMoney());
     }
     
-    if (playerName == (*currentPlayer)->getName()) {
+    if (playerName == current->getName()) {
         currentPlayer = nextPlayer;
         printMessage("Next player is " + (*currentPlayer)->getName() + ".");
     }
