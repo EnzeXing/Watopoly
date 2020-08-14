@@ -81,7 +81,10 @@ class Game {
     void stayInLine();
   // prints message
     void printMessage(std::string message);
+  // returns total assets of the given player
     int totalAsset(std::string playerName);
+  // displays assets of the current player
+    void asset();
     void howToPayTuition(std::string option);
     std::vector<std::string> getPlayerNames();
 };
