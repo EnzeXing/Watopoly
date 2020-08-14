@@ -640,6 +640,10 @@ void Game::setRolled(bool roll) {
     hasRolled = roll;
 }
 
+bool Game::getRolled() {
+    return hasRolled;
+}
+
 int Game::roll() {
     if (hasRolled) {
         printMessage("You have already rolled!");
