@@ -28,12 +28,14 @@ void CommandInput::readInput(std::istream & in, bool testing) {
         } else {
             int dice1;
             int dice2;
-            if (!(in >> dice1)) {
+            getline(in, line);
+            std::istringstream ss1{line};
+            if (!(ss1 >> dice1)) {
                 dice1 = game->roll();
                 dice2 = game->roll();
                 game->movePlayer(dice1 + dice2);
                 roll = true;
-            } else if (!(in >> dice2)) {
+            } else if (!(ss1 >> dice2)) {
                 dice2 = game->roll();
                 game->movePlayer(dice1 + dice2);
                 roll = true;
@@ -42,16 +44,17 @@ void CommandInput::readInput(std::istream & in, bool testing) {
                 roll = true;
             }
         }
-        
+        game->drawBoard();
       } else {
         game->printMessage("You have already rolled!");
       }
-      game->drawBoard();
     } else if (s == "next") {
       game->nextPlayer();
       roll = false;
     } else if (s == "assets") {
       game->asset();
+    } else if (s == "all") {
+      game->allasset();
     } else if (s == "trade") {
       std::string name;
       std::string give;
@@ -195,10 +198,8 @@ void CommandInput::readInput(std::istream & in, bool testing) {
       }
     } else if (s == "bankrupt") {
       game->printMessage("Your total worth is positive so bankruptcy cannot be declared!");
-    } else if (s == "assets") {
-      //game->printAssets();
-    } else if (s == "all") {
-      //game->printAllAssets();
+    } else if (s == "map") {
+      game->drawBoard();
     } else if (s == "save") {
       std::string fileName;
       in >> fileName;
