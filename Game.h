@@ -70,7 +70,7 @@ class Game {
     void drawBoard();
   // roll dice
     int roll();
-    void setRoll(bool roll);
+    void setRolled(bool roll);
   // determines if the player has rolled doubles
     bool rollDouble();
   // allows the current player to use Rim Cup to get out of the DC Tims Line
