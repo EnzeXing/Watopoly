@@ -12,207 +12,213 @@ void CommandInput::readInput(std::istream & in, bool testing) {
   bool roll = false;
   std::string s;
   std::string line;
-  while (in >> s) {
-    if (s == "roll") {
-      if (!roll) {
-        if (game->currentTimRound() != 0) {
-          TimHortons(std::cin, game->currentTimRound());
-          roll = true;
-          continue;
-        }
-        if (!testing) {
-            int dice1 = game->roll();
-            int dice2 = game->roll();
-            game->movePlayer(dice1 + dice2);
-            roll = true;
+  try {
+      while (in >> s) {
+        if (s == "roll") {
+          if (!roll) {
+            if (game->currentTimRound() != 0) {
+              TimHortons(std::cin, game->currentTimRound());
+              roll = true;
+              continue;
+            }
+            if (!testing) {
+                int dice1 = game->roll();
+                int dice2 = game->roll();
+                game->movePlayer(dice1 + dice2);
+                roll = true;
+            } else {
+                int dice1;
+                int dice2;
+                getline(in, line);
+                std::istringstream ss1{line};
+                if (!(ss1 >> dice1)) {
+                    dice1 = game->roll();
+                    dice2 = game->roll();
+                    game->movePlayer(dice1 + dice2);
+                    roll = true;
+                } else if (!(ss1 >> dice2)) {
+                    dice2 = game->roll();
+                    game->movePlayer(dice1 + dice2);
+                    roll = true;
+                } else {
+                    game->movePlayer(dice1 + dice2);
+                    roll = true;
+                }
+            }
+            game->drawBoard();
+          } else {
+            game->printMessage("You have already rolled!");
+          }
+        } else if (s == "next") {
+          game->nextPlayer();
+          roll = false;
+        } else if (s == "assets") {
+          game->asset();
+        } else if (s == "all") {
+          game->allassets();
+        } else if (s == "trade") {
+          std::string name;
+          std::string give;
+          std::string get;
+          in >> name;
+          in >> give;
+          in >> get;
+          if (in.fail()) {
+            game->printMessage("Not enough arguments.");
+            break;
+          }
+          if (!in.fail()) {
+            try {
+              int giveMoney = std::stoi(give);
+              try {
+                int getMoney = std::stoi(get);
+                game->printMessage("Cannot trade money for money!");
+                continue;
+              } catch (std::invalid_argument) {
+                game->printMessage("Does " + name + " accept the trade of giving " + get + " in exchange for $" + give + " ?");
+                std::string response;
+                std::cin >> response;
+                if (response == "accept") {
+                  try {
+                    // do the trade give money, receive building
+                    game->trade(name, giveMoney, get);
+                  } catch (WrongBuildingException) { 
+                    continue; 
+                  } catch (NoEnoughMoney n) {
+                    game->printMessage("You total worth is not enough!");
+                    continue;
+                  }
+                } else if (response == "reject") {
+                  continue;
+                } else {
+                  game->printMessage("Invalid response, trade cancelled.");
+                  continue;
+                }
+              } catch (std::out_of_range) {
+                game->printMessage("Cannot trade money for money and invalid amount of money to receive.");
+                continue;
+              }
+            } catch (std::invalid_argument) {
+              try {
+                int getMoney = std::stoi(get);
+                game->printMessage("Does " + name + " accept the trade of giving $" + get + " in exchange for " + give + " ?");
+                std::string response;
+                std::cin >> response;
+                if (response == "accept") {
+                  // do the trade give building receive money
+                  try {
+                    game->trade(name, give, getMoney); 
+                  } catch (WrongBuildingException) { 
+                    continue;
+                  } catch (NoEnoughMoney n) {
+                    game->printMessage("You total worth is not enough!");
+                    continue;
+                  }
+                } else if (response == "reject") {
+                  continue;
+                } else {
+                  game->printMessage("Invalid response, trade cancelled.");
+                  continue;
+                }
+              } catch (std::invalid_argument) {
+                game->printMessage("Does " + name + " accept the trade of giving " + get + " in exchange for " + give + " ?");
+                std::string response;
+                std::cin >> response;
+                if (response == "accept") {
+                  try {
+                    // do the trade give building, receive building
+                    game->trade(name, give, get);
+                  } catch (WrongBuildingException) { 
+                    continue; 
+                  } catch (NoEnoughMoney n) {
+                    game->printMessage("You total worth is not enough!");
+                    continue;
+                  }
+                } else if (response == "reject") {
+                  continue;
+                } else {
+                  game->printMessage("Invalid response, trade cancelled.");
+                  continue;
+                }
+              } catch (std::out_of_range) {
+                game->printMessage("Invalid amount of money to receive.");
+                continue;
+              }
+            } catch (std::out_of_range) {
+              game->printMessage("Invalid amount of money to give.");
+              continue;
+            }
+          }
+        } else if (s == "improve") {
+          std::string buildingName;
+          std::string op;
+          in >> buildingName;
+          in >> op;
+          if (in.fail()) {
+            game->printMessage("Not enough arguments.");
+            break;
+          }
+          if (op == "sell") {
+            try{
+              game->sellImprovement(game->currentPlayerName(), buildingName);
+            } catch(WrongBuildingException & e) {
+              continue;
+            }
+          } else if (op == "buy") {
+            try{
+              game->buyImprovement(buildingName);
+            } catch (WrongBuildingException & e) {
+              continue;
+            }
+          } else {
+            game->printMessage("Invalid operation.");
+          }
+        } else if (s == "mortgage") {
+          std::string buildingName;
+          in >> buildingName;
+          if (in.fail()) {
+            game->printMessage("Not enough arguments.");
+            break;
+          }
+          try {
+            game->mortgage(game->currentPlayerName(), buildingName);
+          } catch (MortgageException & e) {
+            game->printMessage("Cannot mortgage.");
+          }
+        } else if (s == "unmortgage") {
+          std::string buildingName;
+          in >> buildingName;
+          if (in.fail()) {
+            game->printMessage("Not enough arguments.");
+            break;
+          }
+          try {
+            game->unmortgage(buildingName);
+          } catch (MortgageException & e) {
+            game->printMessage("Cannot unmortgage.");
+          }
+        } else if (s == "bankrupt") {
+          game->printMessage("Your total worth is positive so bankruptcy cannot be declared!");
+        } else if (s == "map") {
+          game->drawBoard();
+        } else if (s == "save") {
+          std::string fileName;
+          in >> fileName;
+          if (in.fail()) {
+            game->printMessage("Need a file to store the information.");
+            break;
+          }
+          std::ofstream realFile {fileName};
+          game->saveGame(realFile);
+        } else if (s == "quit"){
+          break;
         } else {
-            int dice1;
-            int dice2;
-            getline(in, line);
-            std::istringstream ss1{line};
-            if (!(ss1 >> dice1)) {
-                dice1 = game->roll();
-                dice2 = game->roll();
-                game->movePlayer(dice1 + dice2);
-                roll = true;
-            } else if (!(ss1 >> dice2)) {
-                dice2 = game->roll();
-                game->movePlayer(dice1 + dice2);
-                roll = true;
-            } else {
-                game->movePlayer(dice1 + dice2);
-                roll = true;
-            }
-        }
-        game->drawBoard();
-      } else {
-        game->printMessage("You have already rolled!");
-      }
-    } else if (s == "next") {
-      game->nextPlayer();
-      roll = false;
-    } else if (s == "assets") {
-      game->asset();
-    } else if (s == "all") {
-      game->allassets();
-    } else if (s == "trade") {
-      std::string name;
-      std::string give;
-      std::string get;
-      in >> name;
-      in >> give;
-      in >> get;
-      if (in.fail()) {
-        game->printMessage("Not enough arguments.");
-        break;
-      }
-      if (!in.fail()) {
-        try {
-          int giveMoney = std::stoi(give);
-          try {
-            int getMoney = std::stoi(get);
-            game->printMessage("Cannot trade money for money!");
-            continue;
-          } catch (std::invalid_argument) {
-            game->printMessage("Does " + name + " accept the trade of giving " + get + " in exchange for $" + give + " ?");
-            std::string response;
-            std::cin >> response;
-            if (response == "accept") {
-              try {
-                // do the trade give money, receive building
-                game->trade(name, giveMoney, get);
-              } catch (WrongBuildingException) { 
-                continue; 
-              } catch (NoEnoughMoney n) {
-                game->printMessage("You total worth is not enough!");
-                continue;
-              }
-            } else if (response == "reject") {
-              continue;
-            } else {
-              game->printMessage("Invalid response, trade cancelled.");
-              continue;
-            }
-          } catch (std::out_of_range) {
-            game->printMessage("Cannot trade money for money and invalid amount of money to receive.");
-            continue;
-          }
-        } catch (std::invalid_argument) {
-          try {
-            int getMoney = std::stoi(get);
-            game->printMessage("Does " + name + " accept the trade of giving $" + get + " in exchange for " + give + " ?");
-            std::string response;
-            std::cin >> response;
-            if (response == "accept") {
-              // do the trade give building receive money
-              try {
-                game->trade(name, give, getMoney); 
-              } catch (WrongBuildingException) { 
-                continue;
-              } catch (NoEnoughMoney n) {
-                game->printMessage("You total worth is not enough!");
-                continue;
-              }
-            } else if (response == "reject") {
-              continue;
-            } else {
-              game->printMessage("Invalid response, trade cancelled.");
-              continue;
-            }
-          } catch (std::invalid_argument) {
-            game->printMessage("Does " + name + " accept the trade of giving " + get + " in exchange for " + give + " ?");
-            std::string response;
-            std::cin >> response;
-            if (response == "accept") {
-              try {
-                // do the trade give building, receive building
-                game->trade(name, give, get);
-              } catch (WrongBuildingException) { 
-                continue; 
-              } catch (NoEnoughMoney n) {
-                game->printMessage("You total worth is not enough!");
-                continue;
-              }
-            } else if (response == "reject") {
-              continue;
-            } else {
-              game->printMessage("Invalid response, trade cancelled.");
-              continue;
-            }
-          } catch (std::out_of_range) {
-            game->printMessage("Invalid amount of money to receive.");
-            continue;
-          }
-        } catch (std::out_of_range) {
-          game->printMessage("Invalid amount of money to give.");
+          game->printMessage("Invalid input.");
           continue;
-        }
-      }
-    } else if (s == "improve") {
-      std::string buildingName;
-      std::string op;
-      in >> buildingName;
-      in >> op;
-      if (in.fail()) {
-        game->printMessage("Not enough arguments.");
-        break;
-      }
-      if (op == "sell") {
-        try{
-          game->sellImprovement(game->currentPlayerName(), buildingName);
-        } catch(WrongBuildingException & e) {
-          continue;
-        }
-      } else if (op == "buy") {
-        try{
-          game->buyImprovement(buildingName);
-        } catch (WrongBuildingException & e) {
-          continue;
-        }
-      } else {
-        game->printMessage("Invalid operation.");
-      }
-    } else if (s == "mortgage") {
-      std::string buildingName;
-      in >> buildingName;
-      if (in.fail()) {
-        game->printMessage("Not enough arguments.");
-        break;
-      }
-      try {
-        game->mortgage(game->currentPlayerName(), buildingName);
-      } catch (MortgageException & e) {
-        game->printMessage("Cannot mortgage.");
-      }
-    } else if (s == "unmortgage") {
-      std::string buildingName;
-      in >> buildingName;
-      if (in.fail()) {
-        game->printMessage("Not enough arguments.");
-        break;
-      }
-      try {
-        game->unmortgage(buildingName);
-      } catch (MortgageException & e) {
-        game->printMessage("Cannot unmortgage.");
-      }
-    } else if (s == "bankrupt") {
-      game->printMessage("Your total worth is positive so bankruptcy cannot be declared!");
-    } else if (s == "map") {
-      game->drawBoard();
-    } else if (s == "save") {
-      std::string fileName;
-      in >> fileName;
-      if (in.fail()) {
-        game->printMessage("Need a file to store the information.");
-        break;
-      }
-      std::ofstream realFile {fileName};
-      game->saveGame(realFile);
-    } else {
-      game->printMessage("Invalid input.");
-      continue;
-    }
+        } 
+     }
+  } catch (hasWon & e) {
+     return
   }
 }
 
@@ -324,10 +330,18 @@ bool CommandInput::NotEnoughMoney(std::istream & in, int amount, std::string pla
     std::string bkrpt;
     in >> bkrpt;
     if (bkrpt == "bankrupt") {
-      game->bankrupt(playerName, toPlayer);
+      try {
+          game->bankrupt(playerName, toPlayer);
+      } catch (hasWon & e) {
+          throw e;
+      }
     } else {
       game->printMessage("Invalid input, forced bankruptcy.");
-      game->bankrupt(playerName, toPlayer);
+      try {
+          game->bankrupt(playerName, toPlayer);
+      } catch (hasWon & e) {
+          throw e;
+      }
     }
     return false;
   }
