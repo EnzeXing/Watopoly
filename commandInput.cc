@@ -51,7 +51,7 @@ void CommandInput::readInput(std::istream & in, bool testing) {
       game->nextPlayer();
       roll = false;
     } else if (s == "assets") {
-      game->assets();
+      game->asset();
     } else if (s == "trade") {
       std::string name;
       std::string give;
