@@ -149,13 +149,13 @@ void Board::removePlayer(int position, std::string playerName) {
 	char symbol = playerName[0];
 	for (int i = 1; i < 9; i += 2) {
 		if (board[position][4][i] == symbol) {
-			board[oldPosition][4][i] = ' ';
+			board[position][4][i] = ' ';
 		}
 	}
 			
 	for (int i = 1; i < 9; i += 2) {
-		if (board[oldPosition][5][i] == symbol) {
-			board[oldPosition][5][i] = ' ';
+		if (board[position][5][i] == symbol) {
+			board[position][5][i] = ' ';
 		}
 	}
 }
