@@ -25,7 +25,7 @@ int main(int argc, char ** argv) {
     if (argc > 4) {
       usage();
       return 1;
-    } else if ((argc == 1) && (strcmp(argv[0], "./watopoly"))) {
+    } else if ((argc == 1) && (strcmp(argv[0], "./Watopoly"))) {
       int numPlayers;
       std::string line;
       std::cout << "Welcome to Watopoly! Please type \"add Player_name Player_symbol\" to add an player. After adding players, type begin to begin the game.\n";
