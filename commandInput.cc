@@ -9,7 +9,6 @@ CommandInput::CommandInput(std::shared_ptr<Game> game) : game{game} {
 void CommandInput::readInput(std::istream & in, bool testing) {
   game->drawBoard();
   game->printMessage("First player is " + game->currentPlayerName() + ".");
-  bool roll = false;
   std::string s;
   std::string line;
   try {
@@ -18,14 +17,14 @@ void CommandInput::readInput(std::istream & in, bool testing) {
           if (!roll) {
             if (game->currentTimRound() != 0) {
               TimHortons(std::cin, game->currentTimRound());
-              roll = true;
+              game->setRolled(true);
               continue;
             }
             if (!testing) {
                 int dice1 = game->roll();
                 int dice2 = game->roll();
                 game->movePlayer(dice1 + dice2);
-                roll = true;
+                game->setRolled(true);
             } else {
                 int dice1;
                 int dice2;
@@ -35,14 +34,14 @@ void CommandInput::readInput(std::istream & in, bool testing) {
                     dice1 = game->roll();
                     dice2 = game->roll();
                     game->movePlayer(dice1 + dice2);
-                    roll = true;
+                    game->setRolled(true);
                 } else if (!(ss1 >> dice2)) {
                     dice2 = game->roll();
                     game->movePlayer(dice1 + dice2);
-                    roll = true;
+                    game->setRolled(true);
                 } else {
                     game->movePlayer(dice1 + dice2);
-                    roll = true;
+                    game->setRolled(true);
                 }
             }
             game->drawBoard();
@@ -51,7 +50,7 @@ void CommandInput::readInput(std::istream & in, bool testing) {
           }
         } else if (s == "next") {
           game->nextPlayer();
-          roll = false;
+          game->setRolled(false);
         } else if (s == "assets") {
           game->asset();
         } else if (s == "all") {
