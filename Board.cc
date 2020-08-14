@@ -46,7 +46,7 @@ std::map <int, std::string> other = {
   {4, "TUITION"},
   {5, "MKV    "},
   {12, "PAC    "},
-  {15, "UMP    "},
+  {15, "UWP    "},
   {17, "SLC    "},
   {25, "V1     "},
   {28, "CIF    "},
