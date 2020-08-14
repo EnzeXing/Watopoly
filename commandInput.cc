@@ -319,6 +319,19 @@ void CommandInput::auction(std::istream & in, std::string building) {
 
 bool CommandInput::NotEnoughMoney(std::istream & in, int amount, std::string playerName, std::string toPlayer) {
   int currAmount = amount;
+  if (game->totalAsset(playerName) < currAmount) {
+    game->printMessage("You do not have enough asset to pay the money, type \"bankrupt\" to declare bankruptcy.");
+    std::string bkrpt;
+    in >> bkrpt;
+    if (bkrpt == "bankrupt") {
+      game->bankrupt(playerName, toPlayer);
+    } else {
+      game->printMessage("Invalid input, forced bankruptcy.");
+      game->bankrupt(playerName, toPlayer);
+    }
+    return false;
+  }
+  game->printMessage("You need to raise $" + std::to_string(amount) + " by mortgaging properties or sell improvements.");
   std::string option;
   in >> option;
   while (!in.fail() && currAmount > 0) {
@@ -353,18 +366,6 @@ bool CommandInput::NotEnoughMoney(std::istream & in, int amount, std::string pla
       game->printMessage("Invalid option!");
       continue;
     }
-  }
-  if (game->totalAsset(playerName) < currAmount) {
-    game->printMessage("You do not have enough money to pay the money, type \"bankrupt\" to declare bankruptcy.");
-    std::string bkrpt;
-    in >> bkrpt;
-    if (bkrpt == "bankrupt") {
-      game->bankrupt(playerName, toPlayer);
-    } else {
-      game->printMessage("Invalid input, forced bankruptcy.");
-      game->bankrupt(playerName, toPlayer);
-    }
-    return false;
   }
   return true;
 }
