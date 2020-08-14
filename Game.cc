@@ -608,7 +608,8 @@ void Game::bankrupt(std::string playerName, std::string bankruptTo) {
     }
     
     if (playerName == (*currentPlayer)->getName()) {
-        nextPlayer();
+        currentPlayer = nextPlayer;
+        printMessage("Next player is " + (*currentPlayer)->getName() + ".");
     }
 }
 
