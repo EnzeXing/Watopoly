@@ -14,7 +14,7 @@ void CommandInput::readInput(std::istream & in, bool testing) {
   try {
       while (in >> s) {
         if (s == "roll") {
-          if (!roll) {
+          if (!game->getRolled()) {
             if (game->currentTimRound() != 0) {
               TimHortons(std::cin, game->currentTimRound());
               game->setRolled(true);
