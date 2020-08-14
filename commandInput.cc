@@ -323,7 +323,7 @@ void CommandInput::auction(std::istream & in, std::string building) {
   }
 }
 
-bool CommandInput::NotEnoughMoney(std::istream & in, int amount, std::string playerName, std::string toPlayer) {
+bool CommandInput::NotEnoughMoney(std::istream & in, int amount, std::string playerName, std::string toPlayer, bool & roll) {
   int currAmount = amount;
   if (game->totalAsset(playerName) < currAmount) {
     game->printMessage("You do not have enough asset to pay the money, type \"bankrupt\" to declare bankruptcy.");
@@ -331,7 +331,7 @@ bool CommandInput::NotEnoughMoney(std::istream & in, int amount, std::string pla
     in >> bkrpt;
     if (bkrpt == "bankrupt") {
       try {
-          game->bankrupt(playerName, toPlayer);
+          game->bankrupt(playerName, toPlayer, roll);
       } catch (hasWon & e) {
           throw e;
       }
