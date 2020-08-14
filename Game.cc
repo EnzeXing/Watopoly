@@ -204,8 +204,9 @@ void Game::movePlayer(int steps) {
     } catch (NoEnoughMoney & e) {
         std::string message = "You don't have enough cash! You need " + std::to_string(e.needAmount) + " dollars.";
         board->printMessage(message, std::cout);
-        board->getCommand()->NotEnoughMoney(std::cin, e.needAmount, e.playerName, e.receiver);
-        (*currentPlayer)->visit(*(buildings[(*currentPlayer)->getPosition()]));
+        if (board->getCommand()->NotEnoughMoney(std::cin, e.needAmount, e.playerName, e.receiver)) {
+            (*currentPlayer)->visit(*(buildings[(*currentPlayer)->getPosition()]));
+        }   
     } catch (giveMoneyAlert & e) {
         printMessage(e.message);
     } catch (NoEnoughCup & e) {
@@ -581,6 +582,11 @@ void Game::bankrupt(std::string playerName, std::string bankruptTo) {
         throw hasWon("");
     }
     
+    auto nextPlayer = players.erase(currentPlayer);
+    if (nextPlayer == players.end()) {
+        nextPlayer = players.begin();
+    }
+    
     if (bankruptTo == "Bank") {
         printMessage("Current player declares bankrupcy to the bank. All assets will be auctioned.");
         for (auto n : buildings) {
@@ -601,12 +607,9 @@ void Game::bankrupt(std::string playerName, std::string bankruptTo) {
         player->addMoney((*currentPlayer)->getMoney());
     }
     
-    auto nextPlayer = players.erase(currentPlayer);
-    if (nextPlayer == players.end()) {
-        nextPlayer = players.begin();
+    if (playerName == (*currentPlayer)->getName()) {
+        nextPlayer();
     }
-    
-    if (playerName == (*currentPlayer)->getName()) currentPlayer = nextPlayer;
 }
 
 void Game::drawBoard() {
