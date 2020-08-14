@@ -663,8 +663,8 @@ int Game::totalAsset(std::string playerName) {
 }
 
 void Game::asset() {
-    game->printMessage("Current player: " + (*currentPlayer)->getName());
-    game->printMessage("Cash: " + std::to_string((*currentPlayer)->getMoney()));
+    printMessage("Current player: " + (*currentPlayer)->getName());
+    printMessage("Cash: " + std::to_string((*currentPlayer)->getMoney()));
     std::string house = "";
     for (auto n : buildings) {
         auto property = std::dynamic_pointer_cast<Property>(n);
@@ -672,8 +672,8 @@ void Game::asset() {
             house = property->getName() + " ";
         }
     }
-    game->printMessage("Properties: " + house);
-    game->printMessage("Roll Up the Rim Cup: " + (*currentPlayer)->getCup());
+    printMessage("Properties: " + house);
+    printMessage("Roll Up the Rim Cup: " + (*currentPlayer)->getCup());
 }   
     
 
