@@ -631,6 +631,7 @@ void Game::bankrupt(std::string playerName, std::string bankruptTo) {
         currentPlayer = nextPlayer;
         hasRolled = false;
         printMessage("Next player is " + (*currentPlayer)->getName() + ".");
+        throw bankruptException("bankrupt!");
     }
 }
 
