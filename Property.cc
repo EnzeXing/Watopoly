@@ -45,7 +45,7 @@ void Gym::accept(Player & p) {
     if (this->getOwner() == nullptr) {
         throw NoOwner("This property has no owner yet!");
     }
-    if (this->getOwner()->getName() != p.getName()) {
+    if (this->getOwner()->getName() != p.getName() && !mortgage) {
         unsigned int fee = getFee(p);
         p.giveMoney(this->getOwner(), fee);
     }
@@ -74,7 +74,7 @@ void Residence::accept(Player & p) {
     if (this->getOwner() == nullptr) {
         throw NoOwner("This property has no owner yet!");
     }
-    if (this->getOwner()->getName() != p.getName()) {
+    if (this->getOwner()->getName() != p.getName() && !mortgage) {
         unsigned int rent = getRent();
         p.giveMoney(this->getOwner(), rent);
     }
@@ -120,7 +120,7 @@ void Academic::accept(Player & p) {
     if (this->getOwner() == nullptr) {
         throw NoOwner("This property has no owner yet!");
     }
-    if (this->getOwner()->getName() != p.getName()) {
+    if (this->getOwner()->getName() != p.getName() && !mortgage) {
         unsigned int tuition = getTuition();
         p.giveMoney(this->getOwner(), tuition);
     }
