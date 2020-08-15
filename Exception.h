@@ -90,6 +90,9 @@ class hasWon : public WatopolyException {
   hasWon(std::string m);
 };
 
-
+class bankruptException : public WatopolyException {
+  public:
+  bankruptException(std::string m);
+};
 
 #endif
