@@ -421,8 +421,11 @@ void Game::trade(std::string receiver, std::string buildingName, int receiveAmou
     }
     
     try {
+        std::cout << "BBB" << std::endl;
         r->giveMoney(*currentPlayer, receiveAmount);
+        std::cout << "CCC" << std::endl;
         tradeBuilding((*currentPlayer)->getName(), receiver, buildingName);
+        std::cout << "DDD" << std::endl;
     } catch (NoEnoughMoney & e) {
         printMessage(e.message);
         std::string message = "You don't have enough cash! You need " + std::to_string(e.needAmount) + " dollars.";
