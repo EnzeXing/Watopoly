@@ -429,6 +429,7 @@ void CommandInput::TimHortons(std::istream & in, int currentRound) {
                     }
                 }
                 std::cerr << "Leave line." << std::endl;
+                std::cerr << game->currentTimRound() << std::endl;
                 game->leaveLine();
             }
         } else if (command == "pay") {
