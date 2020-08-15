@@ -11,6 +11,7 @@ void CommandInput::readInput(std::istream & in, bool testing) {
   game->printMessage("First player is " + game->currentPlayerName() + ".");
   std::string s;
   std::string line;
+  int times = 0;
   try {
       while (in >> s) {
         if (s == "roll") {
@@ -22,8 +23,20 @@ void CommandInput::readInput(std::istream & in, bool testing) {
             } else if (!testing) {
                 int dice1 = game->roll();
                 int dice2 = game->roll();
-                game->setRolled(true);
-                game->movePlayer(dice1 + dice2);
+                if (dice1 != dice2) {
+                  game->setRolled(true);
+                  game->movePlayer(dice1 + dice2);
+                  times = 0;
+                } else if (dice1 == dice2) && (times != 2) {
+                  game->printMessage("You rolled doubles! Please roll again ...");
+                  times += 1;
+                } else {
+                  game->printMessage("You rolled doubles three times! You are moved to DC Tims Line :(");
+                  game->setRolled(true);
+                  int steps = 30 - game->getCurrentPosition();
+                  game->movePlayer(steps);
+                  times = 0;
+                }
             } else {
                 int dice1;
                 int dice2;
