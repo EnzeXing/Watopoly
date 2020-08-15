@@ -737,9 +737,14 @@ void Game::useRimCup() {
 }
 
 void Game::buyCoffee() {
-    (*currentPlayer)->giveMoney(nullptr, 50);
-    leaveLine();
+    try{ 
+        (*currentPlayer)->giveMoney(nullptr, 50);
+    } catch (giveMoneyAlert & e) {
+        (*currentPlayer)->leaveLine();
+        printMessage(e.message);
+    }  
 }
+
 
 void Game::stayInLine() {
     (*currentPlayer)->stayInLine();
