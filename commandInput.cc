@@ -182,7 +182,7 @@ void CommandInput::readInput(std::istream & in, bool testing) {
           }
           try {
             game->mortgage(game->currentPlayerName(), buildingName);
-          } catch (MortgageException & e) {
+          } catch (WrongBuildingException & e) {
             game->printMessage("Cannot mortgage.");
           }
         } else if (s == "unmortgage") {
@@ -194,7 +194,7 @@ void CommandInput::readInput(std::istream & in, bool testing) {
           }
           try {
             game->unmortgage(buildingName);
-          } catch (MortgageException & e) {
+          } catch (WrongBuildingException & e) {
             game->printMessage("Cannot unmortgage.");
           }
         } else if (s == "bankrupt") {
