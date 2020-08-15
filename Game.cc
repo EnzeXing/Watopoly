@@ -163,6 +163,10 @@ Game::Game(std::ifstream & file) {
         if (owner != "BANK") {
             ss1 >> improvement;
             auto property = std::dynamic_pointer_cast<Property>(buildings[i]);
+            if (improvement == -1) {
+                improvement = 0;
+                property->setMortgage(true);
+            }
             std::cerr << "Convert1" << std::endl;
             property->setOwner(findPlayer(owner));
             std::cerr << owner << std::endl;
@@ -477,11 +481,15 @@ void Game::saveGame(std::ofstream & file) {
             } else {
                 file << "BANK ";
             }
-            auto n3 = std::dynamic_pointer_cast<Academic>(n2);
-            if (n3 != nullptr) {
-                file << n3->getImprovement() << std::endl;
-            } else {
-                file << "0\n";
+            
+            if (n2->Mortgage()) file << "-1\n";
+            else {
+                auto n3 = std::dynamic_pointer_cast<Academic>(n2);
+                if (n3 != nullptr) {
+                    file << n3->getImprovement() << std::endl;
+                } else {
+                    file << "0\n";
+                }
             }
         } else {
             file << "BANK 0" << std::endl;
