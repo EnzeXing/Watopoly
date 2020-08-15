@@ -246,7 +246,7 @@ void Game::movePlayer(int steps) {
         board->printMessage(message, std::cout);
         movePlayer(e.steps);
     } catch (GooseException & e) {
-        board->printMessage(message, std::cout);
+        board->printMessage(e.message, std::cout);
     } catch (NeedlesHallException & e) {
         board->printMessage(e.message, std::cout);
         if (e.amount > 0) {
