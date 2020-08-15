@@ -27,7 +27,7 @@ void CommandInput::readInput(std::istream & in, bool testing) {
                   game->setRolled(true);
                   game->movePlayer(dice1 + dice2);
                   times = 0;
-                } else if (dice1 == dice2) && (times != 2) {
+                } else if ((dice1 == dice2) && (times != 2)) {
                   game->printMessage("You rolled doubles! Please roll again ...");
                   times += 1;
                 } else {
