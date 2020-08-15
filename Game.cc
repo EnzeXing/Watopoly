@@ -843,3 +843,8 @@ void Game::allassets() {
         printMessage("Roll Up the Rim Cup: " + std::to_string(p->getCup()));
     }
 }
+
+
+int Game::getCurrentPosition() {
+    return (*currentPlayer)->getPosition();
+}
