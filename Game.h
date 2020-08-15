@@ -91,6 +91,7 @@ class Game {
     void howToPayTuition(std::string option);
     std::vector<std::string> getPlayerNames();
     void allassets();
+    int getCurrentPosition();
 };
 
 #endif
