@@ -390,8 +390,8 @@ void Game::trade(std::string receiver, int giveAmount, std::string buildingName)
     }
     
     try {
-        tradeBuilding(receiver, (*currentPlayer)->getName(), buildingName);
         (*currentPlayer)->giveMoney(r, giveAmount);
+        tradeBuilding(receiver, (*currentPlayer)->getName(), buildingName);
     } catch (NoEnoughMoney & e) {
         printMessage(e.message);
         std::string message = "You don't have enough cash! You need " + std::to_string(e.needAmount) + " dollars.";
@@ -421,8 +421,8 @@ void Game::trade(std::string receiver, std::string buildingName, int receiveAmou
     }
     
     try {
-        tradeBuilding((*currentPlayer)->getName(), receiver, buildingName);
         r->giveMoney(*currentPlayer, receiveAmount);
+        tradeBuilding((*currentPlayer)->getName(), receiver, buildingName);
     } catch (NoEnoughMoney & e) {
         printMessage(e.message);
         std::string message = "You don't have enough cash! You need " + std::to_string(e.needAmount) + " dollars.";
@@ -434,7 +434,7 @@ void Game::trade(std::string receiver, std::string buildingName, int receiveAmou
             bankrupt((*currentPlayer)->getName(), e.receiver);
             return;
         }
-        board->printMessage("Invalid input.", std::cout);
+        //board->printMessage("Invalid input.", std::cout);
         throw e;
     } catch (giveMoneyAlert & e) {
         printMessage(e.message);
