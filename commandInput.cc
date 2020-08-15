@@ -86,6 +86,9 @@ void CommandInput::readInput(std::istream & in, bool testing) {
                   } catch (NoEnoughMoney n) {
                     game->printMessage("Your total worth is not enough!");
                     continue;
+                  } catch (WrongPlayerName) {
+                    game->printMessage("Wrong player name.");
+                    continue;
                   }
                 } else if (response == "reject") {
                   continue;
@@ -112,6 +115,9 @@ void CommandInput::readInput(std::istream & in, bool testing) {
                   } catch (NoEnoughMoney n) {
                     game->printMessage("Your total worth is not enough!");
                     continue;
+                  } catch (WrongPlayerName) {
+                    game->printMessage("Wrong player name.");
+                    continue;
                   }
                 } else if (response == "reject") {
                   continue;
@@ -131,6 +137,9 @@ void CommandInput::readInput(std::istream & in, bool testing) {
                     continue; 
                   } catch (NoEnoughMoney n) {
                     game->printMessage("Your total worth is not enough!");
+                    continue;
+                  } catch (WrongPlayerName) {
+                    game->printMessage("Wrong player name.");
                     continue;
                   }
                 } else if (response == "reject") {
