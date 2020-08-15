@@ -683,7 +683,7 @@ void Game::bankrupt(std::string playerName, std::string bankruptTo) {
         printMessage("Current player declares bankrupcy to " + bankruptTo + ". All assets will be owned by " + bankruptTo + ".");
         for (auto n : buildings) {
             auto property = std::dynamic_pointer_cast<Property>(n);
-            if (property != nullptr && property->getOwner() == *currentPlayer) {
+            if (property != nullptr && property->getOwner() == current) {
                 tradeBuilding(property->getName(), bankruptTo);
             }
         }
