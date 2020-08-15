@@ -413,8 +413,8 @@ void CommandInput::TimHortons(std::istream & in, int currentRound) {
                                 game->leaveLine();
                             } else break;
                         } catch (giveMoneyAlert & e) {
-                            (*currentPlayer)->leaveLine();
-                            printMessage(e.message);
+                            game->leaveLine();
+                            game->printMessage(e.message);
                         } 
                         
                         game->printMessage("You payed $50!\nYou are out of the line!");
@@ -448,7 +448,7 @@ void CommandInput::TimHortons(std::istream & in, int currentRound) {
                 } else return;
             } catch (giveMoneyAlert & e) {
                 game->leaveLine();
-                printMessage(e.message);
+                game->printMessage(e.message);
             }                     
             game->printMessage("You payed $50!\nYou are out of the line!");
         } else if (command == "use") {
@@ -485,7 +485,7 @@ void CommandInput::TimHortons(std::istream & in, int currentRound) {
             } else return;
         } catch (giveMoneyAlert & e) {
             game->leaveLine();
-            printMessage(e.message);
+            game->printMessage(e.message);
         }
         game->leaveLine();
         game->printMessage("You payed $50!\nYou are out of the line!");
