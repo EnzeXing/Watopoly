@@ -213,6 +213,13 @@ void Game::movePlayer(int steps) {
     } catch (NoEnoughMoney & e) {
         std::string message = "You don't have enough cash! You need " + std::to_string(e.needAmount) + " dollars.";
         board->printMessage(message, std::cout);
+        board->printMessage("Do you want to bankrupt?", std::cout);
+        std::string option;
+        std::cin >> option;
+        if (option == "yes") {
+            bankrupt((*currentPlayer)->getName(), e.receiver);
+            return;
+        }
         if (board->getCommand()->NotEnoughMoney(std::cin, e.needAmount, e.playerName, e.receiver)) {
             (*currentPlayer)->visit(*(buildings[(*currentPlayer)->getPosition()]));
         } else if (e.receiver == "Bank") {
@@ -297,6 +304,16 @@ void Game::purchase(std::string buildingName) {
     try {
         (*currentPlayer)->giveMoney(nullptr, property->getPurchaseCost());
     } catch (NoEnoughMoney & e) {
+        std::string message = "You don't have enough cash! You need " + std::to_string(e.needAmount) + " dollars.";
+        board->printMessage(message, std::cout);
+        board->printMessage("Do you want to bankrupt?", std::cout);
+        std::string option;
+        std::cin >> option;
+        if (option == "yes") {
+            bankrupt((*currentPlayer)->getName(), e.receiver);
+            return;
+        }
+        board->printMessage("")
         if (board->getCommand()->NotEnoughMoney(std::cin, e.needAmount, e.playerName, e.receiver)) {
              purchase(buildingName); 
         } else return;
@@ -373,9 +390,26 @@ void Game::trade(std::string receiver, int giveAmount, std::string buildingName)
         (*currentPlayer)->giveMoney(r, giveAmount);
     } catch (NoEnoughMoney & e) {
         printMessage(e.message);
+        std::string message = "You don't have enough cash! You need " + std::to_string(e.needAmount) + " dollars.";
+        board->printMessage(message, std::cout);
+        board->printMessage("Do you want to bankrupt?", std::cout);
+        std::string option;
+        std::cin >> option;
+        if (option == "yes") {
+            bankrupt((*currentPlayer)->getName(), e.receiver);
+            return;
+        }
         throw e;
     } catch (giveMoneyAlert & e) {
-        printMessage(e.message);
+        printMessage(e.message);std::string message = "You don't have enough cash! You need " + std::to_string(e.needAmount) + " dollars.";
+        board->printMessage(message, std::cout);
+        board->printMessage("Do you want to bankrupt?", std::cout);
+        std::string option;
+        std::cin >> option;
+        if (option == "yes") {
+            bankrupt((*currentPlayer)->getName(), e.receiver);
+            return;
+        }
     } catch (WrongBuildingException & e) {
         printMessage("This trade is cancelled.");
         return;
@@ -394,6 +428,16 @@ void Game::trade(std::string receiver, std::string buildingName, int receiveAmou
         r->giveMoney(*currentPlayer, receiveAmount);
     } catch (NoEnoughMoney & e) {
         printMessage(e.message);
+        std::string message = "You don't have enough cash! You need " + std::to_string(e.needAmount) + " dollars.";
+        board->printMessage(message, std::cout);
+        board->printMessage("Do you want to bankrupt?", std::cout);
+        std::string option;
+        std::cin >> option;
+        if (option == "yes") {
+            bankrupt((*currentPlayer)->getName(), e.receiver);
+            return;
+        }
+        board->printMessage("Invalid input.", std::cout);
         throw e;
     } catch (giveMoneyAlert & e) {
         printMessage(e.message);
@@ -511,6 +555,15 @@ void Game::buyImprovement(std::string buildingName) {
         printMessage(e.message);
     } catch (NoEnoughMoney & e) {
         printMessage(e.message);
+        std::string message = "You don't have enough cash! You need " + std::to_string(e.needAmount) + " dollars.";
+        board->printMessage(message, std::cout);
+        board->printMessage("Do you want to bankrupt?", std::cout);
+        std::string option;
+        std::cin >> option;
+        if (option == "yes") {
+            bankrupt((*currentPlayer)->getName(), e.receiver);
+            return;
+        }
         if (board->getCommand()->NotEnoughMoney(std::cin, e.needAmount, e.playerName, e.receiver)) {
             buyImprovement(buildingName);
         }
@@ -579,6 +632,15 @@ void Game::unmortgage(std::string buildingName) {
         property->getOwner()->giveMoney(nullptr, pay);
     } catch (NoEnoughMoney & e) {
         printMessage(e.message);
+        std::string message = "You don't have enough cash! You need " + std::to_string(e.needAmount) + " dollars.";
+        board->printMessage(message, std::cout);
+        board->printMessage("Do you want to bankrupt?", std::cout);
+        std::string option;
+        std::cin >> option;
+        if (option == "yes") {
+            bankrupt((*currentPlayer)->getName(), e.receiver);
+            return;
+        }
         if (board->getCommand()->NotEnoughMoney(std::cin, e.needAmount, e.playerName, e.receiver)) {
             unmortgage(buildingName);
         }
@@ -675,12 +737,8 @@ void Game::useRimCup() {
 }
 
 void Game::buyCoffee() {
-    try{ 
-        (*currentPlayer)->giveMoney(nullptr, 50);
-    } catch (giveMoneyAlert & e) {
-        (*currentPlayer)->leaveLine();
-        printMessage(e.message);
-    }  
+    (*currentPlayer)->giveMoney(nullptr, 50);
+    leaveLine();
 }
 
 void Game::stayInLine() {
@@ -735,6 +793,15 @@ void Game::howToPayTuition(std::string option) {
             (*currentPlayer)->giveMoney(nullptr, (totalAsset((*currentPlayer)->getName()) + (*currentPlayer)->getMoney()) * 0.1);
         }
     } catch (NoEnoughMoney & e) {
+        std::string message = "You don't have enough cash! You need " + std::to_string(e.needAmount) + " dollars.";
+        board->printMessage(message, std::cout);
+        board->printMessage("Do you want to bankrupt?", std::cout);
+        std::string option;
+        std::cin >> option;
+        if (option == "yes") {
+            bankrupt((*currentPlayer)->getName(), e.receiver);
+            return;
+        }
         try {
             board->getCommand()->NotEnoughMoney(std::cin, e.needAmount, e.playerName, e.receiver);
             howToPayTuition(option);
