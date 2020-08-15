@@ -730,8 +730,12 @@ void Game::howToPayTuition(std::string option) {
             (*currentPlayer)->giveMoney(nullptr, (totalAsset((*currentPlayer)->getName()) + (*currentPlayer)->getMoney()) * 0.1);
         }
     } catch (NoEnoughMoney & e) {
-        board->getCommand()->NotEnoughMoney(std::cin, e.needAmount, e.playerName, e.receiver);
-        howToPayTuition(option);
+        try {
+            board->getCommand()->NotEnoughMoney(std::cin, e.needAmount, e.playerName, e.receiver);
+            howToPayTuition(option);
+        } catch (bankruptException & e) {
+            return;
+        }
     } catch (giveMoneyAlert & e) {
         printMessage(e.message);
     }
