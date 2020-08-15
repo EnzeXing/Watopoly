@@ -313,7 +313,7 @@ void Game::purchase(std::string buildingName) {
             bankrupt((*currentPlayer)->getName(), e.receiver);
             return;
         }
-        board->printMessage("")
+        board->printMessage("", std::cout);
         if (board->getCommand()->NotEnoughMoney(std::cin, e.needAmount, e.playerName, e.receiver)) {
              purchase(buildingName); 
         } else return;
