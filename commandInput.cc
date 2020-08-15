@@ -400,6 +400,7 @@ void CommandInput::TimHortons(std::istream & in, int currentRound) {
             int dice2 = game->roll();
             if (dice1 == dice2) {
                 game->printMessage("Your rolled doubles!\nYou are out of the line!");
+                game->leaveLine();
             } else {
                 game->printMessage("Your didn't roll doubles...\nYou need to pay $50 or using a Roll Up the Rim Cup.");
                 while (true) {
