@@ -401,15 +401,8 @@ void Game::trade(std::string receiver, int giveAmount, std::string buildingName)
         }
         throw e;
     } catch (giveMoneyAlert & e) {
-        printMessage(e.message);std::string message = "You don't have enough cash! You need " + std::to_string(e.needAmount) + " dollars.";
-        board->printMessage(message, std::cout);
-        board->printMessage("Do you want to bankrupt?", std::cout);
-        std::string option;
-        std::cin >> option;
-        if (option == "yes") {
-            bankrupt((*currentPlayer)->getName(), e.receiver);
-            return;
-        }
+        printMessage(e.message);
+        return;
     } catch (WrongBuildingException & e) {
         printMessage("This trade is cancelled.");
         return;
