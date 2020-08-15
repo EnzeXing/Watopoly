@@ -84,7 +84,7 @@ void CommandInput::readInput(std::istream & in, bool testing) {
                   } catch (WrongBuildingException) { 
                     continue; 
                   } catch (NoEnoughMoney n) {
-                    game->printMessage("You total worth is not enough!");
+                    game->printMessage("Your total worth is not enough!");
                     continue;
                   }
                 } else if (response == "reject") {
@@ -110,7 +110,7 @@ void CommandInput::readInput(std::istream & in, bool testing) {
                   } catch (WrongBuildingException) { 
                     continue;
                   } catch (NoEnoughMoney n) {
-                    game->printMessage("You total worth is not enough!");
+                    game->printMessage("Your total worth is not enough!");
                     continue;
                   }
                 } else if (response == "reject") {
@@ -130,7 +130,7 @@ void CommandInput::readInput(std::istream & in, bool testing) {
                   } catch (WrongBuildingException) { 
                     continue; 
                   } catch (NoEnoughMoney n) {
-                    game->printMessage("You total worth is not enough!");
+                    game->printMessage("Your total worth is not enough!");
                     continue;
                   }
                 } else if (response == "reject") {
