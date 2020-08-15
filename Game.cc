@@ -794,9 +794,9 @@ void Game::howToPayTuition(std::string option) {
         std::string message = "You don't have enough cash! You need " + std::to_string(e.needAmount) + " dollars.";
         board->printMessage(message, std::cout);
         board->printMessage("Do you want to bankrupt?", std::cout);
-        std::string option;
-        std::cin >> option;
-        if (option == "yes") {
+        std::string option2;
+        std::cin >> option2;
+        if (option2 == "yes") {
             bankrupt((*currentPlayer)->getName(), e.receiver);
             return;
         }
