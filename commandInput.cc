@@ -13,7 +13,6 @@ void CommandInput::readInput(std::istream & in, bool testing) {
   std::string line;
   try {
       while (in >> s) {
-        std::cerr << s << std::endl;
         if (s == "roll") {
           if (!game->getRolled()) {
             if (game->currentTimRound() != 0) {
