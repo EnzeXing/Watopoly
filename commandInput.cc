@@ -464,44 +464,45 @@ void CommandInput::TimHortons(std::istream & in, int currentRound) {
             game->printMessage("Invalid input.");
             TimHortons(in, currentRound);
         }
-    }
-    
-    game->printMessage("You are in the DC Tims Line :(\nDo you want to roll dice, pay $50 or use a Roll Up the Rim Cup?");
-    std::string command;
-    in >> command;
-    if (command == "roll") {
-        if (game->rollDouble()) {
-            game->printMessage("Your rolled doubles!\nYou are out of the line!");
+    } else { 
+        game->printMessage("You are in the DC Tims Line :(\nDo you want to roll dice, pay $50 or use a Roll Up the Rim Cup?");
+        std::string command;
+        in >> command;
+        if (command == "roll") {
+            if (game->rollDouble()) {
+                game->printMessage("Your rolled doubles!\nYou are out of the line!");
+                game->leaveLine();
+            } else {
+                game->printMessage("Your didn't roll doubles...\nYou are still in the line ...");
+                game->stayInLine();
+            }
+        } else if (command == "pay") {
+            try {
+                game->buyCoffee();
+            } catch (NoEnoughMoney & e) {
+                if (NotEnoughMoney(std::cin, e.needAmount, e.playerName, "Bank")) {
+                        game->buyCoffee();
+                } else return;
+            } catch (giveMoneyAlert & e) {
+                game->leaveLine();
+                game->printMessage(e.message);
+            }
             game->leaveLine();
+            game->printMessage("You payed $50!\nYou are out of the line!");
+        } else if (command == "use") {
+            try {
+                game->useRimCup();
+            } catch (NoEnoughCup & e) {
+                game->printMessage(e.message);
+                TimHortons(in, currentRound);
+            }
+            game->printMessage("You used a Roll Up the Rim Cup!\nYou are out of the line!");
         } else {
-            game->printMessage("Your didn't roll doubles...\nYou are still in the line ...");
-            game->stayInLine();
-        }
-    } else if (command == "pay") {
-        try {
-            game->buyCoffee();
-        } catch (NoEnoughMoney & e) {
-            if (NotEnoughMoney(std::cin, e.needAmount, e.playerName, "Bank")) {
-                    game->buyCoffee();
-            } else return;
-        } catch (giveMoneyAlert & e) {
-            game->leaveLine();
-            game->printMessage(e.message);
-        }
-        game->leaveLine();
-        game->printMessage("You payed $50!\nYou are out of the line!");
-    } else if (command == "use") {
-        try {
-            game->useRimCup();
-        } catch (NoEnoughCup & e) {
-            game->printMessage(e.message);
+            game->printMessage("Invalid input.");
             TimHortons(in, currentRound);
         }
-        game->printMessage("You used a Roll Up the Rim Cup!\nYou are out of the line!");
-    } else {
-        game->printMessage("Invalid input.");
-        TimHortons(in, currentRound);
     }
+    
 }
 
 void CommandInput::payTuition(std::istream & in) {
