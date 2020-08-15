@@ -19,8 +19,7 @@ void CommandInput::readInput(std::istream & in, bool testing) {
               TimHortons(std::cin, game->currentTimRound());
               game->setRolled(true);
               continue;
-            }
-            if (!testing) {
+            } else if (!testing) {
                 int dice1 = game->roll();
                 int dice2 = game->roll();
                 game->setRolled(true);
@@ -422,12 +421,14 @@ void CommandInput::TimHortons(std::istream & in, int currentRound) {
                             game->useRimCup();
                             game->printMessage("You used a Roll Up the Rim Cup!\nYou are out of the line!");
                             game->movePlayer(dice1 + dice2);
+                            break;
                         } catch (NoEnoughCup & e) {
                             game->printMessage(e.message);
                             continue;
                         }
                     }
                 }
+                game->leaveLine();
             }
         } else if (command == "pay") {
             try {
@@ -442,12 +443,15 @@ void CommandInput::TimHortons(std::istream & in, int currentRound) {
         } else if (command == "use") {
             try {
                 game->useRimCup();
+                game->printMessage("You used a Roll Up the Rim Cup!\nYou are out of the line!");
             } catch (NoEnoughCup & e) {
                 game->printMessage(e.message);
                 TimHortons(in, currentRound);
             }
+        } else {
+            game->printMessage("Invalid input.");
+            TimHortons(in, currentRound);
         }
-        game->printMessage("You used a Roll Up the Rim Cup!\nYou are out of the line!");
     }
     
     game->printMessage("You are in the DC Tims Line :(\nDo you want to roll dice, pay $50 or use a Roll Up the Rim Cup?");
@@ -478,6 +482,9 @@ void CommandInput::TimHortons(std::istream & in, int currentRound) {
             TimHortons(in, currentRound);
         }
         game->printMessage("You used a Roll Up the Rim Cup!\nYou are out of the line!");
+    } else {
+        game->printMessage("Invalid input.");
+        TimHortons(in, currentRound);
     }
 }
 
