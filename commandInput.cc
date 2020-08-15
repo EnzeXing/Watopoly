@@ -455,6 +455,7 @@ void CommandInput::TimHortons(std::istream & in, int currentRound) {
     if (command == "roll") {
         if (game->rollDouble()) {
             game->printMessage("Your rolled doubles!\nYou are out of the line!");
+            game->leaveLine();
         } else {
             game->printMessage("Your didn't roll doubles...\nYou are still in the line ...");
             game->stayInLine();
