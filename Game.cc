@@ -814,8 +814,11 @@ void Game::howToPayTuition(std::string option) {
         std::string option2;
         std::cin >> option2;
         if (option2 == "yes") {
-            bankrupt((*currentPlayer)->getName(), e.receiver);
-            return;
+            try {
+                bankrupt((*currentPlayer)->getName(), e.receiver);
+            } catch (bankruptException & e) {
+                return;
+            }
         }
         try {
             board->getCommand()->NotEnoughMoney(std::cin, e.needAmount, e.playerName, e.receiver);
