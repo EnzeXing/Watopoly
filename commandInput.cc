@@ -25,7 +25,7 @@ void CommandInput::readInput(std::istream & in, bool testing) {
                 int dice2 = game->roll();
                 if (dice1 != dice2) {
                   game->setRolled(true);
-                  if ((dice1 + dice2 + game->getCurrentPosition()) >= 40) {
+                  if ((dice1 + dice2 + game->getCurrentPosition()) > 40) {
                     game->movePlayer(40 - game->getCurrentPosition());
                     game->movePlayer(dice1 + dice2 + game->getCurrentPosition() - 40);
                     times = 0;
@@ -61,7 +61,14 @@ void CommandInput::readInput(std::istream & in, bool testing) {
                     // game->movePlayer(dice1 + dice2);
                 }
                 game->setRolled(true);
-                game->movePlayer(dice1 + dice2);
+                if ((dice1 + dice2 + game->getCurrentPosition()) > 40) {
+                    game->movePlayer(40 - game->getCurrentPosition());
+                    game->movePlayer(dice1 + dice2 + game->getCurrentPosition() - 40);
+                    times = 0;
+                  } else {
+                    game->movePlayer(dice1 + dice2);
+                    times = 0;
+                  }
             }
             game->drawBoard();
           } else {
