@@ -391,7 +391,7 @@ void Game::trade(std::string receiver, int giveAmount, std::string buildingName)
     
     try {
         (*currentPlayer)->giveMoney(r, giveAmount);
-        tradeBuilding(receiver, (*currentPlayer)->getName(), buildingName);
+        
     } catch (NoEnoughMoney & e) {
         printMessage(e.message);
         std::string message = "You don't have enough cash! You need " + std::to_string(e.needAmount) + " dollars.";
@@ -406,10 +406,13 @@ void Game::trade(std::string receiver, int giveAmount, std::string buildingName)
         throw e;
     } catch (giveMoneyAlert & e) {
         printMessage(e.message);
-        return;
-    } catch (WrongBuildingException & e) {
-        printMessage("This trade is cancelled.");
-        return;
+        try {
+            tradeBuilding(receiver, (*currentPlayer)->getName(), buildingName);
+        } catch (WrongBuildingException & e) {
+            printMessage("This trade is cancelled.");
+            r->giveMoney(*currentPlayer, giveAmount);
+            return;
+        }
     }
 }
 
@@ -421,11 +424,9 @@ void Game::trade(std::string receiver, std::string buildingName, int receiveAmou
     }
     
     try {
-        std::cout << "BBB" << std::endl;
         r->giveMoney(*currentPlayer, receiveAmount);
-        std::cout << "CCC" << std::endl;
-        tradeBuilding((*currentPlayer)->getName(), receiver, buildingName);
-        std::cout << "DDD" << std::endl;
+        // std::cout << "CCC" << std::endl;  
+        // std::cout << "DDD" << std::endl;
     } catch (NoEnoughMoney & e) {
         printMessage(e.message);
         std::string message = "You don't have enough cash! You need " + std::to_string(e.needAmount) + " dollars.";
@@ -441,10 +442,15 @@ void Game::trade(std::string receiver, std::string buildingName, int receiveAmou
         throw e;
     } catch (giveMoneyAlert & e) {
         printMessage(e.message);
-    } catch (WrongBuildingException & e) {
-        printMessage("This trade is cancelled.");
-        return;
-    }
+        try {
+            tradeBuilding((*currentPlayer)->getName(), receiver, buildingName);
+        } catch (WrongBuildingException & e) {
+            printMessage("This trade is cancelled.");
+            (*currentPlayer)->giveMoney(r, receiveAmount);
+            return;
+        }
+        
+    } 
     
     
 }
