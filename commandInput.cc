@@ -25,8 +25,14 @@ void CommandInput::readInput(std::istream & in, bool testing) {
                 int dice2 = game->roll();
                 if (dice1 != dice2) {
                   game->setRolled(true);
-                  game->movePlayer(dice1 + dice2);
-                  times = 0;
+                  if ((dice1 + dice2 + game->getCurrentPosition()) >= 40) {
+                    game->movePlayer(40 - game->getCurrentPosition());
+                    game->movePlayer(dice1 + dice2 + game->getCurrentPosition() - 40);
+                    times = 0;
+                  } else {
+                    game->movePlayer(dice1 + dice2);
+                    times = 0;
+                  }
                 } else if ((dice1 == dice2) && (times != 2)) {
                   game->printMessage("You rolled doubles! Please roll again ...");
                   times += 1;
